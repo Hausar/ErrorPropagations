@@ -44,7 +44,7 @@ void ErrorPropagation() {
     TH1D *hC22 = new TH1D("hC22", " #sqrt{< v_{4}^{2} >}", 200, 0, 200); //this is just define a histogram which will fill the data.
     hC22->Sumw2();
     
-    TH1D *hC42 = new TH1D("hC42", " #sqrt{< v_{2}^{4} >}", 200, 0, 200); //this is just define a histogram 
+    TH1D *hC42 = new TH1D("hC42", " #sqrt{<< v_{2}^{4} >>}", 200, 0, 200); //this is just define a histogram 
 	hC42->Sumw2();
 
     //Open the root.file:
@@ -69,32 +69,34 @@ void ErrorPropagation() {
         for (int i = 1; i < 11; i++)
     {
         {
-            TString foo(TString::Format("fTprof22_number%dNtrks1bin", i));	
+            TString foo(TString::Format("fTprof42_number%dNtrks1bin", i));	
             TProfile *fsample = (TProfile*)list->FindObject(foo);
 
-            TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22"); 
+            TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC42"); 
             
             BinValue = fsample->GetBinContent(j);
             BinValue2 = Cn22->GetBinContent(j);
-            if (BinValue > 0 && BinValue2 > 0)
+            if (BinValue > 0 && BinValue2 > 0) {
                 error += pow(BinValue - BinValue2, 2);
+                BinValue3 = fc42->GetBinContent(j);
+                valuesqrt = sqrt(BinValue3);
+            }
             else continue; 
             
             cout << "fsample: " << foo << endl;
             cout << "BinValue: " << BinValue << endl;
             cout << "BinValue2: " << BinValue2 << endl;
             cout << "bin: "  << j << endl;
-            cout << "error: " << error << endl; 
+            cout << "error: " << error << endl;
+            cout << "BinValue3: " << BinValue3 << endl;
+            cout << "valuesqrt: " << valuesqrt << endl;  
             fc42->Draw();		
         }
         sigma_z1 = sqrt(error/ (N*N) );
         cout << "sigma: " << sigma_z1 << endl;
-        BinValue3 = fc42->GetBinContent(j);
-        if (BinValue3 > 0)
-            valuesqrt = sqrt(BinValue3);
-            cout << "BinValue3: " << BinValue3 << endl;
-            cout << "valuesqrt: " << valuesqrt << endl; 
-        //else continue; 
+        hC42->SetBinContent(j, valuesqrt);
+        hC42->SetBinError(j, sigma_z1);
+        hC42->Draw();
         }
 
     // for (int i = 1; i < 11; i++)
@@ -231,5 +233,6 @@ void ErrorPropagation() {
     // hC42->SetMarkerStyle(23);
     // hC42->SetMarkerColorAlpha(kRed, 10.0);
 	// hC42->Draw("EP");
-
+    // fc34->Divide(hC42);
+    // fc34->Draw();
 }
