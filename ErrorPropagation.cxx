@@ -17,7 +17,8 @@ void ErrorPropagation() {
     double error;
     double valuesqrt2;
     double BinValue2;
-    double BinValue3;
+    double BinValueA;
+    double BinValueB;
     double error2;
     double sigma_z1;
     double sigma_z2;
@@ -30,13 +31,15 @@ void ErrorPropagation() {
     double x_sqrt;
     double x_sqrt2;
     double subtraction; 
-
+    double Ratio;
+    double BinValue_sample;
+    
     TCanvas *c = new TCanvas("c","The Test HISTOGRAM ", 100, 8, 700, 600);
     c->SetFillColor(19);
     c->cd();
 
-    //TProfile *Tprof24 = new TProfile ("Tprof24", "C_{4}{2} = #sqrt{< v_{4}^{2} >}", 200, 0, 200);
-    //Tprof24->Sumw2(); 
+    // TProfile *Tprofv422 = new TProfile ("Tprofv422", "C_{4}{2} = #sqrt{< v_{4}^{2} >}", 200, 0, 200);
+    // Tprofv422->Sumw2(); 
 
     //TProfile *Tprof42 = new TProfile ("Tprof42", "C_{2}{4} = #sqrt{< v_{2}^{4} >}", 200, 0, 200);
     //Tprof42->Sumw2();
@@ -46,6 +49,9 @@ void ErrorPropagation() {
     
     TH1D *hC42 = new TH1D("hC42", " #sqrt{<< v_{2}^{4} >>}", 200, 0, 200); //this is just define a histogram 
 	hC42->Sumw2();
+
+    TH1D *hCV422 = new TH1D("hCV422", " #sqrt{< v_{4}^{2} >}", 200, 0, 200); //this is just define a histogram which will fill the data.
+    hC22->Sumw2();
 
     //Open the root.file:
     TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/LHC16q_CENT_SDD_W_NUA_3particle_correlation.root", "READ");
@@ -72,14 +78,23 @@ void ErrorPropagation() {
             TString foo(TString::Format("fTprof42_number%dNtrks1bin", i));	
             TProfile *fsample = (TProfile*)list->FindObject(foo);
 
-            TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC42"); 
+            TString bar(TString::Format("fTprof34_number%dNtrks1bin", i));	
+            TProfile *fsample2 = (TProfile*)list->FindObject(bar);
+
+            TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42");
+            TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34"); 
+            
+            BinValueA = Cn34->GetBinContent(j);
+            BinValueB = Cn42->GetBinContent(j);
+            valuesqrt = sqrt(BinValueB);
+            Ratio = BinValueA / (valuesqrt);
             
             BinValue = fsample->GetBinContent(j);
-            BinValue2 = Cn22->GetBinContent(j);
-            if (BinValue > 0 && BinValue2 > 0) {
-                error += pow(BinValue - BinValue2, 2);
-                BinValue3 = fc42->GetBinContent(j);
-                valuesqrt = sqrt(BinValue3);
+            BinValue2 = fsample2->GetBinContent(j);
+            BinValue_sample = BinValue / (BinValue2); 
+            if (BinValue > 0 && BinValue2 > 0 && BinValueA > 0 && BinValueB > 0 ) {
+                error += pow(BinValue_sample - Ratio, 2);
+
             }
             else continue; 
             
@@ -88,15 +103,20 @@ void ErrorPropagation() {
             cout << "BinValue2: " << BinValue2 << endl;
             cout << "bin: "  << j << endl;
             cout << "error: " << error << endl;
-            cout << "BinValue3: " << BinValue3 << endl;
+            cout << "BinValueA: " << BinValueA << endl;
+            cout << "BinValueB: " << BinValueB << endl;
             cout << "valuesqrt: " << valuesqrt << endl;  
+            cout << "Ratio:   "   << Ratio << endl;
             fc42->Draw();		
         }
         sigma_z1 = sqrt(error/ (N*N) );
         cout << "sigma: " << sigma_z1 << endl;
         hC42->SetBinContent(j, valuesqrt);
         hC42->SetBinError(j, sigma_z1);
-        hC42->Draw();
+        hCV422->SetBinContent(j, Ratio);
+        hCV422->SetBinError(j, sigma_z1);
+        //hC42->Draw();
+        hCV422->Draw();
         }
 
     // for (int i = 1; i < 11; i++)
