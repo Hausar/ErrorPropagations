@@ -17,6 +17,7 @@ void ErrorPropagation() {
     double error;
     double valuesqrt2;
     double BinValue2;
+    double BinValue3;
     double error2;
     double sigma_z1;
     double sigma_z2;
@@ -28,6 +29,7 @@ void ErrorPropagation() {
     double part33;
     double x_sqrt;
     double x_sqrt2;
+    double subtraction; 
 
     TCanvas *c = new TCanvas("c","The Test HISTOGRAM ", 100, 8, 700, 600);
     c->SetFillColor(19);
@@ -61,35 +63,68 @@ void ErrorPropagation() {
     TH1D *h3 = fc34->ProjectionX("h3");
 
     //..Loop over fSample for Error propagation:
-
-    for (int i = 1; i < 11; i++)
-	{
-		for (int j=0; j<4; j++)
-		{
-			TString foo(TString::Format("fTprof2%d_number%dNtrks1bin", j+2, i));	
+    error = 0.;
+    int N = 10;
+    for (int j=1; j<201; j++)
+        for (int i = 1; i < 11; i++)
+    {
+        {
+            TString foo(TString::Format("fTprof22_number%dNtrks1bin", i));	
             TProfile *fsample = (TProfile*)list->FindObject(foo);
-			TString bar(TString::Format("fTprofC2%d", j+2));	            
-            TProfile *Cn22 = (TProfile*)list->FindObject(bar); // the right Tprofile will be found here. and then "FindObject" will find the right one. name has to be written correctly.
-			for (int h=0; h<200; h++)
-            {
-                BinValue = fsample->GetBinContent(h);
-                BinValue2 = Cn22->GetBinContent(h);
 
-                cout << "BinValue:  " << BinValue << endl;
-                cout << "BinValue 2: " << BinValue2 << endl;
-                cout << "first step:  " << foo << endl; 
-            }
+            TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22"); 
+            
+            BinValue = fsample->GetBinContent(j);
+            BinValue2 = Cn22->GetBinContent(j);
+            if (BinValue > 0 && BinValue2 > 0)
+                error += pow(BinValue - BinValue2, 2);
+            else continue; 
+            
+            cout << "fsample: " << foo << endl;
+            cout << "BinValue: " << BinValue << endl;
+            cout << "BinValue2: " << BinValue2 << endl;
+            cout << "bin: "  << j << endl;
+            cout << "error: " << error << endl; 
+            fc42->Draw();		
+        }
+        sigma_z1 = sqrt(error/ (N*N) );
+        cout << "sigma: " << sigma_z1 << endl;
+        BinValue3 = fc42->GetBinContent(j);
+        if (BinValue3 > 0)
+            valuesqrt = sqrt(BinValue3);
+            cout << "BinValue3: " << BinValue3 << endl;
+            cout << "valuesqrt: " << valuesqrt << endl; 
+        //else continue; 
+        }
+
+    // for (int i = 1; i < 11; i++)
+	// {
+	// 	for (int j=0; j<4; j++)
+	// 	{
+	// 		TString foo(TString::Format("fTprof2%d_number%dNtrks1bin", j+2, i));	
+    //         TProfile *fsample = (TProfile*)list->FindObject(foo);
+	// 		TString bar(TString::Format("fTprofC2%d", j+2));	            
+    //         TProfile *Cn22 = (TProfile*)list->FindObject(bar); // the right Tprofile will be found here. and then "FindObject" will find the right one. name has to be written correctly.
+	// 		for (int h=0; h<200; h++)
+    //         {
+    //             BinValue = fsample->GetBinContent(h);
+    //             BinValue2 = Cn22->GetBinContent(h);
+
+    //             cout << "BinValue:  " << BinValue << endl;
+    //             cout << "BinValue 2: " << BinValue2 << endl;
+    //             cout << "first step:  " << foo << endl; 
+    //         }
 			
             
 		
-			fsample->Draw("EP");  
+	// 		fsample->Draw("EP");  
 
 
-			// bin_val = c22->GetBinContent(j);
-			// bin_val_fc = fc22->GetBinContent(j);
-			// std::cout << "bin_val" << c22->GetBinContent(j) << std::qendl;
-		}
-	}
+	// 		// bin_val = c22->GetBinContent(j);
+	// 		// bin_val_fc = fc22->GetBinContent(j);
+	// 		// std::cout << "bin_val" << c22->GetBinContent(j) << std::qendl;
+	// 	}
+	// }
     //****************************************************
     //// Loop to get sqrt of each bin in Tprofile of//////
     //     Cn{2} = <<2>> = < vn^2 > and //////////////////
