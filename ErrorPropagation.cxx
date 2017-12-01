@@ -12,27 +12,35 @@
 using namespace std;  
 
 void ErrorPropagation() {
-    double valuesqrt;
-    double BinValue;
     double error;
-    double valuesqrt2;
-    double BinValue2;
-    double BinValueA;
-    double BinValueB;
-    double error2;
+    double BinValue_3Particle_Correlation;
+    double BinValue_4Particle_Correlation;
+    double Sample_BinValue_3Particle_Correlation;
+    double Sample_BinValue_4Particle_Correlation;
+    double Valuesqrt_4Particle_Correlation;
+    double Sample_Valuesqrt_4Particle_Correlation;
+    double V422;
+    double V422_Sample;
     double sigma_z1;
-    double sigma_z2;
-    double part1;
-    double part2;
-    double part3;
-    double part11;
-    double part22;
-    double part33;
-    double x_sqrt;
-    double x_sqrt2;
-    double subtraction; 
-    double Ratio;
-    double BinValue_sample;
+
+
+    // double valuesqrt;
+    // double BinValue;
+    // double valuesqrt2;
+    // double BinValue2;
+    // //double error2;
+    // //double sigma_z2;
+    // // double part1;
+    // // double part2;
+    // // double part3;
+    // // double part11;
+    // // double part22;
+    // // double part33;
+    // double x_sqrt;
+    // double x_sqrt2;
+    // double subtraction; 
+    // double V422;
+    // double BinValue_sample;
     
     TCanvas *c = new TCanvas("c","The Test HISTOGRAM ", 100, 8, 700, 600);
     c->SetFillColor(19);
@@ -50,9 +58,9 @@ void ErrorPropagation() {
     TH1D *hC42 = new TH1D("hC42", " #sqrt{<< v_{2}^{4} >>}", 200, 0, 200); //this is just define a histogram 
 	hC42->Sumw2();
 
-    TH1D *hCV422 = new TH1D("hCV422", " #sqrt{< v_{4}^{2} >}", 200, 0, 200); //this is just define a histogram which will fill the data.
-    hC22->Sumw2();
-
+    TH1D *hCV422 = new TH1D("hCV422", " <<3>> / #sqrt{< v_{2}^{4} >}", 200, 0, 200); //this is just define a histogram which will fill the data of V422.
+    hCV422->Sumw2();
+ 
     //Open the root.file:
     TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/LHC16q_CENT_SDD_W_NUA_3particle_correlation.root", "READ");
     TDirectory *dir = (TDirectoryFile*)file->Get("MyTaskResults");
@@ -69,67 +77,77 @@ void ErrorPropagation() {
     TH1D *h3 = fc34->ProjectionX("h3");
 
     //..Loop over fSample for Error propagation:
-    error = 0.;
-    int N = 10;
-    for (int j=1; j<201; j++)
-        for (int i = 1; i < 11; i++)
-    {
-        {
-            TString foo(TString::Format("fTprof42_number%dNtrks1bin", i));	
-            TProfile *fsample = (TProfile*)list->FindObject(foo);
+    // error = 0.;
+    // int N = 10;
+    // for (int j=1; j<201; j++)
+    //     for (int i = 1; i < 11; i++)
+    // {
+    //     {
+    //         TString bar(TString::Format("fTprof34_number%dNtrks1bin", i));	
+    //         TProfile *prof34 = (TProfile*)list->FindObject(bar);
+    //         TString foo(TString::Format("fTprof42_number%dNtrks1bin", i));	
+    //         TProfile *prof42 = (TProfile*)list->FindObject(foo);
 
-            TString bar(TString::Format("fTprof34_number%dNtrks1bin", i));	
-            TProfile *fsample2 = (TProfile*)list->FindObject(bar);
+    //         TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34"); 
+    //         TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42");
+            
+    //         Sample_BinValue_3Particle_Correlation = prof34->GetBinContent(j);
+    //         Sample_BinValue_4Particle_Correlation = prof42->GetBinContent(j);
+            
+    //         BinValue_3Particle_Correlation = Cn34->GetBinContent(j);
+    //         BinValue_4Particle_Correlation = Cn42->GetBinContent(j);
 
-            TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42");
-            TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34"); 
+    //         // && BinValue_3Particle_Correlation > 0 // Sample_BinValue_3Particle_Correlation > 0 &&
             
-            BinValueA = Cn34->GetBinContent(j);
-            BinValueB = Cn42->GetBinContent(j);
-            valuesqrt = sqrt(BinValueB);
-            Ratio = BinValueA / (valuesqrt);
+    //         if (Sample_BinValue_4Particle_Correlation > 0  && BinValue_4Particle_Correlation > 0 ) {
             
-            BinValue = fsample->GetBinContent(j);
-            BinValue2 = fsample2->GetBinContent(j);
-            BinValue_sample = BinValue / (BinValue2); 
-            if (BinValue > 0 && BinValue2 > 0 && BinValueA > 0 && BinValueB > 0 ) {
-                error += pow(BinValue_sample - Ratio, 2);
+    //             Valuesqrt_4Particle_Correlation = sqrt(BinValue_4Particle_Correlation);
+    //             Sample_Valuesqrt_4Particle_Correlation = sqrt(Sample_BinValue_4Particle_Correlation);
+                
+    //             V422 = BinValue_3Particle_Correlation / Valuesqrt_4Particle_Correlation;
+    //             V422_Sample = Sample_BinValue_3Particle_Correlation / Sample_Valuesqrt_4Particle_Correlation; 
+                
+    //             error += pow(V422_Sample - V422, 2);
 
-            }
-            else continue; 
-            
-            cout << "fsample: " << foo << endl;
-            cout << "BinValue: " << BinValue << endl;
-            cout << "BinValue2: " << BinValue2 << endl;
-            cout << "bin: "  << j << endl;
-            cout << "error: " << error << endl;
-            cout << "BinValueA: " << BinValueA << endl;
-            cout << "BinValueB: " << BinValueB << endl;
-            cout << "valuesqrt: " << valuesqrt << endl;  
-            cout << "Ratio:   "   << Ratio << endl;
-            fc42->Draw();		
-        }
-        sigma_z1 = sqrt(error/ (N*N) );
-        cout << "sigma: " << sigma_z1 << endl;
-        hC42->SetBinContent(j, valuesqrt);
-        hC42->SetBinError(j, sigma_z1);
-        hCV422->SetBinContent(j, Ratio);
-        hCV422->SetBinError(j, sigma_z1);
-        //hC42->Draw();
-        hCV422->Draw();
-        }
+    //         }
+    //         else continue; 
+    //         cout << "prof34: " << bar << endl;
+    //         cout << "prof42: " << foo << endl;
+    //         cout << "Sample_BinValue_3Particle_Correlation: " << Sample_BinValue_3Particle_Correlation << endl;
+    //         cout << "Sample_BinValue_4Particle_Correlation: " << Sample_BinValue_4Particle_Correlation << endl;
+    //         cout << "bin: "  << j << endl;
+    //         cout << "BinValue_3Particle_Correlation: " << BinValue_3Particle_Correlation << endl;
+    //         cout << "BinValue_4Particle_Correlation: " << BinValue_4Particle_Correlation << endl;
+    //         cout << "Valuesqrt_4Particle_Correlation: " << Valuesqrt_4Particle_Correlation << endl;  
+    //         cout << "V422:   "   << V422 << endl;
+    //         cout << "V422_Sample: " << V422_Sample << endl;
+    //         cout << "error: " << error << endl;
+
+    //         //fc42->Draw("EP");
+    //         //Cn34->Draw();
+    //         Cn42->Draw();		
+    //     }
+    //     sigma_z1 = sqrt(error/ (N * N) );
+    //     cout << "sigma: " << sigma_z1 << endl;
+    //     //hC42->SetBinContent(j, Valuesqrt_4Particle_Correlation);
+    //     //hC42->SetBinError(j, sigma_z1);
+    //     //hC42->Draw();
+    //     hCV422->SetBinContent(j, V422);
+    //     hCV422->SetBinError(j, sigma_z1);
+    //     // hCV422->Draw("EP");
+    //     }
 
     // for (int i = 1; i < 11; i++)
 	// {
 	// 	for (int j=0; j<4; j++)
 	// 	{
 	// 		TString foo(TString::Format("fTprof2%d_number%dNtrks1bin", j+2, i));	
-    //         TProfile *fsample = (TProfile*)list->FindObject(foo);
+    //         TProfile *prof42 = (TProfile*)list->FindObject(foo);
 	// 		TString bar(TString::Format("fTprofC2%d", j+2));	            
     //         TProfile *Cn22 = (TProfile*)list->FindObject(bar); // the right Tprofile will be found here. and then "FindObject" will find the right one. name has to be written correctly.
 	// 		for (int h=0; h<200; h++)
     //         {
-    //             BinValue = fsample->GetBinContent(h);
+    //             BinValue = prof42->GetBinContent(h);
     //             BinValue2 = Cn22->GetBinContent(h);
 
     //             cout << "BinValue:  " << BinValue << endl;
@@ -139,7 +157,7 @@ void ErrorPropagation() {
 			
             
 		
-	// 		fsample->Draw("EP");  
+	// 		prof42->Draw("EP");  
 
 
 	// 		// bin_val = c22->GetBinContent(j);
@@ -160,9 +178,9 @@ void ErrorPropagation() {
     //     cout << "Error: " << error << endl;
     // if(BinValue > 0)
     // {
-    //     valuesqrt = sqrt(BinValue);
-    //     x_sqrt = 1/valuesqrt;
-    //     cout << "sqrtBinValue: "<< valuesqrt <<endl;
+    //     Valuesqrt_4Particle_Correlation = sqrt(BinValue);
+    //     x_sqrt = 1/Valuesqrt_4Particle_Correlation;
+    //     cout << "sqrtBinValue: "<< Valuesqrt_4Particle_Correlation <<endl;
     //     cout << "x_sqrt: " << x_sqrt << endl;
 
     //     part1 = 0.5 * x_sqrt;
@@ -177,7 +195,7 @@ void ErrorPropagation() {
     //     sigma_z1 = sqrt(part3);
     //     cout << "sigma_z1: " << sigma_z1 << endl;
  
-    //     hC22->SetBinContent(i, valuesqrt);
+    //     hC22->SetBinContent(i, Valuesqrt_4Particle_Correlation);
     //     hC22->SetBinError(i, sigma_z1);
     // }
     // else(BinValue <= 0);  
@@ -255,4 +273,7 @@ void ErrorPropagation() {
 	// hC42->Draw("EP");
     // fc34->Divide(hC42);
     // fc34->Draw();
+    hCV422->SetMarkerStyle(23);
+    hCV422->SetMarkerColorAlpha(kRed, 10.0);
+	hCV422->Draw("EP");
 }
