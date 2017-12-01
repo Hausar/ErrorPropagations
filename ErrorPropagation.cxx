@@ -78,7 +78,7 @@ void ErrorPropagation() {
 
     //..Loop over fSample for Error propagation:
     // error = 0.;
-    // int N = 10;
+    int N = 10.;
     // for (int j=1; j<201; j++)
     //     for (int i = 1; i < 11; i++)
     // {
@@ -170,15 +170,39 @@ void ErrorPropagation() {
     //     Cn{2} = <<2>> = < vn^2 > and //////////////////
     ////   Cn{4} = <<4>> = <vn^4> = <<4>> - 2 <<2>>^2 ////
     //*****************************************************
-    // for(int i=0; i<200; i++)
+    double BinValue42;
+    double BinValue42_Sample;
+    double final_error;
+    for(int i=0; i<200; i++)
+    {
+        for(int sample=1; sample<11; sample++)
+        {
+            TString foo(TString::Format("fTprof42_number%dNtrks1bin", sample));	
+            TProfile *fprof42 = (TProfile*)list->FindObject(foo);
+            //TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42");
+            BinValue42_Sample = fprof42->GetBinContent(i);
+            BinValue42 = h2->GetBinContent(i); 
+
+            if(BinValue42 > 0 && BinValue42_Sample > 0 ) {
+                Valuesqrt_4Particle_Correlation = sqrt(BinValue42);
+            }
+            else continue;
+            error += pow(BinValue42_Sample - BinValue42, 2);
+
+            cout << "fsample: " << foo << endl;
+            cout << "BinVlue42: " << BinValue42 << endl;
+            cout << "BinVlue42_Sample: " << BinValue42_Sample << endl;
+            cout << " Valuesqrt 4Particle: " << Valuesqrt_4Particle_Correlation << endl;
+            cout << "error: " << error << endl; 
+        
+        }
+        final_error = sqrt(error / (N * N) );
+        cout << "final_error: " << final_error << endl;
+        hC42->SetBinContent(i, Valuesqrt_4Particle_Correlation);
+        hC42->SetBinError(i, final_error);
+
+    }
     // {
-    //     BinValue = h1->GetBinContent(i);
-    //     error = h1->GetBinError(i); 
-    //     cout << "BinValue: " << BinValue << endl; 
-    //     cout << "Error: " << error << endl;
-    // if(BinValue > 0)
-    // {
-    //     Valuesqrt_4Particle_Correlation = sqrt(BinValue);
     //     x_sqrt = 1/Valuesqrt_4Particle_Correlation;
     //     cout << "sqrtBinValue: "<< Valuesqrt_4Particle_Correlation <<endl;
     //     cout << "x_sqrt: " << x_sqrt << endl;
@@ -268,12 +292,12 @@ void ErrorPropagation() {
     // hC22->SetMarkerColorAlpha(kRed, 4.5);
     // hC22->Draw("EP");
     
-    // hC42->SetMarkerStyle(23);
-    // hC42->SetMarkerColorAlpha(kRed, 10.0);
-	// hC42->Draw("EP");
+    hC42->SetMarkerStyle(23);
+    hC42->SetMarkerColorAlpha(kRed, 10.0);
+	hC42->Draw("EP");
     // fc34->Divide(hC42);
     // fc34->Draw();
-    hCV422->SetMarkerStyle(23);
-    hCV422->SetMarkerColorAlpha(kRed, 10.0);
-	hCV422->Draw("EP");
+    // hCV422->SetMarkerStyle(23);
+    // hCV422->SetMarkerColorAlpha(kRed, 10.0);
+	// hCV422->Draw("EP");
 }
