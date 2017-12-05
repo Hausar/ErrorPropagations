@@ -242,9 +242,9 @@ void Linear_caculation() {
     // fc42->SetMarkerColorAlpha(kRed, 4.5);
     // fc42->Draw("EP");
     
-    //hC22->SetMarkerStyle(23);
-    //hC22->SetMarkerColorAlpha(kRed, 4.5);
-    hC22->Draw("EP");
+    // hC22->SetMarkerStyle(23);
+    // hC22->SetMarkerColorAlpha(kRed, 4.5);
+    hC22->Draw("");
     
     // hC42->SetMarkerStyle(23);
     // hC42->SetMarkerColorAlpha(kRed, 10.0);
@@ -252,7 +252,7 @@ void Linear_caculation() {
 
     // hCV422->SetMarkerStyle(20);
     // hCV422->SetMarkerColorAlpha(kBlue, 0.35);
-	// hCV422->Draw("same");
+	// hCV422->Draw(" ");
 
     c->BuildLegend();
     //hTest->Draw();
