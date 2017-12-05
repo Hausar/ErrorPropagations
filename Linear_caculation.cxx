@@ -18,6 +18,7 @@ void Linear_caculation() {
     double Sample_BinValue_4Particle_Correlation;
     double Valuesqrt_4Particle_Correlation;
     double Sample_Valuesqrt_4Particle_Correlation;
+    double Sample_BinValue_2Particle_Correlation;
     double V422;
     double V422_Sample;
     double sigma_z1;
@@ -25,8 +26,23 @@ void Linear_caculation() {
     double BinValue_sample;
     double BinValue42_Sample;
     double Valuesqrt_2Particle_Sample;
+    double Valuesqrt_4Particle_Sample;
+    double V4_BinValue_hC22; 
+    double NL_BinValue_hCV422;
+    double Linear; 
     double final_error;
+    double Linear_Error; 
+    double test;
     int N = 10.;
+
+    //values for Linear error sampling:
+    double fsample_Linear; 
+    double fsample_2particle_correlation;
+    double sqrt_fsample_2particle_correlation;
+    double fsample_3particle_correlation;
+    double fsample_4particle_correlation;
+    double sqrt_fsample_4particle_correlation;
+
     
     TCanvas *c = new TCanvas("c","The Test HISTOGRAM ", 100, 8, 700, 600);
     c->SetFillColor(19);
@@ -45,7 +61,7 @@ void Linear_caculation() {
     TH1D *hC22 = new TH1D("hC22", " #sqrt{< v_{4}^{2} >}", 200, 0, 200); //this is just define a histogram which will fill the data.
     hC22->Sumw2();
     
-    TH1D *hC42 = new TH1D("hC42", " #sqrt{<< v_{2}^{4} >>}", 200, 0, 200); //this is just define a histogram 
+    TH1D *hC42 = new TH1D("hC42", " #sqrt{< v_{2}^{4} >}", 200, 0, 200); //this is just define a histogram 
 	hC42->Sumw2();
 
     TH1D *hCV422 = new TH1D("hCV422", " <<3>> / #sqrt{< v_{2}^{4} >}", 200, 0, 200); //this is just define a histogram which will fill the data of V422.
@@ -70,37 +86,39 @@ void Linear_caculation() {
     //// Loop to get sqrt of each bin in Tprofile of//////
     //     Cn{2} = <<2>> = < vn^2 > and //////////////////
     ////   Cn{4} = <<4>> = <vn^4> = <<4>> - 2 <<2>>^2 ////
+    /////       v2{4} = sqrt(<<4>>_{2,2|-2,-2})        ////////////
     //*****************************************************
-    // for(int i=1; i<201; i++)
-    // {
-    //     double error = 0.0;
-    //     for(int sample=1; sample<11; sample++)
-    //     {
-    //         TString foo(TString::Format("fTprof42_number%dNtrks1bin", sample));	
-    //         TProfile *fprof42 = (TProfile*)list->FindObject(foo);
-    //         //TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42");
-    //         BinValue42_Sample = fprof42->GetBinContent(i);
-    //         BinValue42 = h2->GetBinContent(i); 
+    for(int i=1; i<201; i++)
+    {
+        double error = 0.0;
+        for(int sample=1; sample<11; sample++)
+        {
+            TString foo(TString::Format("fTprof42_number%dNtrks1bin", sample));	
+            TProfile *fprof42 = (TProfile*)list->FindObject(foo);
+            TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42");
+            BinValue42_Sample = fprof42->GetBinContent(i);
+            BinValue42 = Cn42->GetBinContent(i); 
 
-    //         if(BinValue42 > 0 && BinValue42_Sample > 0 ) {
-    //             Valuesqrt_4Particle_Correlation = sqrt(BinValue42);
-    //         }
-    //         else continue;
-    //         error += pow(BinValue42_Sample - BinValue42, 2);
+            if(BinValue42 > 0 && BinValue42_Sample > 0 ) {
+                Valuesqrt_4Particle_Correlation = sqrt(BinValue42);
+                Valuesqrt_4Particle_Sample = sqrt(BinValue42_Sample);
+            }
+            else continue;
+            error += pow(Valuesqrt_4Particle_Sample - Valuesqrt_4Particle_Correlation, 2);
 
-    //         cout << "fsample: " << foo << endl;
-    //         cout << "BinVlue42: " << BinValue42 << endl;
-    //         cout << "BinVlue42_Sample: " << BinValue42_Sample << endl;
-    //         cout << " Valuesqrt 4Particle: " << Valuesqrt_4Particle_Correlation << endl;
-    //         cout << "error: " << error << endl; 
+            cout << "fsample: " << foo << endl;
+            cout << "BinVlue42: " << BinValue42 << endl;
+            cout << "BinVlue42_Sample: " << BinValue42_Sample << endl;
+            cout << " Valuesqrt 4Particle: " << Valuesqrt_4Particle_Correlation << endl;
+            cout << "error: " << error << endl; 
         
-    //     }
-    //     final_error = sqrt(error / (N * N) );
-    //     cout << "final_error: " << final_error << endl;
-    //     hC42->SetBinContent(i, Valuesqrt_4Particle_Correlation);
-    //     hC42->SetBinError(i, final_error);
+        }
+        final_error = sqrt(error / (N * N) );
+        cout << "final_error: " << final_error << endl;
+        hC42->SetBinContent(i, Valuesqrt_4Particle_Correlation);
+        hC42->SetBinError(i, final_error);
 
-    // }
+    }
     //*************************************************************************
     //.. Loop for get the v4 = sqrt(<<2>>_{4|-4})
     for(int i=1; i < 201; i++)
@@ -162,24 +180,24 @@ void Linear_caculation() {
 
             }
             else continue; 
-            cout << "prof34: " << bar << endl;
-            cout << "prof42: " << foo << endl;
-            cout << "Sample_BinValue_3Particle_Correlation: " << Sample_BinValue_3Particle_Correlation << endl;
-            cout << "Sample_BinValue_4Particle_Correlation: " << Sample_BinValue_4Particle_Correlation << endl;
-            cout << "bin: "  << j << endl;
-            cout << "BinValue_3Particle_Correlation: " << BinValue_3Particle_Correlation << endl;
-            cout << "BinValue_4Particle_Correlation: " << BinValue_4Particle_Correlation << endl;
-            cout << "Valuesqrt_4Particle_Correlation: " << Valuesqrt_4Particle_Correlation << endl;  
-            cout << "V422:   "   << V422 << endl;
-            cout << "V422_Sample: " << V422_Sample << endl;
-            cout << "error: " << error << endl;
+            // cout << "prof34: " << bar << endl;
+            // cout << "prof42: " << foo << endl;
+            // cout << "Sample_BinValue_3Particle_Correlation: " << Sample_BinValue_3Particle_Correlation << endl;
+            // cout << "Sample_BinValue_4Particle_Correlation: " << Sample_BinValue_4Particle_Correlation << endl;
+            // cout << "bin: "  << j << endl;
+            // cout << "BinValue_3Particle_Correlation: " << BinValue_3Particle_Correlation << endl;
+            // cout << "BinValue_4Particle_Correlation: " << BinValue_4Particle_Correlation << endl;
+            // cout << "Valuesqrt_4Particle_Correlation: " << Valuesqrt_4Particle_Correlation << endl;  
+            // cout << "V422:   "   << V422 << endl;
+            // cout << "V422_Sample: " << V422_Sample << endl;
+            // cout << "error: " << error << endl;
 
             //fc42->Draw("EP");
             //Cn34->Draw();
             //Cn42->Draw();		
         }
         sigma_z1 = sqrt(error/ (N * N) );
-        cout << "sigma: " << sigma_z1 << endl;
+        //cout << "sigma: " << sigma_z1 << endl;
         //hC42->SetBinContent(j, Valuesqrt_4Particle_Correlation);
         //hC42->SetBinError(j, sigma_z1);
         //hC42->Draw();
@@ -187,6 +205,83 @@ void Linear_caculation() {
         hCV422->SetBinError(j, sigma_z1);
         
         }
+        //***************************************************************************************************************
+        //..Linear Response calculation:
+        //.. The L and NL are uncorrelated means they are perpendicular so they make a 90 triangle when the "Hypotenuse" is v4 (sqrt(<<2>>_{4|-4})) and the two others are L response and Non-Linear response which is the "<<3>> / sqrt(<<4>>)" so by using the "Pythagorean theoerem" the v4^2 = L^2 + NL ^2 
+        /////                                               L^2 = v4^2 - NL^2  we dont have L response so
+        ////////                              L = sqrt (v4 - NL) Here v4 is sqrt( <<2>> ) and NL is <<3>> /sqrt(<<4>> )
+        //***************************************************************************************************************
+
+    for (int j=1; j<201; j++) {
+        double error = 0.0;
+        for (int i = 1; i < 11; i++) {
+            TString foo(TString::Format("fTprof24_number%dNtrks1bin", i));
+            TProfile *prof24 = (TProfile*)list->FindObject(foo);
+            TString bar(TString::Format("fTprof34_number%dNtrks1bin", i));	
+            TProfile *prof34 = (TProfile*)list->FindObject(bar);
+            TString foo2(TString::Format("fTprof42_number%dNtrks1bin", i));	
+            TProfile *prof42 = (TProfile*)list->FindObject(foo2);
+
+            TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24");
+            TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34"); 
+            TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42");
+
+            Sample_BinValue_2Particle_Correlation = prof24->GetBinContent(j);
+            Sample_BinValue_3Particle_Correlation = prof34->GetBinContent(j);
+            Sample_BinValue_4Particle_Correlation = prof42->GetBinContent(j);
+
+            BinValue_2Particle_Correlation = Cn24->GetBinContent(j);
+            BinValue_3Particle_Correlation = Cn34->GetBinContent(j);
+            BinValue_4Particle_Correlation = Cn42->GetBinContent(j);
+
+            sqrt_fsample_2particle_correlation = sqrt(Sample_BinValue_2Particle_Correlation);
+            sqrt_fsample_4particle_correlation = sqrt(Sample_BinValue_4Particle_Correlation);
+
+            Valuesqrt_2Particle_Correlation = sqrt(BinValue_2Particle_Correlation);
+            //Sample_Valuesqrt_2Particle_Correlation = sqrt(Sample_BinValue_2Particle_Correlation);
+
+            Valuesqrt_4Particle_Correlation = sqrt(BinValue_4Particle_Correlation);
+            //Sample_Valuesqrt_4Particle_Correlation = sqrt(Sample_BinValue_4Particle_Correlation);
+        
+            V422 = BinValue_3Particle_Correlation / (Valuesqrt_4Particle_Correlation);
+            //V422_Sample = Sample_BinValue_3Particle_Correlation / Sample_Valuesqrt_4Particle_Correlation; 
+            V422_Sample = Sample_BinValue_3Particle_Correlation / (sqrt_fsample_4particle_correlation); 
+
+
+            V4_BinValue_hC22 = hC22->GetBinContent(j);
+            NL_BinValue_hCV422 = hCV422->GetBinContent(j);
+
+
+            if (sqrt_fsample_2particle_correlation > V422_Sample &&  sqrt_fsample_2particle_correlation > 0 && sqrt_fsample_4particle_correlation > 0 &&  Sample_BinValue_3Particle_Correlation > 0 &&  V4_BinValue_hC22 > NL_BinValue_hCV422 && V4_BinValue_hC22 > 0 && NL_BinValue_hCV422 > 0 && Valuesqrt_2Particle_Correlation > V422 ) {
+
+                //Linear = sqrt(pow(V4_BinValue_hC22, 2) - pow(NL_BinValue_hCV422, 2) );
+                Linear = sqrt(pow(Valuesqrt_2Particle_Correlation, 2) - pow(V422, 2));   
+                fsample_Linear = sqrt (pow(sqrt_fsample_2particle_correlation, 2) - pow(V422_Sample, 2 ) ); 
+                
+
+
+                // Linear = sqrt( pow(Valuesqrt_2Particle_Correlation,2 ) - pow(BinValue_3Particle_Correlation / (Valuesqrt_4Particle_Correlation), 2) ); 
+                error += pow(fsample_Linear - Linear, 2);
+            }
+            else continue; 
+            // cout << "Valuesqrt_2Particle_Correlation: " << Valuesqrt_2Particle_Correlation << endl; 
+            // cout << "BinValue_3Particle_Correlation: " << BinValue_3Particle_Correlation << endl; 
+            // cout << "Valuesqrt_4Particle_Correlation: " << Valuesqrt_4Particle_Correlation << endl; 
+            cout << "V4_BinValue_hC22: " << V4_BinValue_hC22 << endl;
+            cout << "NL_BinValue_hCV422: " << NL_BinValue_hCV422 << endl;
+            cout << "Linear: " << Linear << endl; 
+        }
+        Linear_Error = sqrt(error/ (N * N) );           
+        hTest->SetBinContent(j, Linear); 
+        hTest->SetBinError(j, Linear_Error); 
+    }
+
+
+
+
+
+
+
     
     //************************************************************************
     //.. Test the Error, her is only for testing <<4>> error manually.
@@ -242,18 +337,21 @@ void Linear_caculation() {
     // fc42->SetMarkerColorAlpha(kRed, 4.5);
     // fc42->Draw("EP");
     
-    // hC22->SetMarkerStyle(23);
-    // hC22->SetMarkerColorAlpha(kRed, 4.5);
-    hC22->Draw("");
+    hC22->SetMarkerStyle(20);
+    hC22->SetMarkerColorAlpha(kRed, 4.5);
+    hC22->Draw("same");
     
-    // hC42->SetMarkerStyle(23);
-    // hC42->SetMarkerColorAlpha(kRed, 10.0);
-	// hC42->Draw("EP");
+    // hC42->SetMarkerStyle(21);
+    // hC42->SetMarkerColorAlpha(kBlack, 10.0);
+	// hC42->Draw("same");
 
-    // hCV422->SetMarkerStyle(20);
-    // hCV422->SetMarkerColorAlpha(kBlue, 0.35);
-	// hCV422->Draw(" ");
-
+    hCV422->SetMarkerStyle(20);
+    hCV422->SetMarkerColorAlpha(kBlue, 0.35);
+	hCV422->Draw("same");
+    
+    hTest->SetMarkerStyle(21);
+    hTest->SetMarkerColorAlpha(kBlack, 4.5);
+    hTest->Draw("same");
     c->BuildLegend();
-    //hTest->Draw();
+    //hTest->Draw("same");
 }
