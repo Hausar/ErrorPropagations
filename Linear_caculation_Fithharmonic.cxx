@@ -379,12 +379,12 @@ void Linear_caculation_Fithharmonic() {
     // hC42->SetMarkerColorAlpha(kBlack, 10.0);
 	// hC42->Draw("same");
 
-    hC22->SetMarkerStyle(20);
-    hC22->SetMarkerColorAlpha(kRed, 4.5);
-    hC22->SetAxisRange(0., 110);
-    hC22->SetMarkerSize(1.);
-    hC22->SetXTitle("# of tracks");
-    hC22->Draw("same");
+    // hC22->SetMarkerStyle(20);
+    // hC22->SetMarkerColorAlpha(kRed, 4.5);
+    // hC22->SetAxisRange(0., 110);
+    // hC22->SetMarkerSize(1.);
+    // hC22->SetXTitle("# of tracks");
+    // hC22->Draw("same");
     // //gStyle->SetOptStat(0);
 
     hCV532->SetMarkerStyle(34);
@@ -393,11 +393,11 @@ void Linear_caculation_Fithharmonic() {
     hCV532->SetMarkerSize(2.);
 	hCV532->Draw("same");
     
-    hCLinear->SetMarkerStyle(21);
-    hCLinear->SetMarkerColorAlpha(kBlack, 4.5);
-    hCLinear->SetAxisRange(0., 110);
-    hCLinear->SetMarkerSize(1.);
-    hCLinear->Draw("same");
+    // hCLinear->SetMarkerStyle(21);
+    // hCLinear->SetMarkerColorAlpha(kBlack, 4.5);
+    // hCLinear->SetAxisRange(0., 110);
+    // hCLinear->SetMarkerSize(1.);
+    // hCLinear->Draw("same");
     c->BuildLegend();
     
     // //..Create a root.file:
