@@ -24,19 +24,16 @@ void Linear_caculation_Fithharmonic() {
     double Sample_Valuesqrt_23Particle_Correlation = 0.0;
     double Sample_BinValue_25Particle_Correlation = 0.0;
     double Sample_BinValue_35Particle_Correlation = 0.0;
-    double Sample_Value_sqrt_25Particle_correlation = 0.0;
+    double Sample_Value_sqrt_25particle_correlation = 0.0;
+    double Sample_Value_sqrt_22particle_correlation = 0.0;
+    double Sample_Value_sqrt_23particle_correlation = 0.0;
     double Valuesqrt_25Particle_Correlation = 0.0;
     double BinValue_25Particle_Correlation = 0.0;
     double BinValue_35Particle_Correlation = 0.0;
-
-
     double Valuesqrt_22Particle_Correlation = 0.0;
-    double Sample_Valuesqrt_4Particle_Correlation = 0.0;
     double V532;
     double V532_Sample;
     double sigma_z1;
-
-
     double BinValue42;
     double BinValue_sample;
     double BinValue42_Sample;
@@ -51,17 +48,14 @@ void Linear_caculation_Fithharmonic() {
     double Linear_value_sample;
     double final_error;
     double Linear_Error; 
-    double test;
     int N = 10.;
+    double fsample_Linear; 
 
     //values for Linear error sampling:
-    double fsample_Linear; 
-    double fsample_2particle_correlation = 0.0;
-    double fsample_3particle_correlation = 0.0;
-    double fsample_4particle_correlation = 0.0;
+    // double fsample_2particle_correlation = 0.0;
+    // double fsample_3particle_correlation = 0.0;
+    // double fsample_4particle_correlation = 0.0;
 
-    double Sample_Value_sqrt_22particle_correlation = 0.0;
-    double Sample_Value_sqrt_23particle_correlation = 0.0;
 
     
     TCanvas *c = new TCanvas("c","The Test HISTOGRAM ", 100, 8, 700, 600);
@@ -94,8 +88,8 @@ void Linear_caculation_Fithharmonic() {
     TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22_Gap");  //..v2^{2}
     TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23_Gap");  //..v3^{2}
     TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35_Gap");  //..<<3>>_{5|-3,-2}
+
     
- 
     //..Projection on Xaxis:
     // TH1D *h1 = Cn24->ProjectionX("h1");
     // TH1D *h2 = Cn42->ProjectionX("h2");
@@ -145,6 +139,7 @@ void Linear_caculation_Fithharmonic() {
         double error = 0.0;
         for(int sample =1; sample < 11; sample++)
         {
+            //TString foo(TString::Format("fTprof25_number%dNtrks1bin", sample));
             TString foo(TString::Format("fTprof25_number%dGapNtrks1bin", sample));
             TProfile *fprof25 = (TProfile*)list->FindObject(foo);
 
@@ -172,6 +167,13 @@ void Linear_caculation_Fithharmonic() {
     for (int j=1; j<201; j++) {
         double error = 0.0;
         for (int i = 1; i < 11; i++) {
+
+            // TString bar(TString::Format("fTprof35_number%dNtrks1bin", i));	
+            // TProfile *prof35 = (TProfile*)list->FindObject(bar);
+            // TString foo(TString::Format("fTprof22_number%dNtrks1bin", i));	
+            // TProfile *prof22 = (TProfile*)list->FindObject(foo);
+            // TString foo2(TString::Format("fTprof23_number%dNtrks1bin", i));	
+            // TProfile *prof23 = (TProfile*)list->FindObject(foo2);
 
             TString bar(TString::Format("fTprof35_number%dGapNtrks1bin", i));	
             TProfile *prof35 = (TProfile*)list->FindObject(bar);
@@ -231,6 +233,15 @@ void Linear_caculation_Fithharmonic() {
     for (int j=1; j<201; j++) {
         double error = 0.0;
         for (int i = 1; i < 11; i++) {
+            // TString foo(TString::Format("fTprof25_number%dNtrks1bin", i));
+            // TProfile *prof25 = (TProfile*)list->FindObject(foo);
+            // TString bar(TString::Format("fTprof35_number%dNtrks1bin", i));	
+            // TProfile *prof35 = (TProfile*)list->FindObject(bar);
+            // TString foo2(TString::Format("fTprof22_number%dNtrks1bin", i));	
+            // TProfile *prof22 = (TProfile*)list->FindObject(foo2);
+            // TString foo3(TString::Format("fTprof23_number%dNtrks1bin", i));	
+            // TProfile *prof23 = (TProfile*)list->FindObject(foo3);
+
             TString foo(TString::Format("fTprof25_number%dGapNtrks1bin", i));
             TProfile *prof25 = (TProfile*)list->FindObject(foo);
             TString bar(TString::Format("fTprof35_number%dGapNtrks1bin", i));	
@@ -258,22 +269,21 @@ void Linear_caculation_Fithharmonic() {
 
                 Sample_Value_sqrt_22particle_correlation = sqrt(Sample_BinValue_22Particle_Correlation);
                 Sample_Value_sqrt_23particle_correlation = sqrt(Sample_BinValue_23Particle_Correlation);
-                Sample_Value_sqrt_25Particle_correlation = sqrt(Sample_BinValue_25Particle_Correlation);
+                Sample_Value_sqrt_25particle_correlation = sqrt(Sample_BinValue_25Particle_Correlation);
                 
                 Valuesqrt_22Particle_Correlation = sqrt(BinValue_22Particle_Correlation);
                 Valuesqrt_23Particle_Correlation = sqrt(BinValue_23Particle_Correlation);
                 Valuesqrt_25Particle_Correlation = sqrt(BinValue_25Particle_Correlation);
             }   
-            else continue; 
-
             if(Valuesqrt_23Particle_Correlation > 0 && Valuesqrt_22Particle_Correlation > 0 && Sample_Value_sqrt_22particle_correlation > 0 && Sample_Value_sqrt_23particle_correlation > 0  && Sample_BinValue_35Particle_Correlation > 0 && BinValue_35Particle_Correlation > 0 ){
                 
                 V532 = BinValue_35Particle_Correlation / (Valuesqrt_23Particle_Correlation * Valuesqrt_22Particle_Correlation );
-                V532_Sample = Sample_BinValue_35Particle_Correlation / (Sample_Value_sqrt_23particle_correlation *Sample_Value_sqrt_22particle_correlation);               
-                
+                V532_Sample = Sample_BinValue_35Particle_Correlation / (Sample_Value_sqrt_23particle_correlation * Sample_Value_sqrt_22particle_correlation);  
+
+                //..First part i linear calculation is v5^2{2} which means---> vn{2} = sqrt(< vn^2 >) = sqrt(<<2>>) because <<2>> = <vn^2> --> vn = sqrt(<<2>> = sqrt(<vn^2>)
                 Linear = pow(Valuesqrt_25Particle_Correlation, 2) - pow(V532, 2);   
                 fsample_Linear = pow(Sample_Value_sqrt_25particle_correlation, 2) - pow(V532_Sample, 2); 
-        }
+            }
             if(fsample_Linear > 0 && Linear > 0 ) {
                 Linear_value_sample = sqrt(fsample_Linear);
                 Linear_value = sqrt(Linear);
@@ -364,23 +374,24 @@ void Linear_caculation_Fithharmonic() {
     // Cn42->SetMarkerColorAlpha(kRed, 4.5);
     // Cn42->Draw("EP");
     
-    // hC22->SetMarkerStyle(20);
-    // hC22->SetMarkerColorAlpha(kRed, 4.5);
-    // hC22->SetAxisRange(0., 110);
-    // hC22->SetMarkerSize(1.);
-    // hC22->SetXTitle("# of tracks");
-    // //gStyle->SetOptStat(0);
-    // hC22->Draw("same");
     
     // hC42->SetMarkerStyle(21);
     // hC42->SetMarkerColorAlpha(kBlack, 10.0);
 	// hC42->Draw("same");
 
-    // hCV532->SetMarkerStyle(34);
-    // hCV532->SetMarkerColorAlpha(kBlue, 0.45);
-    // hCV532->SetAxisRange(0., 110);
-    // hCV532->SetMarkerSize(2.);
-	// hCV532->Draw("same");
+    hC22->SetMarkerStyle(20);
+    hC22->SetMarkerColorAlpha(kRed, 4.5);
+    hC22->SetAxisRange(0., 110);
+    hC22->SetMarkerSize(1.);
+    hC22->SetXTitle("# of tracks");
+    hC22->Draw("same");
+    // //gStyle->SetOptStat(0);
+
+    hCV532->SetMarkerStyle(34);
+    hCV532->SetMarkerColorAlpha(kBlue, 0.45);
+    hCV532->SetAxisRange(0., 110);
+    hCV532->SetMarkerSize(2.);
+	hCV532->Draw("same");
     
     hCLinear->SetMarkerStyle(21);
     hCLinear->SetMarkerColorAlpha(kBlack, 4.5);
