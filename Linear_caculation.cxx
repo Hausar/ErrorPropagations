@@ -39,7 +39,7 @@ void Linear_caculation() {
     double final_error;
     double Linear_Error; 
     double test;
-    int N = 10.;
+    int N = 10;
 
     //values for Linear error sampling:
     double fsample_Linear; 
@@ -78,8 +78,8 @@ void Linear_caculation() {
     TList *list = (TList*)dir->Get("Flow_Refs_MyTaskResults");
     
     TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24_Gap");
-    TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC42_Gap");  
-    TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC34_Gap"); 
+    TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42_Gap");  
+    TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34_Gap"); 
     
  
     //..Projection on Xaxis:
@@ -260,7 +260,7 @@ void Linear_caculation() {
                 
                 Linear = pow(Valuesqrt_2Particle_Correlation, 2) - pow(V422, 2);   
                 fsample_Linear = pow(sqrt_fsample_2particle_correlation, 2) - pow(V422_Sample, 2); 
-        }
+            }
             if(fsample_Linear > 0 && Linear > 0 ) {
                 Linear_value_sample = sqrt(fsample_Linear);
                 Linear_value = sqrt(Linear);
