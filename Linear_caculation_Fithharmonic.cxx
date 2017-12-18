@@ -30,7 +30,6 @@ void Linear_caculation_Fithharmonic() {
     double Valuesqrt_25Particle_Correlation = 0.0;
     double BinValue_25Particle_Correlation = 0.0;
     double BinValue_35Particle_Correlation = 0.0;
-    double Valuesqrt_22Particle_Correlation = 0.0;
     double V532;
     double V532_Sample;
     double sigma_z1;
@@ -79,15 +78,15 @@ void Linear_caculation_Fithharmonic() {
     TDirectory *dir = (TDirectoryFile*)file->Get("MyTaskResults");
     TList *list = (TList*)dir->Get("Flow_Refs_MyTaskResults");
     
-    // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25");  //..V5{2}
-    // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22");  //..v2^{2}
-    // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23");  //..v3^{2}
-    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35");  //..<<3>>_{5|-3,-2}
+    TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25");  //..V5{2}
+    TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22");  //..v2^{2}
+    TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23");  //..v3^{2}
+    TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35");  //..<<3>>_{5|-3,-2}
     
-    TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25_Gap");  //..V5{2}
-    TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22_Gap");  //..v2^{2}
-    TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23_Gap");  //..v3^{2}
-    TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35_Gap");  //..<<3>>_{5|-3,-2}
+    // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25_Gap");  //..V5{2}
+    // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22_Gap");  //..v2^{2}
+    // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23_Gap");  //..v3^{2}
+    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35_Gap");  //..<<3>>_{5|-3,-2}
 
     
     //..Projection on Xaxis:
@@ -139,9 +138,10 @@ void Linear_caculation_Fithharmonic() {
         double error = 0.0;
         for(int sample =1; sample < 11; sample++)
         {
-            //TString foo(TString::Format("fTprof25_number%dNtrks1bin", sample));
-            TString foo(TString::Format("fTprof25_number%dGapNtrks1bin", sample));
+            TString foo(TString::Format("fTprof25_number%dNtrks1bin", sample));
             TProfile *fprof25 = (TProfile*)list->FindObject(foo);
+            // TString foo(TString::Format("fTprof25_number%dGapNtrks1bin", sample));
+            //TProfile *fprof25 = (TProfile*)list->FindObject(foo);
 
             BinValue25_Sample = fprof25->GetBinContent(i);
             BinValue25 = Cn25->GetBinContent(i);
@@ -168,19 +168,19 @@ void Linear_caculation_Fithharmonic() {
         double error = 0.0;
         for (int i = 1; i < 11; i++) {
 
-            // TString bar(TString::Format("fTprof35_number%dNtrks1bin", i));	
-            // TProfile *prof35 = (TProfile*)list->FindObject(bar);
-            // TString foo(TString::Format("fTprof22_number%dNtrks1bin", i));	
-            // TProfile *prof22 = (TProfile*)list->FindObject(foo);
-            // TString foo2(TString::Format("fTprof23_number%dNtrks1bin", i));	
-            // TProfile *prof23 = (TProfile*)list->FindObject(foo2);
-
-            TString bar(TString::Format("fTprof35_number%dGapNtrks1bin", i));	
+            TString bar(TString::Format("fTprof35_number%dNtrks1bin", i));	
             TProfile *prof35 = (TProfile*)list->FindObject(bar);
-            TString foo(TString::Format("fTprof22_number%dGapNtrks1bin", i));	
+            TString foo(TString::Format("fTprof22_number%dNtrks1bin", i));	
             TProfile *prof22 = (TProfile*)list->FindObject(foo);
-            TString foo2(TString::Format("fTprof23_number%dGapNtrks1bin", i));	
+            TString foo2(TString::Format("fTprof23_number%dNtrks1bin", i));	
             TProfile *prof23 = (TProfile*)list->FindObject(foo2);
+
+            // TString bar(TString::Format("fTprof35_number%dGapNtrks1bin", i));	
+            // TProfile *prof35 = (TProfile*)list->FindObject(bar);
+            // TString foo(TString::Format("fTprof22_number%dGapNtrks1bin", i));	
+            // TProfile *prof22 = (TProfile*)list->FindObject(foo);
+            // TString foo2(TString::Format("fTprof23_number%dGapNtrks1bin", i));	
+            // TProfile *prof23 = (TProfile*)list->FindObject(foo2);
                     
             Sample_BinValue_3Particle_Correlation = prof35->GetBinContent(j);
             Sample_BinValue_22Particle_Correlation = prof22->GetBinContent(j);
@@ -233,23 +233,23 @@ void Linear_caculation_Fithharmonic() {
     for (int j=1; j<201; j++) {
         double error = 0.0;
         for (int i = 1; i < 11; i++) {
-            // TString foo(TString::Format("fTprof25_number%dNtrks1bin", i));
-            // TProfile *prof25 = (TProfile*)list->FindObject(foo);
-            // TString bar(TString::Format("fTprof35_number%dNtrks1bin", i));	
-            // TProfile *prof35 = (TProfile*)list->FindObject(bar);
-            // TString foo2(TString::Format("fTprof22_number%dNtrks1bin", i));	
-            // TProfile *prof22 = (TProfile*)list->FindObject(foo2);
-            // TString foo3(TString::Format("fTprof23_number%dNtrks1bin", i));	
-            // TProfile *prof23 = (TProfile*)list->FindObject(foo3);
-
-            TString foo(TString::Format("fTprof25_number%dGapNtrks1bin", i));
+            TString foo(TString::Format("fTprof25_number%dNtrks1bin", i));
             TProfile *prof25 = (TProfile*)list->FindObject(foo);
-            TString bar(TString::Format("fTprof35_number%dGapNtrks1bin", i));	
+            TString bar(TString::Format("fTprof35_number%dNtrks1bin", i));	
             TProfile *prof35 = (TProfile*)list->FindObject(bar);
-            TString foo2(TString::Format("fTprof22_number%dGapNtrks1bin", i));	
+            TString foo2(TString::Format("fTprof22_number%dNtrks1bin", i));	
             TProfile *prof22 = (TProfile*)list->FindObject(foo2);
-            TString foo3(TString::Format("fTprof23_number%dGapNtrks1bin", i));	
+            TString foo3(TString::Format("fTprof23_number%dNtrks1bin", i));	
             TProfile *prof23 = (TProfile*)list->FindObject(foo3);
+
+            // TString foo(TString::Format("fTprof25_number%dGapNtrks1bin", i));
+            // TProfile *prof25 = (TProfile*)list->FindObject(foo);
+            // TString bar(TString::Format("fTprof35_number%dGapNtrks1bin", i));	
+            // TProfile *prof35 = (TProfile*)list->FindObject(bar);
+            // TString foo2(TString::Format("fTprof22_number%dGapNtrks1bin", i));	
+            // TProfile *prof22 = (TProfile*)list->FindObject(foo2);
+            // TString foo3(TString::Format("fTprof23_number%dGapNtrks1bin", i));	
+            // TProfile *prof23 = (TProfile*)list->FindObject(foo3);
 
             Sample_BinValue_25Particle_Correlation = prof25->GetBinContent(j);
             Sample_BinValue_35Particle_Correlation = prof35->GetBinContent(j);
@@ -373,33 +373,41 @@ void Linear_caculation_Fithharmonic() {
     // hC42->SetMarkerColorAlpha(kBlack, 10.0);
 	// hC42->Draw("same");
 
-    // hC22->SetMarkerStyle(20);
-    // hC22->SetMarkerColorAlpha(kRed, 4.5);
-    // hC22->SetAxisRange(0., 110);
-    // hC22->SetMarkerSize(1.);
-    // hC22->SetXTitle("# of tracks");
-    // hC22->Draw("same");
-    // //gStyle->SetOptStat(0);
+    hC22->SetMarkerStyle(20);
+    hC22->SetMarkerColorAlpha(kRed, 4.5);
+    //hC22->SetAxisRange(0., 110);
+    hC22->SetMarkerSize(1.);
+    hC22->SetXTitle("# of tracks");
+    hC22->Draw("same");
+    //gStyle->SetOptStat(0);
 
     hCV532->SetMarkerStyle(34);
     hCV532->SetMarkerColorAlpha(kBlue, 0.45);
-    hCV532->SetAxisRange(0., 110);
+    //hCV532->SetAxisRange(0., 110);
     hCV532->SetMarkerSize(2.);
 	hCV532->Draw("same");
     
-    // hCLinear->SetMarkerStyle(21);
-    // hCLinear->SetMarkerColorAlpha(kBlack, 4.5);
-    // hCLinear->SetAxisRange(0., 110);
-    // hCLinear->SetMarkerSize(1.);
-    // hCLinear->Draw("same");
+    hCLinear->SetMarkerStyle(21);
+    hCLinear->SetMarkerColorAlpha(kBlack, 4.5);
+    //hCLinear->SetAxisRange(0., 110);
+    hCLinear->SetMarkerSize(1.);
+    hCLinear->Draw("same");
     c->BuildLegend();
     
     // //..Create a root.file:
-    // TFile* fileOutput = new TFile("V4_Linear_NonLinear_Response.root","RECREATE");
+    // TFile* fileOutput = new TFile("V5_Linear_NonLinear_Response_Gap02.root","RECREATE");
     // if(!fileOutput) return;
     // fileOutput->cd();
     // hC22->Write();
-    // hCV422->Write();
+    // hCV532->Write();
     // hCLinear->Write();
     // return;
-}
+
+    TFile* fileOutput = new TFile("V5_Linear_NonLinear_Response_WOGap.root","RECREATE");
+    if(!fileOutput) return;
+    fileOutput->cd();
+    hC22->Write();
+    hCV532->Write();
+    hCLinear->Write();
+    return;
+}   
