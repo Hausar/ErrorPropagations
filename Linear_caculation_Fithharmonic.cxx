@@ -313,12 +313,6 @@ void Linear_caculation_Fithharmonic() {
         
     }
 
-
-
-
-
-
-
     
     //************************************************************************
     //.. Test the Error, her is only for testing <<4>> error manually.
