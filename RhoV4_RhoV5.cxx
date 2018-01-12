@@ -70,7 +70,7 @@ int N = 10;
     hC22 = (TH1D*) file->Get("hC22");
 
     //Open the root.file:
-    TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/LHC16q_CENT_SDD_W_NUA_3particle_02Gap.root", "READ");
+    TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/Run_wNUA_Wo_NUA/LHC16q_CENT_SDD_W_NUA_3particle_02Gap.root", "READ");
     TDirectory *dir = (TDirectoryFile*)file->Get("MyTaskResults");
     TList *list = (TList*)dir->Get("Flow_Refs_MyTaskResults");
     
@@ -216,19 +216,28 @@ int N = 10;
     // hCV422->SetMarkerSize(2.);
 	// hCV422->Draw("same");
     
-    // hRho_V422->SetMarkerStyle(20);
-    // hRho_V422->SetMarkerColorAlpha(kBlue, 4.5);
-    // hRho_V422->SetAxisRange(0., 110);
-    // hRho_V422->SetMarkerSize(1.);
-    // hRho_V422->SetXTitle("# of tracks");
-    // hRho_V422->Draw("same");
-
-    hRho_V532->SetMarkerStyle(20);
-    hRho_V532->SetMarkerColorAlpha(kRed, 4.5);
-    hRho_V532->SetAxisRange(0., 110);
-    hRho_V532->SetMarkerSize(1.);
-    hRho_V532->SetXTitle("# of tracks");
-    hRho_V532->Draw("same");
+    hRho_V422->SetMarkerStyle(20);
+    hRho_V422->SetMarkerColorAlpha(kBlue, 4.5);
+    hRho_V422->SetAxisRange(0., 110);
+    hRho_V422->SetMarkerSize(1.);
+    hRho_V422->SetXTitle("# of tracks");
+    hRho_V422->Draw();
     c->BuildLegend();
+
+    // hRho_V532->SetMarkerStyle(20);
+    // hRho_V532->SetMarkerColorAlpha(kRed, 4.5);
+    // hRho_V532->SetAxisRange(0., 110);
+    // hRho_V532->SetMarkerSize(1.);
+    // hRho_V532->SetXTitle("# of tracks");
+    // hRho_V532->Draw();
+    // c->BuildLegend();
+
+    TFile* fileOutput = new TFile("Rho_v422_Rho_v532_Gap02.root","RECREATE");
+    if(!fileOutput) return;
+    fileOutput->cd();
+    hRho_V422->Write();
+    hRho_V532->Write();
+    fileOutput->Close();
+    return;
 
 }
