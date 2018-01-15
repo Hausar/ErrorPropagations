@@ -224,7 +224,7 @@ void Linear_caculation() {
         //..Linear Response calculation:
         //.. The L and NL are uncorrelated means they are perpendicular so they make a 90 triangle when the "Hypotenuse" is v4 (sqrt(<<2>>_{4|-4})) and the two others are L response and Non-Linear response which is the "<<3>> / sqrt(<<4>>)" so by using the "Pythagorean theoerem" the v4^2 = L^2 + NL ^2 
         /////                                               L^2 = v4^2 - NL^2  we dont have L response so
-        ////////                              L = sqrt (v4 - NL) Here v4 is sqrt( <<2>> ) and NL is <<3>> /sqrt(<<4>> )
+        ////////                              L = sqrt (v4^2 - NL^2) Here v4 is sqrt( <<2>>_{4,-4}) and NL is <<3>> /sqrt(<<4>> )
         //***************************************************************************************************************
 
     for (int j=1; j<201; j++) {

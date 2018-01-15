@@ -187,7 +187,7 @@ void ErrorPropagation() {
         }
     
     //************************************************************************
-    //.. Test the Error, her is only for testing <<4>> error manually.
+    //.. Test the Error, here is only for testing <<4>> error manually.
     // for (int i = 1; i < 201; i++)
 	// {
     //     double error = 0.0;
