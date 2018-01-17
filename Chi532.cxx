@@ -183,13 +183,26 @@ void Chi532() {
     // h3->Draw();
     //h3->Divide(hC22);
 
-    hChi532->SetMarkerStyle(21);
-    hChi532->SetMarkerColorAlpha(kBlack, 4.5);
+    //hChi532->SetMarkerStyle(21);
+    //hChi532->SetMarkerColorAlpha(kBlack, 4.5);
     hChi532->GetYaxis()->SetRangeUser(0., 30.);
-    hChi532->GetXaxis()->SetRangeUser(0., 130);
+    hChi532->GetXaxis()->SetRangeUser(0., 140);
     hChi532->SetMarkerSize(1.);
     hChi532->Draw("same");
     //c->BuildLegend();
+    hChi532->SetTitle("Non-Linear coefficient #chi_{5,32} of v_{5,32} for pPb at 5.02 TeV");
+    hChi532->SetMarkerStyle(kFullTriangleUp); 
+    hChi532->SetMarkerColor(kBlue+1);
+    hChi532->GetYaxis()->SetTitleOffset(1.4);
+    //hChi532->GetYaxis()->CenterTitle(true);
+    hChi532->GetYaxis()->SetTitle("#chi_{5,32}");
+
+    hChi532->GetXaxis()->SetTitleOffset(1.4);
+    //hChi532->GetXaxis()->CenterTitle(true);
+    gStyle->SetTitleFontSize(0.2);
+    hChi532->GetXaxis()->SetTitle("N_{Ch}(|#Delta#eta| < 0.8)");
+    hChi532->SetFillColor(kBlue-9);
+    c->Update();
     
     TLatex latex;
     latex.SetTextSize(0.035);
@@ -208,28 +221,13 @@ void Chi532() {
     
     leg->SetBorderSize(0);
     gStyle->SetTitleFontSize(0.2);
-    hChi532->SetTitle("Non-Linear coefficient #chi_{5,32} of v_{5,32} for pPb at 5.02 TeV");
-    hChi532->SetMarkerStyle(kFullTriangleUp); 
-    hChi532->SetMarkerColor(kBlue+1);
-    hChi532->GetYaxis()->SetTitleOffset(1.4);
-    //hChi532->GetYaxis()->CenterTitle(true);
-    hChi532->GetYaxis()->SetTitle("#chi_{5,32}");
-
-    hChi532->GetXaxis()->SetTitleOffset(1.4);
-    //hChi532->GetXaxis()->CenterTitle(true);
-    gStyle->SetTitleFontSize(0.2);
-    hChi532->GetXaxis()->SetTitle("N_{Ch}(|#Delta#eta| < 0.8)");
-    hChi532->SetFillColor(kBlue-9);
-    c->Update();
 
     // //..Create a root.file:
-    // TFile* fileOutput = new TFile("V5_Linear_NonLinear_Response_Gap02.root","RECREATE");
-    // if(!fileOutput) return;
-    // fileOutput->cd();
-    // hC22->Write();
-    // hCV532->Write();
-    // hCLinear->Write();
-    // return;
+    TFile* fileOutput = new TFile("Chi422_Chi532_Gap02.root","UPDATE");
+    if(!fileOutput) return;
+    fileOutput->cd();
+    hChi532->Write();
+    return;
 
     // TFile* fileOutput = new TFile("V5_Linear_NonLinear_Response_WOGap.root","RECREATE");
     // if(!fileOutput) return;

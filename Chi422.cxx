@@ -203,19 +203,17 @@ void Chi422() {
     hChi422->SetMarkerColorAlpha(kBlack, 4.5);
     //hChi422->SetAxisRange(0., 110, "X");
     hChi422->GetYaxis()->SetRangeUser(0., 3.);
-    hChi422->GetXaxis()->SetRangeUser(0., 130);
+    hChi422->GetXaxis()->SetRangeUser(0., 140);
     hChi422->SetMarkerSize(1.);
     hChi422->Draw("same");
     c->BuildLegend();
     
     //..Create a root.file:
-    // TFile* fileOutput = new TFile("V4_Linear_NonLinear_Response_Gap02.root","RECREATE");
-    // if(!fileOutput) return;
-    // fileOutput->cd();
-    // hC22->Write();
-    // hCV422->Write();
-    // hCLinear->Write();
-    // return;
+    TFile* fileOutput = new TFile("Chi422_Chi532_Gap02.root","RECREATE");
+    if(!fileOutput) return;
+    fileOutput->cd();
+    hChi422->Write();
+    return;
     
     // TFile* fileOutput = new TFile("V4_Linear_NonLinear_Response_WOGap.root","RECREATE");
     // if(!fileOutput) return;
