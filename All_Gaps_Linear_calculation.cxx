@@ -11,7 +11,7 @@
 #include <iostream>
 using namespace std;  
 
-void Linear_caculation() {
+void All_Gaps_Linear_calculation() {
     double BinValue_3Particle_Correlation = 0.0;
     double BinValue_4Particle_Correlation = 0.0;
     double BinValue_2Particle_Correlation = 0.0;
@@ -42,25 +42,19 @@ void Linear_caculation() {
     int N = 10;
 
     //values for Linear error sampling:
-    double fsample_Linear; 
+    double Sample_Linear; 
     double fsample_2particle_correlation = 0.0;
-    double sqrt_fsample_2particle_correlation = 0.0;
+    double Sample_Valuesqrt_2particle_correlation = 0.0;
     double fsample_3particle_correlation = 0.0;
     double fsample_4particle_correlation = 0.0;
-    double sqrt_fsample_4particle_correlation = 0.0;
+    double Sample_Valuesqrt_4particle_correlation = 0.0;
 
     
     TCanvas *c = new TCanvas("c","The Test HISTOGRAM ", 100, 8, 700, 600);
     c->SetFillColor(10);
     c->cd();
-
-    // TProfile *Tprofv422 = new TProfile ("Tprofv422", "C_{4}{2} = #sqrt{< v_{4}^{2} >}", 200, 0, 200);
-    // Tprofv422->Sumw2(); 
-
-    //TProfile *Tprof42 = new TProfile ("Tprof42", "C_{2}{4} = #sqrt{< v_{2}^{4} >}", 200, 0, 200);
-    //Tprof42->Sumw2();
     
-    TH1D *hC22 = new TH1D("hC22", " V4{2},  #sqrt{< v_{4}^{2} >}", 200, 0, 200); //this is just define a histogram which will fill the data.
+    TH1D *hC22 = new TH1D("hC22", " V4{2},  #sqrt{< v_{4}^{2} >}, 2-Particle correlation", 200, 0, 200); //this is just define a histogram which will fill the data.
     hC22->Sumw2();
     
     TH1D *hC42 = new TH1D("hC42", " #sqrt{< v_{2}^{4} >} 4-Particle correlation", 200, 0, 200); //this is just define a histogram 
@@ -77,23 +71,56 @@ void Linear_caculation() {
     TDirectory *dir = (TDirectoryFile*)file->Get("MyTaskResults");
     TList *list = (TList*)dir->Get("Flow_Refs_MyTaskResults");
     
-    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Ntrks1bin");
-    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Ntrks1bin"); 
+    //..Uden Gap
+    TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Ntrks1bin");
+    TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");  
+    TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Ntrks1bin"); 
 
-    TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap0Ntrks1bin");
-    TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap0Ntrks1bin");  
-    TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap0Ntrks1bin"); 
+    //..Gap= 0.0
+    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap0Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap0Ntrks1bin");  
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap0Ntrks1bin"); 
     
+    //..Gap= 0.1
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap01Ntrks1bin");
     // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap01Ntrks1bin");  
     // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap01Ntrks1bin"); 
 
+    //..Gap= 0.2
+    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap02Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap02Ntrks1bin");  
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap02Ntrks1bin");
 
-
-
-    
+    //..Gap= 0.3
+    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap03Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap03Ntrks1bin");  
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap03Ntrks1bin");     
  
+    //..Gap= 0.4
+    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap04Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap04Ntrks1bin");  
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap04Ntrks1bin"); 
+
+    //..Gap= 0.5
+    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap05Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap05Ntrks1bin");  
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap05Ntrks1bin"); 
+
+    //..Gap= 0.6
+    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap06Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap06Ntrks1bin");  
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap06Ntrks1bin"); 
+
+    //..Gap= 0.7
+    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap07Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap07Ntrks1bin");  
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap07Ntrks1bin");
+
+    //..Gap= 0.8
+    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap08Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap08Ntrks1bin");  
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap08Ntrks1bin");  
+
     //..Projection on Xaxis:
     TH1D *h1 = Cn24->ProjectionX("h1");
     TH1D *h2 = Cn42->ProjectionX("h2");
@@ -138,34 +165,72 @@ void Linear_caculation() {
     //*************************************************************************
      //  Cn{2} = <<2>> = < vn^2 > and /////////
     //.. Loop for get the v4{2} = sqrt(<<2>>_{4|-4})
-    // for(int i=1; i < 201; i++)
-    // {
-    //     double error = 0.0;
-    //     for(int sample =1; sample < 11; sample++)
-    //     {
-    //         TString foo(TString::Format("fTprof24_number%dNtrks1bin", sample));
-    //         TProfile *fprof24 = (TProfile*)list->FindObject(foo);
+    //************************************************************************
+    for(int i=1; i < 201; i++)
+    {
+        double error = 0.0;
+        for(int sample =1; sample < 11; sample++)
+        {   
+            //..Uden Gap
+            TString foo_24(TString::Format("fTprof24_number%dNtrks1bin", sample));
+            TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
 
-    //         // TString foo(TString::Format("fTprof24_number%dGapNtrks1bin", sample));
-    //         // TProfile *fprof24 = (TProfile*)list->FindObject(foo);
+            //..Gap= 0.0
+            // TString foo_24(TString::Format("fTprof24_number%dGap0Ntrks1bin", sample));
+            // TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
 
-    //         BinValue24_Sample = fprof24->GetBinContent(i);
-    //         BinValue24 = Cn24->GetBinContent(i);
-    //         if(BinValue24_Sample > 0 && BinValue24 > 0 ) {
-    //             Valuesqrt_2Particle_Correlation = sqrt(BinValue24);
-    //             Valuesqrt_2Particle_Sample = sqrt(BinValue24_Sample); 
-    //         }
-    //         else continue;
-    //         error += pow(Valuesqrt_2Particle_Sample - Valuesqrt_2Particle_Correlation, 2);
-    //         // cout << "BinValue24_Sample: " << BinValue24_Sample << endl;
-    //         // cout << "BinValue24: " << BinValue24 << endl;
-    //         // cout << "error: " << error << endl;
-    //     }
-    //     final_error = sqrt(error/ (N * N) );
-    //     //cout << "final error: " << final_error << endl;
-    //     hC22->SetBinContent(i, Valuesqrt_2Particle_Correlation);
-    //     hC22->SetBinError(i, final_error);
-    // }
+            //..Gap= 0.1
+            // TString foo_24(TString::Format("fTprof24_number%dGap01Ntrks1bin", sample));
+            // TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
+
+            //..Gap= 0.2
+            // TString foo_24(TString::Format("fTprof24_number%dGap02Ntrks1bin", sample));
+            // TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
+
+            //..Gap= 0.3
+            // TString foo_24(TString::Format("fTprof24_number%dGap03Ntrks1bin", sample));
+            // TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
+
+            //..Gap= 0.4
+            // TString foo_24(TString::Format("fTprof24_number%dGap04Ntrks1bin", sample));
+            // TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
+
+            //..Gap= 0.5
+            // TString foo_24(TString::Format("fTprof24_number%dGap05Ntrks1bin", sample));
+            // TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
+
+            //..Gap= 0.6
+            // TString foo_24(TString::Format("fTprof24_number%dGap06Ntrks1bin", sample));
+            // TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
+
+            //..Gap= 0.7
+            // TString foo_24(TString::Format("fTprof24_number%dGap07Ntrks1bin", sample));
+            // TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
+
+            //..Gap= 0.8
+            // TString foo_24(TString::Format("fTprof24_number%dGap08Ntrks1bin", sample));
+            // TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
+
+
+
+            BinValue24_Sample = fprof24->GetBinContent(i);
+            BinValue24 = Cn24->GetBinContent(i);
+
+            if(BinValue24_Sample > 0 && BinValue24 > 0 ) {
+                Valuesqrt_2Particle_Correlation = sqrt(BinValue24);
+                Valuesqrt_2Particle_Sample = sqrt(BinValue24_Sample); 
+            }
+            else continue;
+            error += pow(Valuesqrt_2Particle_Sample - Valuesqrt_2Particle_Correlation, 2);
+            // cout << "BinValue24_Sample: " << BinValue24_Sample << endl;
+            // cout << "BinValue24: " << BinValue24 << endl;
+            // cout << "error: " << error << endl;
+        }
+        final_error = sqrt(error/ (N * N) );
+        //cout << "final error: " << final_error << endl;
+        hC22->SetBinContent(i, Valuesqrt_2Particle_Correlation);
+        hC22->SetBinError(i, final_error);
+    }
     
 
     // //..Loop over fSample for Error propagation for Non-Linear Response:
@@ -173,24 +238,67 @@ void Linear_caculation() {
     for (int j=1; j<201; j++) {
         double error = 0.0;
         for (int i = 1; i < 11; i++) {
-
-            // TString bar(TString::Format("fTprof34_number%dNtrks1bin", i));	
-            // TProfile *prof34 = (TProfile*)list->FindObject(bar);
-            // TString foo(TString::Format("fTprof42_number%dNtrks1bin", i));	
-            // TProfile *prof42 = (TProfile*)list->FindObject(foo);
+            
+            //..uden Gap
+            TString bar_34(TString::Format("fTprof34_number%dNtrks1bin", i));	
+            TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            TString foo_42(TString::Format("fTprof42_number%dNtrks1bin", i));	
+            TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
             
             //..Gap= 0.0  
-            // TString bar(TString::Format("fTprof34_number%dGap0Ntrks1bin", i));	
-            // TProfile *prof34 = (TProfile*)list->FindObject(bar);
-            // TString foo(TString::Format("fTprof42_number%dGap0Ntrks1bin", i));	
-            // TProfile *prof42 = (TProfile*)list->FindObject(foo);
+            // TString bar_34(TString::Format("fTprof34_number%dGap0Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap0Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
-            //..Gap= 0.1
-            // TString bar(TString::Format("fTprof34_number%dGap01Ntrks1bin", i));	
-            // TProfile *prof34 = (TProfile*)list->FindObject(bar);
-            // TString foo(TString::Format("fTprof42_number%dGap01Ntrks1bin", i));	
-            // TProfile *prof42 = (TProfile*)list->FindObject(foo);
+            // //..Gap= 0.1
+            // TString bar_34(TString::Format("fTprof34_number%dGap01Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap01Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
+            //..Gap= 0.2
+            // TString bar_34(TString::Format("fTprof34_number%dGap02Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap02Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
             
+            // //..Gap= 0.3  
+            // TString bar_34(TString::Format("fTprof34_number%dGap03Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap03Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
+            //..Gap= 0.4  
+            // TString bar_34(TString::Format("fTprof34_number%dGap04Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap04Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
+            //..Gap= 0.5  
+            // TString bar_34(TString::Format("fTprof34_number%dGap05Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap05Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
+            //..Gap= 0.6
+            // TString bar_34(TString::Format("fTprof34_number%dGap06Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap06Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
+            //..Gap= 0.7
+            // TString bar_34(TString::Format("fTprof34_number%dGap07Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap07Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
+            //..Gap= 0.8
+            // TString bar_34(TString::Format("fTprof34_number%dGap08Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap08Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
 
 
             Sample_BinValue_3Particle_Correlation = prof34->GetBinContent(j);
@@ -221,17 +329,10 @@ void Linear_caculation() {
             // cout << "Valuesqrt_4Particle_Correlation: " << Valuesqrt_4Particle_Correlation << endl;  
             // cout << "V422:   "   << V422 << endl;
             // cout << "V422_Sample: " << V422_Sample << endl;
-            // cout << "error: " << error << endl;
-
-            //fc42->Draw("EP");
-            //Cn34->Draw();
-            //Cn42->Draw();		
+            // cout << "error: " << error << endl;	
         }
         sigma_z1 = sqrt(error/ (N * N) );
         //cout << "sigma: " << sigma_z1 << endl;
-        //hC42->SetBinContent(j, Valuesqrt_4Particle_Correlation);
-        //hC42->SetBinError(j, sigma_z1);
-        //hC42->Draw();
         hCV422->SetBinContent(j, V422);
         hCV422->SetBinError(j, sigma_z1);    
         }
@@ -245,21 +346,85 @@ void Linear_caculation() {
     for (int j=1; j<201; j++) {
         double error = 0.0;
         for (int i = 1; i < 11; i++) {
+            //..Uden Gap 
+            TString foo_24(TString::Format("fTprof24_number%dNtrks1bin", i));
+            TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            TString bar_34(TString::Format("fTprof34_number%dNtrks1bin", i));	
+            TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            TString foo_42(TString::Format("fTprof42_number%dNtrks1bin", i));	
+            TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
-            TString foo(TString::Format("fTprof24_number%dNtrks1bin", i));
-            TProfile *prof24 = (TProfile*)list->FindObject(foo);
-            TString bar(TString::Format("fTprof34_number%dNtrks1bin", i));	
-            TProfile *prof34 = (TProfile*)list->FindObject(bar);
-            TString foo2(TString::Format("fTprof42_number%dNtrks1bin", i));	
-            TProfile *prof42 = (TProfile*)list->FindObject(foo2);
+            //..Gap= 0.0
+            // TString foo_24(TString::Format("fTprof24_number%dGap0Ntrks1bin", i));
+            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            // TString bar_34(TString::Format("fTprof34_number%dGap0Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap0Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
-            // TString foo(TString::Format("fTprof24_number%dGapNtrks1bin", i));
-            // TProfile *prof24 = (TProfile*)list->FindObject(foo);
-            // TString bar(TString::Format("fTprof34_number%dGapNtrks1bin", i));	
-            // TProfile *prof34 = (TProfile*)list->FindObject(bar);
-            // TString foo2(TString::Format("fTprof42_number%dGapNtrks1bin", i));	
-            // TProfile *prof42 = (TProfile*)list->FindObject(foo2);
+            //..Gap= 0.1
+            // TString foo_24(TString::Format("fTprof24_number%dGap01Ntrks1bin", i));
+            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            // TString bar_34(TString::Format("fTprof34_number%dGap01Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap01Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
+            //..Gap= 0.2
+            // TString foo_24(TString::Format("fTprof24_number%dGap02Ntrks1bin", i));
+            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            // TString bar_34(TString::Format("fTprof34_number%dGap02Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap02Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
+            //..Gap= 0.3
+            // TString foo_24(TString::Format("fTprof24_number%dGap03Ntrks1bin", i));
+            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            // TString bar_34(TString::Format("fTprof34_number%dGap03Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap03Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
+            //..Gap= 0.4
+            // TString foo_24(TString::Format("fTprof24_number%dGap04Ntrks1bin", i));
+            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            // TString bar_34(TString::Format("fTprof34_number%dGap04Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap04Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
+            //..Gap= 0.5
+            // TString foo_24(TString::Format("fTprof24_number%dGap05Ntrks1bin", i));
+            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            // TString bar_34(TString::Format("fTprof34_number%dGap05Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap05Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
+            //..Gap= 0.6
+            // TString foo_24(TString::Format("fTprof24_number%dGap06Ntrks1bin", i));
+            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            // TString bar_34(TString::Format("fTprof34_number%dGap06Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap06Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
+            //..Gap= 0.7
+            // TString foo_24(TString::Format("fTprof24_number%dGap07Ntrks1bin", i));
+            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            // TString bar_34(TString::Format("fTprof34_number%dGap07Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap07Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+
+            //..Gap= 0.8
+            // TString foo_24(TString::Format("fTprof24_number%dGap08Ntrks1bin", i));
+            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            // TString bar_34(TString::Format("fTprof34_number%dGap08Ntrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap08Ntrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             Sample_BinValue_2Particle_Correlation = prof24->GetBinContent(j);
             Sample_BinValue_3Particle_Correlation = prof34->GetBinContent(j);
@@ -275,24 +440,24 @@ void Linear_caculation() {
             
             if(Sample_BinValue_2Particle_Correlation > 0 && Sample_BinValue_4Particle_Correlation > 0 && BinValue_4Particle_Correlation > 0 && BinValue_2Particle_Correlation > 0 ) {
 
-                sqrt_fsample_2particle_correlation = sqrt(Sample_BinValue_2Particle_Correlation);
-                sqrt_fsample_4particle_correlation = sqrt(Sample_BinValue_4Particle_Correlation);
+                Sample_Valuesqrt_2particle_correlation = sqrt(Sample_BinValue_2Particle_Correlation);
+                Sample_Valuesqrt_4particle_correlation = sqrt(Sample_BinValue_4Particle_Correlation);
                 
                 Valuesqrt_2Particle_Correlation = sqrt(BinValue_2Particle_Correlation);
                 Valuesqrt_4Particle_Correlation = sqrt(BinValue_4Particle_Correlation);
             }   
             else continue; 
 
-            if(Valuesqrt_4Particle_Correlation > 0 && sqrt_fsample_4particle_correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 && BinValue_3Particle_Correlation > 0 ){
+            if(Valuesqrt_4Particle_Correlation > 0 && Sample_Valuesqrt_4particle_correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 && BinValue_3Particle_Correlation > 0 ){
                 
                 V422 = BinValue_3Particle_Correlation / (Valuesqrt_4Particle_Correlation);
-                V422_Sample = Sample_BinValue_3Particle_Correlation / (sqrt_fsample_4particle_correlation);               
+                V422_Sample = Sample_BinValue_3Particle_Correlation / (Sample_Valuesqrt_4particle_correlation);               
                 
                 Linear = pow(Valuesqrt_2Particle_Correlation, 2) - pow(V422, 2);   
-                fsample_Linear = pow(sqrt_fsample_2particle_correlation, 2) - pow(V422_Sample, 2); 
+                Sample_Linear = pow(Sample_Valuesqrt_2particle_correlation, 2) - pow(V422_Sample, 2); 
             }
-            if(fsample_Linear > 0 && Linear > 0 ) {
-                Linear_value_sample = sqrt(fsample_Linear);
+            if(Sample_Linear > 0 && Linear > 0 ) {
+                Linear_value_sample = sqrt(Sample_Linear);
                 Linear_value = sqrt(Linear);
                 error += pow(Linear_value_sample - Linear_value, 2);
             }
@@ -305,8 +470,8 @@ void Linear_caculation() {
 
         cout << "Valuesqrt_2Particle_Correlation: " << Valuesqrt_2Particle_Correlation << endl; 
         cout << "Valuesqrt_4Particle_Correlation: " << Valuesqrt_4Particle_Correlation << endl; 
-        cout << "sqrt_fsample_2particle_correlation: " << sqrt_fsample_2particle_correlation << endl; 
-        cout << "sqrt_fsample_4particle_correlation: " << sqrt_fsample_4particle_correlation << endl; 
+        cout << "Sample_Valuesqrt_2particle_correlation: " << Sample_Valuesqrt_2particle_correlation << endl; 
+        cout << "Sample_Valuesqrt_4particle_correlation: " << Sample_Valuesqrt_4particle_correlation << endl; 
         
 
         // cout << "BinValue_3Particle_Correlation: " << BinValue_3Particle_Correlation << endl; 
@@ -314,17 +479,11 @@ void Linear_caculation() {
         //cout << "V4_BinValue_hC22: " << V4_BinValue_hC22 << endl;
         //cout << "NL_BinValue_hCV422: " << NL_BinValue_hCV422 << endl;
         cout << "Linear3: " << Linear << endl;
-        cout << "fsample_Linear: " << fsample_Linear << endl; 
+        cout << "Sample_Linear: " << Sample_Linear << endl; 
         cout << "Linear_value: " << Linear_value << endl;
         cout << "Linear_value_sample: " << Linear_value_sample << endl;   
         
     }
-
-
-
-
-
-
 
     
     //************************************************************************
@@ -354,60 +513,49 @@ void Linear_caculation() {
     //************************************************************************          
     //..Plot the Histograms
 
-
-    //h1->SetMarkerStyle(23);
-    //h1->SetMarkerColorAlpha(kRed, 4.5);  
-    //h1->Draw();
-
-    //h2->SetMarkerStyle(23);
-    //h2->SetMarkerColorAlpha(kRed, 4.5);  
-    //h2->Draw();
-
-    // h3->SetMarkerStyle(23);
-    // h3->SetMarkerColorAlpha(kRed, 4.5);
-    // h3->Divide(hC42);    
-    // h3->Draw();
-    //h3->Divide(hC22);
-    
-    // Cn24->SetMarkerStyle(23);
-    // Cn24->SetMarkerColorAlpha(kRed, 4.5);
-    // Cn24->Draw("EP");
-    
-    // Cn34->SetMarkerStyle(23);
-    // Cn34->SetMarkerColorAlpha(kRed, 4.5);
-    // Cn34->Draw("EP");
-    
-    // Cn42->SetMarkerStyle(23);
-    // Cn42->SetMarkerColorAlpha(kRed, 4.5);
-    // Cn42->Draw("EP");
-    
-    // hC22->SetMarkerStyle(20);
-    // hC22->SetMarkerColorAlpha(kRed, 4.5);
-    // //hC22->SetAxisRange(0., 110);
-    // hC22->SetMarkerSize(1.);
-    // hC22->SetXTitle("# of tracks");
-    // //gStyle->SetOptStat(0);
-    // hC22->Draw("same");
-    
     // // hC42->SetMarkerStyle(21);
     // // hC42->SetMarkerColorAlpha(kBlack, 10.0);
 	// // hC42->Draw("same");
-
-    // hCV422->SetMarkerStyle(34);
-    // hCV422->SetMarkerColorAlpha(kBlue, 0.45);
-    // //hCV422->SetAxisRange(0., 110);
-    // hCV422->SetMarkerSize(2.);
-	// hCV422->Draw("same");
     
+    //..V4{2}
+    // hC22->SetMarkerStyle(20);
+    // hC22->SetMarkerColorAlpha(kRed, 4.5);
+    // hC22->SetAxisRange(0., 110);
+    // hC22->SetMarkerSize(1.);
+    // hC22->SetXTitle("# of tracks");
+    // gStyle->SetOptStat(0);
+    hC22->Draw("same");
+    
+
+    //..V4^L
     // hCLinear->SetMarkerStyle(21);
     // hCLinear->SetMarkerColorAlpha(kBlack, 4.5);
     // //hCLinear->SetAxisRange(0., 110);
     // hCLinear->SetMarkerSize(1.);
-    // hCLinear->Draw("same");
+    hCLinear->Draw("same");
+
+    //..V4,22
+    // hCV422->SetMarkerStyle(34);
+    // hCV422->SetMarkerColorAlpha(kBlue, 0.45);
+    // //hCV422->GetYaxis()->SetRangeUser(0., 3.);
+    // //hCV422->GetXaxis()->SetRangeUser(0., 140);
+    // hCV422->SetMarkerSize(2.);
+	hCV422->Draw("same");
     // c->BuildLegend();
     
+    
     //..Create a root.file:
-    // TFile* fileOutput = new TFile("V4_Linear_NonLinear_Response_Gap02.root","RECREATE");
+    //..Uden Gap
+    TFile* fileOutput = new TFile("WOGap_V4_Linear_NonLinear_Response.root","RECREATE");
+    if(!fileOutput) return;
+    fileOutput->cd();
+    hC22->Write();
+    hCV422->Write();
+    hCLinear->Write();
+    return;
+    
+    //..Gap= 0.0
+    // TFile* fileOutput = new TFile("Gap0_V4_Linear_NonLinear_Response.root","RECREATE");
     // if(!fileOutput) return;
     // fileOutput->cd();
     // hC22->Write();
@@ -415,12 +563,76 @@ void Linear_caculation() {
     // hCLinear->Write();
     // return;
     
-    TFile* fileOutput = new TFile("V4_Linear_NonLinear_Response_WOGap.root","RECREATE");
-    if(!fileOutput) return;
-    fileOutput->cd();
-    hC22->Write();
-    hCV422->Write();
-    hCLinear->Write();
-    return;
+    //..Gap= 0.1
+    // TFile* fileOutput = new TFile("Gap01_V4_Linear_NonLinear_Response.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hC22->Write();
+    // hCV422->Write();
+    // hCLinear->Write();
+    // return;
+
+    //..Gap= 0.2
+    // TFile* fileOutput = new TFile("Gap02_V4_Linear_NonLinear_Response.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hC22->Write();
+    // hCV422->Write();
+    // hCLinear->Write();
+    // return;
+
+    //..Gap= 0.3
+    // TFile* fileOutput = new TFile("Gap03_V4_Linear_NonLinear_Response.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hC22->Write();
+    // hCV422->Write();
+    // hCLinear->Write();
+    // return;
+  
+    //..Gap= 0.4
+    // TFile* fileOutput = new TFile("Gap04_V4_Linear_NonLinear_Response.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hC22->Write();
+    // hCV422->Write();
+    // hCLinear->Write();
+    // return;
+
+    //..Gap= 0.5
+    // TFile* fileOutput = new TFile("Gap05_V4_Linear_NonLinear_Response.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hC22->Write();
+    // hCV422->Write();
+    // hCLinear->Write();
+    // return;
+
+    //..Gap= 0.6
+    // TFile* fileOutput = new TFile("Gap06_V4_Linear_NonLinear_Response.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hC22->Write();
+    // hCV422->Write();
+    // hCLinear->Write();
+    // return;
+
+    //..Gap= 0.7
+    // TFile* fileOutput = new TFile("Gap07_V4_Linear_NonLinear_Response.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hC22->Write();
+    // hCV422->Write();
+    // hCLinear->Write();
+    // return;
+
+    //..Gap= 0.8
+    // TFile* fileOutput = new TFile("Gap08_V4_Linear_NonLinear_Response.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hC22->Write();
+    // hCV422->Write();
+    // hCLinear->Write();
+    // return;
 
 }
