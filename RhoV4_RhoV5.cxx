@@ -51,7 +51,7 @@ int N = 10;
 
 
     TCanvas *c = new TCanvas("c","The Test HISTOGRAM ", 100, 8, 700, 600);
-    c->SetFillColor(19);
+    c->SetFillColor(10);
     c->cd();
 
     TH1D *hRho_V422 = new TH1D("hRho_V422", "#rho_{4,22} = < cos (4 #Psi_{4} - 4 #Psi_{2}) > ", 200, 0, 200); //this is just define a histogram which will fill the data.
