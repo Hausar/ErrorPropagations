@@ -79,9 +79,9 @@ void All_Gaps_Linear_calculation() {
     TList *list = (TList*)dir->Get("Flow_Refs_MyTaskResults");
     
     //..Uden Gap
-    TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Ntrks1bin");
-    TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");  
-    TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Ntrks1bin"); 
+    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");  
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Ntrks1bin"); 
 
     //..Gap= 0.0
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap0Ntrks1bin");
@@ -124,9 +124,9 @@ void All_Gaps_Linear_calculation() {
     // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap07Ntrks1bin");
 
     //..Gap= 0.8
-    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap08Ntrks1bin");
-    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap08Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap08Ntrks1bin");  
+    TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap08Ntrks1bin");
+    TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap08Ntrks1bin");  
+    TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap08Ntrks1bin");  
 
     //..Projection on Xaxis:
     TH1D *h1 = Cn24->ProjectionX("h1");
@@ -180,8 +180,8 @@ void All_Gaps_Linear_calculation() {
         for(int sample =1; sample < 11; sample++)
         {   
             //..Uden Gap
-            TString foo_24(TString::Format("fTprof24_number%dNtrks1bin", sample));
-            TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
+            // TString foo_24(TString::Format("fTprof24_number%dNtrks1bin", sample));
+            // TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
 
             //..Gap= 0.0
             // TString foo_24(TString::Format("fTprof24_number%dGap0Ntrks1bin", sample));
@@ -216,8 +216,8 @@ void All_Gaps_Linear_calculation() {
             // TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
 
             //..Gap= 0.8
-            // TString foo_24(TString::Format("fTprof24_number%dGap08Ntrks1bin", sample));
-            // TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
+            TString foo_24(TString::Format("fTprof24_number%dGap08Ntrks1bin", sample));
+            TProfile *fprof24 = (TProfile*)list->FindObject(foo_24);
 
 
 
@@ -262,10 +262,10 @@ void All_Gaps_Linear_calculation() {
         for (int i = 1; i < 11; i++) {
             
             //..uden Gap
-            TString bar_34(TString::Format("fTprof34_number%dNtrks1bin", i));	
-            TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
-            TString foo_42(TString::Format("fTprof42_number%dNtrks1bin", i));	
-            TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+            // TString bar_34(TString::Format("fTprof34_number%dNtrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dNtrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
             
             //..Gap= 0.0  
             // TString bar_34(TString::Format("fTprof34_number%dGap0Ntrks1bin", i));	
@@ -316,10 +316,10 @@ void All_Gaps_Linear_calculation() {
             // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             //..Gap= 0.8
-            // TString bar_34(TString::Format("fTprof34_number%dGap08Ntrks1bin", i));	
-            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
-            // TString foo_42(TString::Format("fTprof42_number%dGap08Ntrks1bin", i));	
-            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+            TString bar_34(TString::Format("fTprof34_number%dGap08Ntrks1bin", i));	
+            TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            TString foo_42(TString::Format("fTprof42_number%dGap08Ntrks1bin", i));	
+            TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
 
 
@@ -384,12 +384,12 @@ void All_Gaps_Linear_calculation() {
         double error = 0.0;
         for (int i = 1; i < 11; i++) {
             //..Uden Gap 
-            TString foo_24(TString::Format("fTprof24_number%dNtrks1bin", i));
-            TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
-            TString bar_34(TString::Format("fTprof34_number%dNtrks1bin", i));	
-            TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
-            TString foo_42(TString::Format("fTprof42_number%dNtrks1bin", i));	
-            TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+            // TString foo_24(TString::Format("fTprof24_number%dNtrks1bin", i));
+            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            // TString bar_34(TString::Format("fTprof34_number%dNtrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dNtrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             //..Gap= 0.0
             // TString foo_24(TString::Format("fTprof24_number%dGap0Ntrks1bin", i));
@@ -456,12 +456,12 @@ void All_Gaps_Linear_calculation() {
             // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             //..Gap= 0.8
-            // TString foo_24(TString::Format("fTprof24_number%dGap08Ntrks1bin", i));
-            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
-            // TString bar_34(TString::Format("fTprof34_number%dGap08Ntrks1bin", i));	
-            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
-            // TString foo_42(TString::Format("fTprof42_number%dGap08Ntrks1bin", i));	
-            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+            TString foo_24(TString::Format("fTprof24_number%dGap08Ntrks1bin", i));
+            TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            TString bar_34(TString::Format("fTprof34_number%dGap08Ntrks1bin", i));	
+            TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            TString foo_42(TString::Format("fTprof42_number%dGap08Ntrks1bin", i));	
+            TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             Sample_BinValue_2Particle_Correlation = prof24->GetBinContent(j);
             Sample_BinValue_3Particle_Correlation = prof34->GetBinContent(j);
@@ -577,7 +577,7 @@ void All_Gaps_Linear_calculation() {
     // hC22->SetMarkerSize(1.);
     // hC22->SetXTitle("# of tracks");
     // gStyle->SetOptStat(0);
-    //hC22->Draw("same");
+    hC22->Draw("same");
     
 
     //..V4^L
@@ -593,22 +593,22 @@ void All_Gaps_Linear_calculation() {
     // //hCV422->GetYaxis()->SetRangeUser(0., 3.);
     // //hCV422->GetXaxis()->SetRangeUser(0., 140);
     // hCV422->SetMarkerSize(2.);
-	//hCV422->Draw("same");
+	hCV422->Draw("same");
     // c->BuildLegend();
     
     
     //..Create a root.file:
     //..Uden Gap
-    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V4_Linear_NL/WOGap_Conditions_V4_Linear_NonLinear_Response.root","RECREATE");
-    if(!fileOutput) return;
-    fileOutput->cd();
-    hC22->Write();
-    hCV422->Write();
-    hCLinear->Write();
-    return;
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V4_Linear_NL/WOGap_Conditions_V4_Linear_NonLinear_Response.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hC22->Write();
+    // hCV422->Write();
+    // hCLinear->Write();
+    // return;
     
     //..Gap= 0.0
-    // TFile* fileOutput = new TFile("Gap0_V4_Linear_NonLinear_Response.root","RECREATE");
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V4_Linear_NL/Gap00_V4_Linear_NonLinear_Response_NewCondition.root","RECREATE");
     // if(!fileOutput) return;
     // fileOutput->cd();
     // hC22->Write();
@@ -617,7 +617,7 @@ void All_Gaps_Linear_calculation() {
     // return;
     
     //..Gap= 0.1
-    // TFile* fileOutput = new TFile("Gap01_V4_Linear_NonLinear_Response.root","RECREATE");
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V4_Linear_NL/Gap01_V4_Linear_NonLinear_Response_NewCondition.root","RECREATE");
     // if(!fileOutput) return;
     // fileOutput->cd();
     // hC22->Write();
@@ -626,7 +626,7 @@ void All_Gaps_Linear_calculation() {
     // return;
 
     //..Gap= 0.2
-    // TFile* fileOutput = new TFile("Gap02_V4_Linear_NonLinear_Response.root","RECREATE");
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V4_Linear_NL/Gap02_V4_Linear_NonLinear_Response_NewCondition.root","RECREATE");
     // if(!fileOutput) return;
     // fileOutput->cd();
     // hC22->Write();
@@ -635,7 +635,7 @@ void All_Gaps_Linear_calculation() {
     // return;
 
     //..Gap= 0.3
-    // TFile* fileOutput = new TFile("Gap03_V4_Linear_NonLinear_Response.root","RECREATE");
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V4_Linear_NL/Gap03_V4_Linear_NonLinear_Response_NewCondition.root","RECREATE");
     // if(!fileOutput) return;
     // fileOutput->cd();
     // hC22->Write();
@@ -644,7 +644,7 @@ void All_Gaps_Linear_calculation() {
     // return;
   
     //..Gap= 0.4
-    // TFile* fileOutput = new TFile("Gap04_V4_Linear_NonLinear_Response.root","RECREATE");
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V4_Linear_NL/Gap04_V4_Linear_NonLinear_Response_NewCondition.root","RECREATE");
     // if(!fileOutput) return;
     // fileOutput->cd();
     // hC22->Write();
@@ -653,7 +653,7 @@ void All_Gaps_Linear_calculation() {
     // return;
 
     //..Gap= 0.5
-    // TFile* fileOutput = new TFile("Gap05_V4_Linear_NonLinear_Response.root","RECREATE");
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V4_Linear_NL/Gap05_V4_Linear_NonLinear_Response_NewCondition.root","RECREATE");
     // if(!fileOutput) return;
     // fileOutput->cd();
     // hC22->Write();
@@ -662,7 +662,7 @@ void All_Gaps_Linear_calculation() {
     // return;
 
     //..Gap= 0.6
-    // TFile* fileOutput = new TFile("Gap06_V4_Linear_NonLinear_Response.root","RECREATE");
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V4_Linear_NL/Gap06_V4_Linear_NonLinear_Response_NewCondition.root","RECREATE");
     // if(!fileOutput) return;
     // fileOutput->cd();
     // hC22->Write();
@@ -671,7 +671,7 @@ void All_Gaps_Linear_calculation() {
     // return;
 
     //..Gap= 0.7
-    // TFile* fileOutput = new TFile("Gap07_V4_Linear_NonLinear_Response.root","RECREATE");
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V4_Linear_NL/Gap07_V4_Linear_NonLinear_Response_NewCondition.root","RECREATE");
     // if(!fileOutput) return;
     // fileOutput->cd();
     // hC22->Write();
@@ -680,7 +680,7 @@ void All_Gaps_Linear_calculation() {
     // return;
 
     //..Gap= 0.8
-    // TFile* fileOutput = new TFile("Gap08_V4_Linear_NonLinear_Response.root","RECREATE");
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V4_Linear_NL/Gap08_V4_Linear_NonLinear_Response_NewCondition.root","RECREATE");
     // if(!fileOutput) return;
     // fileOutput->cd();
     // hC22->Write();
