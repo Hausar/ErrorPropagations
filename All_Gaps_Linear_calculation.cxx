@@ -39,7 +39,14 @@ void All_Gaps_Linear_calculation() {
     double final_error;
     double Linear_Error; 
     double test;
+    double BinValue_Sapmle24;
+    double BinValue_Total24;
+    double BinValue_Sapmle_34;
+    double BinValue_Sapmle_42;
+    double BinValue_Total_34;
+    double BinValue_Total_42;
     int N = 10;
+
 
     //values for Linear error sampling:
     double Sample_Linear; 
@@ -125,6 +132,7 @@ void All_Gaps_Linear_calculation() {
     TH1D *h1 = Cn24->ProjectionX("h1");
     TH1D *h2 = Cn42->ProjectionX("h2");
     TH1D *h3 = Cn34->ProjectionX("h3");
+
 
     //****************************************************
     //// Loop to get sqrt of each bin in Tprofile of//////
@@ -213,8 +221,11 @@ void All_Gaps_Linear_calculation() {
 
 
 
-            BinValue24_Sample = fprof24->GetBinContent(i);
             BinValue24 = Cn24->GetBinContent(i);
+            BinValue24_Sample = fprof24->GetBinContent(i);
+            //..Test:
+            BinValue_Total24 = Cn24->GetBinEntries(i);
+            BinValue_Sapmle24 = fprof24->GetBinEntries(i);
 
             if(BinValue24_Sample > 0 && BinValue24 > 0 ) {
                 Valuesqrt_2Particle_Correlation = sqrt(BinValue24);
@@ -227,14 +238,25 @@ void All_Gaps_Linear_calculation() {
             // cout << "error: " << error << endl;
         }
         final_error = sqrt(error/ (N * N) );
+        //hC22->SetBinContent(i, Valuesqrt_2Particle_Correlation);
+        //hC22->SetBinError(i, final_error);
+
+        if( BinValue_Total24 > 1000 && BinValue_Sapmle24 > 100) {
+            hC22->SetBinContent(i, Valuesqrt_2Particle_Correlation);
+            hC22->SetBinError(i, final_error);
+        }
+        else continue;
         //cout << "final error: " << final_error << endl;
-        hC22->SetBinContent(i, Valuesqrt_2Particle_Correlation);
-        hC22->SetBinError(i, final_error);
+        //cout << "BinValue24_Sample: " << BinValue24_Sample << endl;
+        //cout << "BinValue_h1: " << BinValue_h1 << endl;
+        cout << "BinTest_24Total: " << BinValue_Total24 << endl;
+        cout << "BinTest_24Sample: " << BinValue_Sapmle24 << endl;
     }
     
-
+    //*************************************************************************
     // //..Loop over fSample for Error propagation for Non-Linear Response:
-
+    
+    //**************************************************************************
     for (int j=1; j<201; j++) {
         double error = 0.0;
         for (int i = 1; i < 11; i++) {
@@ -306,6 +328,13 @@ void All_Gaps_Linear_calculation() {
             
             BinValue_3Particle_Correlation = Cn34->GetBinContent(j);
             BinValue_4Particle_Correlation = Cn42->GetBinContent(j);
+
+        //..Check for Multiplicity, in the way in the sampling plot has to be at least N_ch>100 and in the total N_ch>1000 in each bins. 
+            BinValue_Total_34 = Cn34->GetBinEntries(j);
+            BinValue_Total_42 = Cn42->GetBinEntries(j);
+
+            BinValue_Sapmle_34 = prof34->GetBinEntries(j);
+            BinValue_Sapmle_42 = prof42->GetBinEntries(j);
             
             if (Sample_BinValue_4Particle_Correlation > 0  && BinValue_4Particle_Correlation > 0 && BinValue_3Particle_Correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 ) {
             
@@ -333,9 +362,17 @@ void All_Gaps_Linear_calculation() {
         }
         sigma_z1 = sqrt(error/ (N * N) );
         //cout << "sigma: " << sigma_z1 << endl;
-        hCV422->SetBinContent(j, V422);
-        hCV422->SetBinError(j, sigma_z1);    
+        if( BinValue_Total_34 > 1000 && BinValue_Total_42 > 1000 && BinValue_Sapmle_34 >100 && BinValue_Sapmle_42 >100) {
+            hCV422->SetBinContent(j, V422);
+            hCV422->SetBinError(j, sigma_z1); 
         }
+        else continue;
+        cout << "BinValue_Total_34: " << BinValue_Total_34 << endl;
+        cout << "BinValue_Total_42: " << BinValue_Total_42 << endl;
+        cout << "BinValue_Sapmle_34: " << BinValue_Sapmle_34 << endl;
+        cout << "BinValue_Sapmle_42: " << BinValue_Sapmle_42 << endl;
+        
+    }
         //***************************************************************************************************************
         //..Linear Response calculation:
         //.. The L and NL are uncorrelated means they are perpendicular so they make a 90 triangle when the "Hypotenuse" is v4 (sqrt(<<2>>_{4|-4})) and the two others are L response and Non-Linear response which is the "<<3>> / sqrt(<<4>>)" so by using the "Pythagorean theoerem" the v4^2 = L^2 + NL ^2 
@@ -433,10 +470,19 @@ void All_Gaps_Linear_calculation() {
             BinValue_2Particle_Correlation = Cn24->GetBinContent(j);
             BinValue_3Particle_Correlation = Cn34->GetBinContent(j);
             BinValue_4Particle_Correlation = Cn42->GetBinContent(j);
+            
+            //..Check the multiplicity in each bins:
+            BinValue_Total_24 = Cn24->GetBinEntries(j);
+            BinValue_Total_34 = Cn34->GetBinEntries(j);
+            BinValue_Total_42 = Cn42->GetBinEntries(j);
 
-            cout << "j: " << j << endl;
-            cout << "i: " << i << endl;
-            cout << "binvalue3s: " << Sample_BinValue_3Particle_Correlation << endl;
+            BinValue_Sample_24 = prof24->GetBinEntries(j);
+            BinValue_Sapmle_34 = prof34->GetBinEntries(j);
+            BinValue_Sapmle_42 = prof42->GetBinEntries(j);
+            
+            // cout << "j: " << j << endl;
+            // cout << "i: " << i << endl;
+            // cout << "binvalue3s: " << Sample_BinValue_3Particle_Correlation << endl;
             
             if(Sample_BinValue_2Particle_Correlation > 0 && Sample_BinValue_4Particle_Correlation > 0 && BinValue_4Particle_Correlation > 0 && BinValue_2Particle_Correlation > 0 ) {
 
@@ -464,24 +510,31 @@ void All_Gaps_Linear_calculation() {
             else continue; 
         
         }
-        Linear_Error = sqrt(error/ (N * N) );           
-        hCLinear->SetBinContent(j, Linear_value); 
-        hCLinear->SetBinError(j, Linear_Error); 
-
-        cout << "Valuesqrt_2Particle_Correlation: " << Valuesqrt_2Particle_Correlation << endl; 
-        cout << "Valuesqrt_4Particle_Correlation: " << Valuesqrt_4Particle_Correlation << endl; 
-        cout << "Sample_Valuesqrt_2particle_correlation: " << Sample_Valuesqrt_2particle_correlation << endl; 
-        cout << "Sample_Valuesqrt_4particle_correlation: " << Sample_Valuesqrt_4particle_correlation << endl; 
+        Linear_Error = sqrt(error/ (N * N) );
+        if( BinValue_Total_24 > 1000 && BinValue_Total_34 > 1000 && BinValue_Total_42 > 1000 && BinValue_Sample_24 >100 && BinValue_Sapmle_34 >100 && BinValue_Sapmle_42 >100) {
+            hCLinear->SetBinContent(j, Linear_value); 
+            hCLinear->SetBinError(j, Linear_Error); 
+        }
+        else continue;
         
-
+        cout << "BinValue_Total_24: " << BinValue_Total_24 << endl;
+        cout << "BinValue_Total_34: " << BinValue_Total_34 << endl;
+        cout << "BinValue_Total_42: " << BinValue_Total_42 << endl;
+        cout << "BinValue_Sample_24: " << BinValue_Sample_24 << endl;
+        cout << "BinValue_Sapmle_34: " << BinValue_Sapmle_34 << endl;
+        cout << "BinValue_Sapmle_42: " << BinValue_Sapmle_42 << endl;
+        // cout << "Valuesqrt_2Particle_Correlation: " << Valuesqrt_2Particle_Correlation << endl; 
+        // cout << "Valuesqrt_4Particle_Correlation: " << Valuesqrt_4Particle_Correlation << endl; 
+        // cout << "Sample_Valuesqrt_2particle_correlation: " << Sample_Valuesqrt_2particle_correlation << endl; 
+        // cout << "Sample_Valuesqrt_4particle_correlation: " << Sample_Valuesqrt_4particle_correlation << endl; 
         // cout << "BinValue_3Particle_Correlation: " << BinValue_3Particle_Correlation << endl; 
         // cout << "Valuesqrt_4Particle_Correlation: " << Valuesqrt_4Particle_Correlation << endl; 
         //cout << "V4_BinValue_hC22: " << V4_BinValue_hC22 << endl;
         //cout << "NL_BinValue_hCV422: " << NL_BinValue_hCV422 << endl;
-        cout << "Linear3: " << Linear << endl;
-        cout << "Sample_Linear: " << Sample_Linear << endl; 
-        cout << "Linear_value: " << Linear_value << endl;
-        cout << "Linear_value_sample: " << Linear_value_sample << endl;   
+        // cout << "Linear3: " << Linear << endl;
+        // cout << "Sample_Linear: " << Sample_Linear << endl; 
+        // cout << "Linear_value: " << Linear_value << endl;
+        // cout << "Linear_value_sample: " << Linear_value_sample << endl;   
         
     }
 
@@ -524,7 +577,7 @@ void All_Gaps_Linear_calculation() {
     // hC22->SetMarkerSize(1.);
     // hC22->SetXTitle("# of tracks");
     // gStyle->SetOptStat(0);
-    hC22->Draw("same");
+    //hC22->Draw("same");
     
 
     //..V4^L
@@ -540,13 +593,13 @@ void All_Gaps_Linear_calculation() {
     // //hCV422->GetYaxis()->SetRangeUser(0., 3.);
     // //hCV422->GetXaxis()->SetRangeUser(0., 140);
     // hCV422->SetMarkerSize(2.);
-	hCV422->Draw("same");
+	//hCV422->Draw("same");
     // c->BuildLegend();
     
     
     //..Create a root.file:
     //..Uden Gap
-    TFile* fileOutput = new TFile("WOGap_V4_Linear_NonLinear_Response.root","RECREATE");
+    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V4_Linear_NL/WOGap_Conditions_V4_Linear_NonLinear_Response.root","RECREATE");
     if(!fileOutput) return;
     fileOutput->cd();
     hC22->Write();
