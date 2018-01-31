@@ -26,13 +26,13 @@ void All_Gaps_Rebin_V4_V5_NL_L()
     // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_Rebin_NewCondition_V4/Rebin_V4_Linear_NL_histograms_NewCondition.root","RECREATE");
     
     //..v532
-    TFile* fileOutput1 = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_Rebin_NewCondition_V5/Rebin_V5_Linear_NL_histograms_NewCondition.root","RECREATE");
+    // TFile* fileOutput1 = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_Rebin_NewCondition_V5/Rebin_V5_Linear_NL_histograms_NewCondition.root","RECREATE");
     
     //..chi422/chi532
-    // TFile* fileOutput2 = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/Rebin_Chi422_Chi532_AllGaps/Rebin_Chi422_Chi532_histograms.root","RECREATE");
+    TFile* fileOutput2 = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/Rebin_NewCondition_Chi422_Chi532_AllGaps/Rebin_NewCondition_Chi422_Chi532_histograms.root","RECREATE");
 
     //..Rho_v422_v532
-    // TFile* fileOutput3 = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/Rebin_Rho_v422_v532/Rebin_Rho_v422_v532_histograms.root","RECREATE");
+    // TFile* fileOutput3 = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/Rebin_NewConditions_Rho_v422_v532/Rebin_NewCondition_Rho_v422_v532_histograms.root","RECREATE");
     //**************************************************************************
     //..V4,22 
     // //..Open Root.File:
@@ -99,92 +99,33 @@ void All_Gaps_Rebin_V4_V5_NL_L()
     //******************************************************************************************************************************
     //..V5,32 
     //..Open Root.File:
-    int EtaGap[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-
-    for(int i=0; i <9; i++) {
-        TString fPath (TString::Format("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V5_Linear_NL/Gap0%0d_V5_Linear_NonLinear_Response_NewCondition.root", EtaGap[i]));
-
-        TFile* file = TFile::Open(fPath, "READ");
-        if(!file) return;
-
-        TH1D* hC22 = (TH1D*)file->Get("hC22");
-        if(!hC22) return;
-        //hC22->Draw();
-
-        TH1D* hCV532 = (TH1D*)file->Get("hCV532");
-        if(!hC22) return;
-
-        TH1D* hCLinear = (TH1D*)file->Get("hCLinear");
-        if(!hCLinear) return;
-
-        TH1D* hC22_Rebin = new TH1D(Form("hC25_Rebin_Gap0%0d", EtaGap[i]),"v_{5}{2}, 2-Particle correlations; #N_ch; #v_{5}{2}", 10, 0, 200);
-		hC22_Rebin->Sumw2();
-        //hC22_Rebin->Draw();
-
-        TH1D* hCV532_Rebin = new TH1D(Form("hCV532_Rebin_Gap0%0d", EtaGap[i]),"v_{5,32} Non-Linear Response; #N_ch; #v_{5,32}", 10, 0, 200);
-		hCV532_Rebin->Sumw2();
-
-        TH1D* hCLinear_Rebin = new TH1D(Form("hCLinearV5_Rebin_Gap0%0d", EtaGap[i]),"v_{5}^{L} Linear Response; #N_ch; #v_{5}^{L}", 10, 0, 200);
-		hCLinear_Rebin->Sumw2();
-
-        Printf("the merge directory exist:");
-        cout << "EtaGap: " << EtaGap[i] << endl;
-        cout << "i : " << i << endl; 
-
-        int binning = 20;
-        double errorNum;
-        double sumNum = 0;
-        double sumDenom = 1;
-        double content = 0;
-        
-        if(binning == 20)RebinAll(hC22, hC22_Rebin, 20);
-        if(!hC22) fPrint("Warning there is no histogram");
-        //hC22_Rebin->GetXaxis()->SetRangeUser(10, 110);
-        //hC22_Rebin->Draw("same");
-
-        if(binning == 20)RebinAll(hCV532, hCV532_Rebin, 20);
-        if(!hCV532) fPrint("Warning there is no histogram");
-        //hCV422_Rebin->GetXaxis()->SetRangeUser(10, 110);
-        //hCV422_Rebin->Draw("same");
-
-        if(binning == 20)RebinAll(hCLinear, hCLinear_Rebin, 20);
-        if(!hCLinear) fPrint("Warning there is no histogram");
-        //hCLinear_Rebin->GetXaxis()->SetRangeUser(10, 110);
-        //hCLinear_Rebin->Draw("same");
-
-        if(!fileOutput1) return;
-        fileOutput1->cd();
-        hC22_Rebin->Write();
-        hCV532_Rebin->Write();
-        hCLinear_Rebin->Write();
-        fileOutput1->Write(Form("hC25_Rebin_Gap0%0d", EtaGap[i]));
-        fileOutput1->Write(Form("hCV532_Rebin_Gap0%0d", EtaGap[i]));
-        fileOutput1->Write(Form("hCLinearV5_Rebin_Gap0%0d", EtaGap[i]));
-
-    }  //..End of loop
-
-    //******************************************************************************************************************************
-    //..Chi422 and
-    //..Chi532: 
-    //..Open Root.File:
     // int EtaGap[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
 
     // for(int i=0; i <9; i++) {
-    //     TString fPath (TString::Format("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/Chi422_Chi532_AllGaps/Gap0%0d_Chi_422_Chi_532.root", EtaGap[i]));
+    //     TString fPath (TString::Format("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_NewCondition_V5_Linear_NL/Gap0%0d_V5_Linear_NonLinear_Response_NewCondition.root", EtaGap[i]));
 
     //     TFile* file = TFile::Open(fPath, "READ");
     //     if(!file) return;
 
-    //     TH1D* hChi422 = (TH1D*)file->Get("hChi422");
-    //     if(!hChi422) return;
-    //     //hChi422->Draw();
+    //     TH1D* hC22 = (TH1D*)file->Get("hC22");
+    //     if(!hC22) return;
+    //     //hC22->Draw();
 
-    //     TH1D* hChi422_Rebin = new TH1D(Form("hChi422_Rebin_Gap0%0d", EtaGap[i])," #chi_{4,22}; #N_ch; #chi_{4,22}", 10, 0, 200);
-	// 	hChi422_Rebin->Sumw2();
+    //     TH1D* hCV532 = (TH1D*)file->Get("hCV532");
+    //     if(!hC22) return;
+
+    //     TH1D* hCLinear = (TH1D*)file->Get("hCLinear");
+    //     if(!hCLinear) return;
+
+    //     TH1D* hC22_Rebin = new TH1D(Form("hC25_Rebin_Gap0%0d", EtaGap[i]),"v_{5}{2}, 2-Particle correlations; #N_ch; #v_{5}{2}", 10, 0, 200);
+	// 	hC22_Rebin->Sumw2();
     //     //hC22_Rebin->Draw();
 
-    //     TH1D* hChi532_Rebin = new TH1D(Form("hChi532_Rebin_Gap0%0d", EtaGap[i])," #chi_{5,32}; #N_ch; #v_{5,32}", 10, 0, 200);
-	// 	hChi532_Rebin->Sumw2();
+    //     TH1D* hCV532_Rebin = new TH1D(Form("hCV532_Rebin_Gap0%0d", EtaGap[i]),"v_{5,32} Non-Linear Response; #N_ch; #v_{5,32}", 10, 0, 200);
+	// 	hCV532_Rebin->Sumw2();
+
+    //     TH1D* hCLinear_Rebin = new TH1D(Form("hCLinearV5_Rebin_Gap0%0d", EtaGap[i]),"v_{5}^{L} Linear Response; #N_ch; #v_{5}^{L}", 10, 0, 200);
+	// 	hCLinear_Rebin->Sumw2();
 
     //     Printf("the merge directory exist:");
     //     cout << "EtaGap: " << EtaGap[i] << endl;
@@ -196,24 +137,83 @@ void All_Gaps_Rebin_V4_V5_NL_L()
     //     double sumDenom = 1;
     //     double content = 0;
         
-    //     if(binning == 20)RebinAll(hChi422, hChi422_Rebin, 20);
-    //     if(!hChi422) fPrint("Warning there is no histogram");
+    //     if(binning == 20)RebinAll(hC22, hC22_Rebin, 20);
+    //     if(!hC22) fPrint("Warning there is no histogram");
     //     //hC22_Rebin->GetXaxis()->SetRangeUser(10, 110);
     //     //hC22_Rebin->Draw("same");
 
-    //     if(binning == 20)RebinAll(hChi532, hChi532_Rebin, 20);
-    //     if(!hChi532) fPrint("Warning there is no histogram");
+    //     if(binning == 20)RebinAll(hCV532, hCV532_Rebin, 20);
+    //     if(!hCV532) fPrint("Warning there is no histogram");
     //     //hCV422_Rebin->GetXaxis()->SetRangeUser(10, 110);
     //     //hCV422_Rebin->Draw("same");
 
-    //     if(!fileOutput2) return;
-    //     fileOutput2->cd();
-    //     hChi422_Rebin->Write();
-    //     hChi532_Rebin->Write();
-    //     fileOutput2->Write(Form("hChi422_Rebin_Gap0%0d", EtaGap[i]));
-    //     fileOutput2->Write(Form("hChi532_Rebin_Gap0%0d", EtaGap[i]));
+    //     if(binning == 20)RebinAll(hCLinear, hCLinear_Rebin, 20);
+    //     if(!hCLinear) fPrint("Warning there is no histogram");
+    //     //hCLinear_Rebin->GetXaxis()->SetRangeUser(10, 110);
+    //     //hCLinear_Rebin->Draw("same");
 
-    // } //..End of loop
+    //     if(!fileOutput1) return;
+    //     fileOutput1->cd();
+    //     hC22_Rebin->Write();
+    //     hCV532_Rebin->Write();
+    //     hCLinear_Rebin->Write();
+    //     fileOutput1->Write(Form("hC25_Rebin_Gap0%0d", EtaGap[i]));
+    //     fileOutput1->Write(Form("hCV532_Rebin_Gap0%0d", EtaGap[i]));
+    //     fileOutput1->Write(Form("hCLinearV5_Rebin_Gap0%0d", EtaGap[i]));
+
+    // }  //..End of loop
+
+    //******************************************************************************************************************************
+    //..Chi422 and
+    //..Chi532: 
+    //..Open Root.File:
+    int EtaGap[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+
+    for(int i=0; i <9; i++) {
+        TString fPath (TString::Format("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/NewCondition_Chi422_Chi532_AllGaps/Gap0%0d_NewCondition_Chi_422_Chi_532.root", EtaGap[i]));
+
+        TFile* file = TFile::Open(fPath, "READ");
+        if(!file) return;
+
+        TH1D* hChi422 = (TH1D*)file->Get("hChi422");
+        if(!hChi422) return;
+        //hChi422->Draw();
+
+        TH1D* hChi422_Rebin = new TH1D(Form("hChi422_Rebin_Gap0%0d", EtaGap[i])," #chi_{4,22}; #N_ch; #chi_{4,22}", 10, 0, 200);
+		hChi422_Rebin->Sumw2();
+        //hC22_Rebin->Draw();
+
+        TH1D* hChi532_Rebin = new TH1D(Form("hChi532_Rebin_Gap0%0d", EtaGap[i])," #chi_{5,32}; #N_ch; #v_{5,32}", 10, 0, 200);
+		hChi532_Rebin->Sumw2();
+
+        Printf("the merge directory exist:");
+        cout << "EtaGap: " << EtaGap[i] << endl;
+        cout << "i : " << i << endl; 
+
+        int binning = 20;
+        double errorNum;
+        double sumNum = 0;
+        double sumDenom = 1;
+        double content = 0;
+        
+        if(binning == 20)RebinAll(hChi422, hChi422_Rebin, 20);
+        if(!hChi422) fPrint("Warning there is no histogram");
+        //hC22_Rebin->GetXaxis()->SetRangeUser(10, 110);
+        //hC22_Rebin->Draw("same");
+
+        if(binning == 20)RebinAll(hChi532, hChi532_Rebin, 20);
+        if(!hChi532) fPrint("Warning there is no histogram");
+        //hCV422_Rebin->GetXaxis()->SetRangeUser(10, 110);
+        //hCV422_Rebin->Draw("same");
+
+        if(!fileOutput2) return;
+        fileOutput2->cd();
+        hChi422_Rebin->Write(Form("hChi422_Rebin_Gap0%0d", EtaGap[i]));
+        hChi532_Rebin->Write(Form("hChi532_Rebin_Gap0%0d", EtaGap[i]));
+        fileOutput2->Write(Form("hChi422_Rebin_Gap0%0d", EtaGap[i]));
+        fileOutput2->Write(Form("hChi532_Rebin_Gap0%0d", EtaGap[i]));
+
+    } //..End of loop
     //*****************************************************************************    
     //..Rho_v422 and
     //..Rho_v532: 
@@ -221,7 +221,7 @@ void All_Gaps_Rebin_V4_V5_NL_L()
     // int EtaGap[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
 
     // for(int i=0; i <9; i++) {
-    //     TString fPath (TString::Format("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/AllGaps_Rho_v422_v532/Gap0%0d_Rho_v422_Rho_v532.root", EtaGap[i]));
+    //     TString fPath (TString::Format("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/AllGaps_NewConditions_Rho_v422_v532/Gap0%0d_NewCondition_Rho_v422_Rho_v532.root", EtaGap[i])); 
 
     //     TFile* file = TFile::Open(fPath, "READ");
     //     if(!file) return;
