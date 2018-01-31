@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std; 
 
-void Delta_eta_dependent_V4L_NL_V4_2part() {
+void Delta_eta_dependent_Three_Four_partcorr() {
     double Bin_value_v422;
     double Bin_value_hC22;
     double Bin_value_hCLinear;
@@ -23,7 +23,7 @@ void Delta_eta_dependent_V4L_NL_V4_2part() {
     //..Root.file for all Eta-dependant plots
     // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Eta_Dependent/NewCondition_Delta_eta_dependent_V4L_NL422_V4_2part.root","RECREATE");
 
-    TFile* fileOutput2 = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Eta_Dependent/New_Condition_Delta_eta_dependent_V5L_NL532_V5_2part.root","RECREATE");
+    TFile* fileOutput2 = new TFile(,"RECREATE");
 
     int n= 9;
     double EtaGap[9]= {0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8};
@@ -87,8 +87,7 @@ void Delta_eta_dependent_V4L_NL_V4_2part() {
     // TFile* file = TFile::Open(
     // "/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_Rebin_NewCondition_V4/Rebin_V4_Linear_NL_histograms_NewCondition.root", "READ");
 
-    TFile* file = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_Rebin_NewCondition_V5/Rebin_V5_Linear_NL_histograms_NewCondition.root", "READ");
-    
+    TFile* file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/LHC16q_CENT_SDD_0Gap_2_08Gap_FullGaps.root", "READ");
 
     for(int i=1; i<11; i++) {
         for(int gap=0; gap < 9; gap++) {

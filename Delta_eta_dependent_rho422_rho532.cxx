@@ -18,7 +18,7 @@ void Delta_eta_dependent_rho422_rho532() {
 
 
     //..Root.file for all Eta-dependant plots
-    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Eta_Dependent/Delta_eta_dependent_rho422_rho532.root","RECREATE");
+    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Eta_Dependent/NewCondition_Delta_eta_dependent_rho422_rho532.root","RECREATE");
 
 
     int n= 9;
@@ -28,10 +28,10 @@ void Delta_eta_dependent_rho422_rho532() {
 
     //**************************************************************************
     TFile* file = TFile::Open(
-    "/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/Rebin_Rho_v422_v532/Rebin_Rho_v422_v532_histograms.root", "READ");
+    "/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/Rebin_NewConditions_Rho_v422_v532/Rebin_NewCondition_Rho_v422_v532_histograms.root", "READ");
     
     //..loop over bins and eta-gaps:
-    for(int i=1; i<11; i++) {
+    for(int i=1; i<9; i++) {
         for(int gap=0; gap < 9; gap++) {
             
             //..Rho422 & Rho532:
