@@ -18,7 +18,7 @@ void Delta_eta_dependent_chi422_chi532() {
 
 
     //..Root.file for all Eta-dependant plots
-    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Eta_Dependent/Delta_eta_dependent_chi422_chi532.root","RECREATE");
+    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Eta_Dependent/New_Condition_Delta_eta_dependent_chi422_chi532.root","RECREATE");
 
 
     int n= 9;
@@ -26,12 +26,13 @@ void Delta_eta_dependent_chi422_chi532() {
     double y1[9] = {};
     double y2[9] = {};
 
+
     //**************************************************************************
     TFile* file = TFile::Open(
-    "/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/Rebin_Chi422_Chi532_AllGaps/Rebin_Chi422_Chi532_histograms.root", "READ");
+    "/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/Rebin_NewCondition_Chi422_Chi532_AllGaps/Rebin_NewCondition_Chi422_Chi532_histograms.root", "READ");
     
     //..loop over bins and eta-gaps:
-    for(int i=1; i<11; i++) {
+    for(int i=1; i<9; i++) {
         for(int gap=0; gap < 9; gap++) {
             
             //..Chi422 & Chi532:
