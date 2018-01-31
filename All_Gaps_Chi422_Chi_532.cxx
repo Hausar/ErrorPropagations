@@ -1,5 +1,5 @@
 
-//Macro To Calculate the Error Propagation:
+//Macro To Calculate the Chi422, Chi532 Error Propagation:
 //Root file:
 #include <TFile.h>
 #include <TMath.h>
@@ -80,7 +80,7 @@ void All_Gaps_Chi422_Chi_532() {
     double BinValue_Sample35;
     double BinValue_Sample22;
     double BinValue_Sample23;
-    double 
+     
 
 
     
@@ -295,11 +295,23 @@ void All_Gaps_Chi422_Chi_532() {
             BinValue_4Particle_Correlation = Cn42->GetBinContent(i);
 
             //..Test Multiplicity
-            BinValue_Total34 = Cn34->GetBinEntries(i);
-            BinValue_Total42 = Cn42->GetBinEntries(i);
+            BinValue_Total34 = Cn34->GetBinEffectiveEntries(i);
+            BinValue_Total42 = Cn42->GetBinEffectiveEntries(i);
 
-            BinValue_Sample34 = prof34->GetBinEntries(i);
-            BinValue_Sample42 = prof42->GetBinEntries(i);
+            BinValue_Sample34 = prof34->GetBinEffectiveEntries(i);
+            BinValue_Sample42 = prof42->GetBinEffectiveEntries(i);
+
+            if( BinValue_Total34 > 1000 && BinValue_Total42 > 1000 && BinValue_Sample34 > 100 && BinValue_Sample42 > 100 ) {
+                cout << "Passed Multiplicity Test Good" << endl;
+                cout << "******************************" << endl;
+                cout << "i: " << i << endl;
+                cout << "Sample: " << sample << endl;
+                cout << "BinValue_Total34: " << BinValue_Total34 << endl;
+                cout <<"BinValue_Sample34: " << BinValue_Sample34 << endl;
+            }
+            else continue; 
+
+
             
             if (Sample_BinValue_4Particle_Correlation > 0  && BinValue_4Particle_Correlation > 0 && BinValue_3Particle_Correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 ) {
             
@@ -331,9 +343,10 @@ void All_Gaps_Chi422_Chi_532() {
             // cout << "error: " << error << endl;
             //fc42->Draw("EP");
             //Cn34->Draw();
-            //Cn42->Draw();		
+            //Cn42->Draw();
+            cout << "-----------------------------" << endl;		
             cout << "Chi422: " << Chi422 << endl;
-            cout << "Chi422_Sample: " << Chi422_Sample << endl;
+            //cout << "Chi422_Sample: " << Chi422_Sample << endl;
         }
         sigma_z1 = sqrt(error/ (N * N) );
         if( BinValue_Total34 > 1000 && BinValue_Total42 > 1000 && BinValue_Sample34 > 100 && BinValue_Sample42 > 100 ) {
@@ -341,7 +354,8 @@ void All_Gaps_Chi422_Chi_532() {
             hChi422->SetBinError(i, sigma_z1);    
         }
         else continue; 
-
+        cout << "BinValue_Total34: " << BinValue_Total34 << endl;
+        cout <<"BinValue_Sample34: " << BinValue_Sample34 << endl;   
     }
 
 
@@ -443,13 +457,24 @@ void All_Gaps_Chi422_Chi_532() {
             BinValue_23Particle_Correlation = Cn23->GetBinContent(i);
 
             //..Test Multiplicity
-            BinValue_Total35 = Cn35->GetBinEntries(i);
-            BinValue_Total22 = Cn22->GetBinEntries(i);
-            BinValue_Total23 = Cn23->GetBinEntries(i);
+            BinValue_Total35 = Cn35->GetBinEffectiveEntries(i);
+            BinValue_Total22 = Cn22->GetBinEffectiveEntries(i);
+            BinValue_Total23 = Cn23->GetBinEffectiveEntries(i);
 
-            BinValue_Sample35 = prof35->GetBinEntries(i);
-            BinValue_Sample22 = prof22->GetBinEntries(i);
-            BinValue_Sample23 = prof23->GetBinEntries(i);
+            BinValue_Sample35 = prof35->GetBinEffectiveEntries(i);
+            BinValue_Sample22 = prof22->GetBinEffectiveEntries(i);
+            BinValue_Sample23 = prof23->GetBinEffectiveEntries(i);
+
+            if( BinValue_Total35 > 1000 && BinValue_Total22 > 1000 && BinValue_Total23 > 1000 && BinValue_Sample35 > 100 && BinValue_Sample22 > 100 && BinValue_Sample23 > 100 ) {
+                cout << "Passed Multiplicity Test Good" << endl;
+                cout << "******************************" << endl;
+                cout << "i: " << i << endl;
+                cout << "Sample: " << sample << endl;
+                cout << "BinValue_Total34: " << BinValue_Total35 << endl;
+                cout <<"BinValue_Sample34: " << BinValue_Sample35 << endl;
+            }
+            else continue; 
+
 
 
             if (Sample_BinValue_22Particle_Correlation > 0  && BinValue_22Particle_Correlation > 0  &&  Sample_BinValue_23Particle_Correlation > 0 && BinValue_23Particle_Correlation > 0 &&  BinValue_3Particle_Correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 ) {
@@ -562,8 +587,8 @@ void All_Gaps_Chi422_Chi_532() {
     // hChi422->GetYaxis()->SetRangeUser(0., 3.);
     // hChi422->GetXaxis()->SetRangeUser(0., 140);
     // hChi422->SetMarkerSize(1.);
-    hChi422->Draw("same");
-    c->BuildLegend();
+    //hChi422->Draw("same");
+    //c->BuildLegend();
     
     hChi532->Draw("same");
     c->BuildLegend();
@@ -644,10 +669,10 @@ void All_Gaps_Chi422_Chi_532() {
     // return;
 
     //..Gap= 0.8
-    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/Gap08_NewCondition_Chi_422_Chi_532.root","RECREATE");
-    if(!fileOutput) return;
-    fileOutput->cd();
-    hChi422->Write();
-    hChi532->Write();
-    return;
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/Gap08_NewCondition_Chi_422_Chi_532.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hChi422->Write();
+    // hChi532->Write();
+    // return;
 }
