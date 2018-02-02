@@ -16,31 +16,201 @@ void Rebin_3Particle_4Particle_Correlations() {
     c->SetFillColor(10);
     c->cd();
 
-    TH1F *Rebin_hist_C24 = new TH1F("Rebin_hist_C24", "the new Rebin plot for <<2>>_{4,-4} with #eta Gap = 0.2", 20, 0, 200);
-    Rebin_hist_C24->Sumw2();
-
-    TProfile *Rebinhist34 = new TProfile("Rebinhist34", "the new Rebin plot", 10, 0, 200);
-    Rebinhist34->Sumw2();
-
-    //Open the root.file:
-    TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/LHC16q_CENT_SDD_0Gap_2_08Gap_FullGaps.root", "READ");
-    TDirectory *dir = (TDirectoryFile*)file->Get("MyTaskResults");
-    TList *list = (TList*)dir->Get("Flow_Refs_MyTaskResults");
+    //..Create New root.file:
+    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Rebin_Cut_Data_3_4_particle/New_Rebin_Cut_Data_3part_4part_histograms.root","RECREATE");
     
     //*************************************************************************
     int EtaGap[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-    for(int i=1; i< 201; i++) {
-        for(int j=0; j <9; j++) {
-            TString foo(TString::Format("fTprofC34Gap0%0dNtrks1bin", EtaGap[j]));
-            TProfile *fTtest = (TProfile*)list->FindObject(foo);
-            //..Try to Rebin
-            TH1D* hChi422_Rebin = new TH1D(Form("hChi422_Rebin_Gap%0d", EtaGap[j])," #chi_{4,22}; #N_ch; #chi_{4,22}", 10, 0, 200);
-		    hChi422_Rebin->Sumw2();
-            //hChi422_Rebin = fTtest->Rebin(10, "hChi422_Rebin");
+
+    for(int i=0; i <9; i++) {
+        TString fPath (TString::Format("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Cut_Data_3_4_particle/Gap0%0d_Cut_Tprofile_3_4_particle.root", EtaGap[i]));   
+        
+        TFile* file = TFile::Open(fPath, "READ");
+        if(!file) return;
+
+        TProfile* fTprofC34GapNtrks1bin = (TProfile*)file->Get(Form("fTprofC34Gap0%0dNtrks1bin", EtaGap[i]));
+        if(!fTprofC34GapNtrks1bin) return;
+        //fTprofC34GapNtrks1bin->Draw();
+
+        TProfile* fTprofC35GapNtrks1bin = (TProfile*)file->Get(Form("fTprofC35Gap0%0dNtrks1bin", EtaGap[i]));
+        if(!fTprofC35GapNtrks1bin) return;
+        //fTprofC35GapNtrks1bin->Draw();
+
+        TProfile* fTprofC42GapNtrks1bin = (TProfile*)file->Get(Form("fTprofC42Gap0%0dNtrks1bin", EtaGap[i]));
+        if(!fTprofC42GapNtrks1bin) return;
+        fTprofC42GapNtrks1bin->Draw();
+
+        TProfile* fTprofC43GapNtrks1bin = (TProfile*)file->Get(Form("fTprofC43Gap0%0dNtrks1bin", EtaGap[i]));
+        if(!fTprofC43GapNtrks1bin) return;
+        fTprofC43GapNtrks1bin->Draw();
+
+
+        TH1D* hC34_Rebin = new TH1D(Form("hC34_Rebin_Gap0%0d", EtaGap[i])," <<3>>_{4,-2,-2} 3Particle correlations", 5, 5, 105);
+		hC34_Rebin->Sumw2();
+        //hC34_Rebin->Draw();
+
+        TH1D* hC35_Rebin = new TH1D(Form("hC35_Rebin_Gap0%0d", EtaGap[i])," <<3>>_{5,-3,-2} 3Particle correlations", 5, 5, 105);
+		hC35_Rebin->Sumw2();
+        //hC35_Rebin->Draw();
+
+
+        TH1D* hC42_Rebin = new TH1D(Form("hC42_Rebin_Gap0%0d", EtaGap[i])," <<4>>_{2,2,-2,-2} 4-Particle correlations", 5, 5, 105);
+		hC42_Rebin->Sumw2();
+        hC42_Rebin->Draw();
+
+        TH1D* hC43_Rebin = new TH1D(Form("hC43_Rebin_Gap0%0d", EtaGap[i])," <<4>>_{2,3,-2,-3} 4-Particle correlations", 5, 5, 105);
+		hC43_Rebin->Sumw2();
+        //hC43_Rebin->Draw();
+
+
+        int binning = 20;
+        double errorNum;
+        double sumNum = 0;
+        double sumDenom = 1;
+        double content = 0;
+        
+        if(binning == 20)RebinAll(fTprofC34GapNtrks1bin, hC34_Rebin, 20);
+        if(!fTprofC34GapNtrks1bin) fPrint("Warning there is no histogram");
+
+        if(binning == 20)RebinAll(fTprofC35GapNtrks1bin, hC35_Rebin, 20);
+        if(!fTprofC35GapNtrks1bin) fPrint("Warning there is no histogram");
+
+        if(binning == 20)RebinAll(fTprofC42GapNtrks1bin, hC42_Rebin, 20);
+        if(!fTprofC42GapNtrks1bin) fPrint("Warning there is no histogram");
+
+        if(binning == 20)RebinAll(fTprofC43GapNtrks1bin, hC43_Rebin, 20);
+        if(!fTprofC43GapNtrks1bin) fPrint("Warning there is no histogram");
+
+        if(!fileOutput) return;
+        fileOutput->cd();
+        hC34_Rebin->Write(Form("hC34_Rebin_Gap0%0d", EtaGap[i]));
+        hC35_Rebin->Write(Form("hC35_Rebin_Gap0%0d", EtaGap[i]));
+        hC42_Rebin->Write(Form("hC42_Rebin_Gap0%0d", EtaGap[i]));
+        hC43_Rebin->Write(Form("hC43_Rebin_Gap0%0d", EtaGap[i]));
+        
+        Printf("The Tprofile exist:");
+        cout << "EtaGap: " << EtaGap[i] << endl;
+        cout << "i : " << i << endl; 
+    } //..End of loop
+
+
+} // //..Define Rebin Function
+// //_______________________________________________________________________________
+void RebinAll(TH1D *h1, TH1D *h2, int binning)
+{
+    
+    double sumNum[200] = {0};
+    double sumDenom[200] = {0};
+    double errorNum[200] = {0};
+    double content[200] = {0};
+    double error[200] = {0};
+    
+    int bin = 1;
+
+    if(binning == 5)
+    {
+        for(int j=1; j<200; j=j+5)
+        {
+            for(int i=0; i<5; i++)
+            {
+                if(h1->GetBinContent(j+i) != 0)
+                {
+                    errorNum[bin] += TMath::Power(h1->GetBinError(j+i), 2.);
+                    sumNum[bin] += h1->GetBinContent(j+i);
+                    sumDenom[bin] += 1;
+                }
+            }
+            bin += 1;
         }
-    }   
 
+        for(int i=1; i<40; i++)
+        {
+            if(sumDenom[i] != 0) content[i] = sumNum[i]/sumDenom[i];
+            if(sumDenom[i] != 0) error[i] = TMath::Sqrt(errorNum[i]/TMath::Power(sumDenom[i], 2.));
+            h2->SetBinContent(i, content[i]);
+            h2->SetBinError(i, error[i]);
+        }
+    }
 
+    if(binning == 10)
+    {
+        for(int j=1; j<200; j=j+10)
+        {
+            for(int i=0; i<10; i++)
+            {
+                if(h1->GetBinContent(j+i) != 0)
+                {
+                    errorNum[bin] += TMath::Power(h1->GetBinError(j+i), 2.);
+                    sumNum[bin] += h1->GetBinContent(j+i);
+                    sumDenom[bin] += 1;
+                }
+            }
+            bin += 1;
+        }
+
+        for(int i=1; i<20; i++)
+        {
+            if(sumDenom[i] != 0) content[i] = sumNum[i]/sumDenom[i];
+            if(sumDenom[i] != 0) error[i] = TMath::Sqrt(errorNum[i]/TMath::Power(sumDenom[i], 2.));
+            h2->SetBinContent(i, content[i]);
+            h2->SetBinError(i, error[i]);
+        }
+    }
+
+    if(binning == 20)
+    {
+        for(int j=1; j<201; j=j+20)
+        {
+            for(int i=0; i<20; i++)
+            {
+                if(h1->GetBinContent(j+i) != 0)
+                {
+                    errorNum[bin] += TMath::Power(h1->GetBinError(j+i), 2.);
+                    sumNum[bin] += h1->GetBinContent(j+i);
+                    sumDenom[bin] += 1;
+                }
+            }
+            bin += 1;
+        }
+
+        for(int i=1; i<11; i++)
+        {
+            if(sumDenom[i] != 0) content[i] = sumNum[i]/sumDenom[i];
+            if(sumDenom[i] != 0) error[i] = TMath::Sqrt(errorNum[i]/TMath::Power(sumDenom[i], 2.));
+            h2->SetBinContent(i, content[i]);
+            h2->SetBinError(i, error[i]);
+        }
+    }
+
+    if(binning == 40)
+    {
+        for(int j=1; j<201; j=j+40)
+        {
+            for(int i=0; i<40; i++)
+            {
+                if(h1->GetBinContent(j+i) != 0)
+                {
+                    errorNum[bin] += TMath::Power(h1->GetBinError(j+i), 2.);
+                    sumNum[bin] += h1->GetBinContent(j+i);
+                    sumDenom[bin] += 1;
+                }
+            }
+            bin += 1;
+        }
+
+        for(int i=1; i<6; i++)
+        {
+            if(sumDenom[i] != 0) content[i] = sumNum[i]/sumDenom[i];
+            if(sumDenom[i] != 0) error[i] = TMath::Sqrt(errorNum[i]/TMath::Power(sumDenom[i], 2.));
+            h2->SetBinContent(i, content[i]);
+            h2->SetBinError(i, error[i]);
+        }
+    }
+}   //..End of Function
+
+    //..Extra info om Tprofile Rebinning directly:
+    // TH2D *TprofileRebin34 = fTprofC34Gap0Ntrks1bin->RebinX(10, "TprofileRebin34");
+    // TprofileRebin34->Draw();
 
 
     //*************************************************************************
@@ -148,4 +318,4 @@ void Rebin_3Particle_4Particle_Correlations() {
     // hCn42_Gap02_Rebin->Write();
     // hCn34_Gap02_Rebin->Write();
     
-}
+//}
