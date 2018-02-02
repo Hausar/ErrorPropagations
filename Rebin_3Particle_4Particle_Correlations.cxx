@@ -56,11 +56,11 @@ void Rebin_3Particle_4Particle_Correlations() {
 
         TH1D* hC42_Rebin = new TH1D(Form("hC42_Rebin_Gap0%0d", EtaGap[i])," <<4>>_{2,2,-2,-2} 4-Particle correlations", 5, 5, 105);
 		hC42_Rebin->Sumw2();
-        hC42_Rebin->Draw();
+        //hC42_Rebin->Draw();
 
         TH1D* hC43_Rebin = new TH1D(Form("hC43_Rebin_Gap0%0d", EtaGap[i])," <<4>>_{2,3,-2,-3} 4-Particle correlations", 5, 5, 105);
 		hC43_Rebin->Sumw2();
-        //hC43_Rebin->Draw();
+        hC43_Rebin->Draw();
 
 
         int binning = 20;
@@ -159,7 +159,7 @@ void RebinAll(TH1D *h1, TH1D *h2, int binning)
 
     if(binning == 20)
     {
-        for(int j=1; j<201; j=j+20)
+        for(int j=1; j<101; j=j+20)
         {
             for(int i=0; i<20; i++)
             {
@@ -173,7 +173,7 @@ void RebinAll(TH1D *h1, TH1D *h2, int binning)
             bin += 1;
         }
 
-        for(int i=1; i<11; i++)
+        for(int i=1; i<6; i++)
         {
             if(sumDenom[i] != 0) content[i] = sumNum[i]/sumDenom[i];
             if(sumDenom[i] != 0) error[i] = TMath::Sqrt(errorNum[i]/TMath::Power(sumDenom[i], 2.));
