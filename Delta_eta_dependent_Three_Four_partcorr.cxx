@@ -18,15 +18,19 @@ void Delta_eta_dependent_Three_Four_partcorr() {
     c->cd();
 
     //..Create New file.root Eta-dependant of <<3>> and <<4>> plots
-    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Eta_Dependent/New_Delta_eta_dependent_3Part_4Part/New_Delta_eta_dependent_3part_4part_correlation.root","RECREATE");
+    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Eta_Dependent/New_Delta_eta_dependent_3Part_4Part/ErrorBar_New_Delta_eta_dependent_3part_4part_correlation.root","RECREATE");
 
     int n= 9;
-    double EtaGap[9]= {0, 1, 2, 3, 4, 5, 6, 7, 8};
+    double EtaGap[9]= {0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8};
     double y1[9] = {};
     double y2[9] = {};
     double y3[9] = {};
     double y4[9] = {};
-
+    double error1 [9] = {};
+    //double errx1 [9] = {0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05};
+    double error2 [9] = {};
+    double error3 [9] = {};
+    double error4 [9] = {};
     //**************************************************************************
     //TEST:
     // TGraph* gr = new TGraph(n, EtaGap, hC22);
@@ -101,7 +105,12 @@ void Delta_eta_dependent_Three_Four_partcorr() {
             y3[gap] = hC42_gap->GetBinContent(i);
             y4[gap] = hC43_gap->GetBinContent(i);
 
-        
+            //..Error for TH1D:
+            error1[gap] = hC34_gap->GetBinError(i);
+            error2[gap] = hC35_gap->GetBinError(i);
+            error3[gap] = hC42_gap->GetBinError(i);
+            error4[gap] = hC43_gap->GetBinError(i);
+
             //..V5:
             // TString foo_25(TString::Format("hC25_Rebin_Gap0%0d", gap));
             // TString foo_NL532(TString::Format("hCV532_Rebin_Gap0%0d", gap));
@@ -122,8 +131,9 @@ void Delta_eta_dependent_Three_Four_partcorr() {
             cout << "y4: " << y4[gap] << endl;
             cout << "i: " << i <<endl;
             cout << "Gap: " << gap << endl;
-            nbin_range = hC34_gap->GetXaxis()->FindBin(106) - hC34_gap->GetXaxis()->FindBin(5);
-            cout << "Number of bins: " << nbin_range << endl; 
+            cout << "error: " << error1[gap] << endl;
+            //nbin_range = hC34_gap->GetXaxis()->FindBin(106) - hC34_gap->GetXaxis()->FindBin(5);
+            //cout << "Number of bins: " << nbin_range << endl; 
             cout << "**********************************************" << endl;
             //*********************************************************************
             // //..V4
@@ -168,7 +178,7 @@ void Delta_eta_dependent_Three_Four_partcorr() {
             //*********************************************************************
             // //..V5
             
-            TGraph* gr1 = new TGraph(n, EtaGap, y1);
+            TGraphErrors* gr1 = new TGraphErrors(n, EtaGap, y1, 0, error1);
             gr1->SetLineColor(2);
             gr1->SetLineWidth(4);
             gr1->SetMarkerColor(4);
@@ -177,10 +187,11 @@ void Delta_eta_dependent_Three_Four_partcorr() {
             gr1->GetXaxis()->SetTitle("#Delta #eta");
             gr1->GetYaxis()->SetTitle("<<3>>_{4|-2,-2}");
             gr1->GetYaxis()->SetTitleOffset(1.4);
-            gr1->Draw("ACP");
+            //gr1->Draw("ACP");
             //gr1->Draw("AC*");
+            gr1->Draw("ap");
 
-            TGraph* gr2 = new TGraph(n, EtaGap, y2);
+            TGraphErrors* gr2 = new TGraphErrors(n, EtaGap, y2, 0, error2);
             gr2->SetLineColor(2);
             gr2->SetLineWidth(4);
             gr2->SetMarkerColor(4);
@@ -189,11 +200,11 @@ void Delta_eta_dependent_Three_Four_partcorr() {
             gr2->GetXaxis()->SetTitle("#Delta #eta");
             gr2->GetYaxis()->SetTitle("<<3>>_{5|-3,-2}");
             gr2->GetYaxis()->SetTitleOffset(1.4);
-            gr2->Draw("ACP");
+            //gr2->Draw("ACP");
             //gr2->Draw("AC*");
+            gr2->Draw("ap");
 
-
-            TGraph* gr3 = new TGraph(n, EtaGap, y3);
+            TGraphErrors* gr3 = new TGraphErrors(n, EtaGap, y3, 0, error3);
             gr3->SetLineColor(2);
             gr3->SetLineWidth(4);
             gr3->SetMarkerColor(4);
@@ -202,10 +213,11 @@ void Delta_eta_dependent_Three_Four_partcorr() {
             gr3->GetXaxis()->SetTitle("#Delta #eta");
             gr3->GetYaxis()->SetTitle("<<4>>_{2,2|-2,-2}");
             gr3->GetYaxis()->SetTitleOffset(1.4);
-            gr3->Draw("ACP");
+            //gr3->Draw("ACP");
             //gr3->Draw("AC*");
+            //gr3->Draw("ap");
 
-            TGraph* gr4 = new TGraph(n, EtaGap, y4);
+            TGraphErrors* gr4 = new TGraphErrors(n, EtaGap, y4, 0, error4);
             gr4->SetLineColor(2);
             gr4->SetLineWidth(4);
             gr4->SetMarkerColor(4);
@@ -214,8 +226,9 @@ void Delta_eta_dependent_Three_Four_partcorr() {
             gr4->GetXaxis()->SetTitle("#Delta #eta");
             gr4->GetYaxis()->SetTitle("<<4>>_{2,2|-2,-2}");
             gr4->GetYaxis()->SetTitleOffset(1.4);
-            gr4->Draw("ACP");
+            //gr4->Draw("ACP");
             //gr4->Draw("AC*");
+            //gr4->Draw("ap");
    
         }
         if(!fileOutput) return;
@@ -225,11 +238,6 @@ void Delta_eta_dependent_Three_Four_partcorr() {
         gr3->Write(Form("<<4>>_{2,2|-2,-2} 4-Particle correlations, Bin%0d", i));
         gr4->Write(Form("<<4>>_{2,3|-2,-3} 4-Particle correlations, Bin%0d", i));
         
-        // if(!fileOutput2) return;
-        // fileOutput2->cd();
-        // gr1->Write(Form("EtaDependent_V5_2particle_plots_Bin%0d", i));
-        // gr2->Write(Form("EtaDependent_V5_NL532_plots_Bin%0d", i));
-        // gr3->Write(Form("EtaDependent_V5_Linear_plots_Bin%0d", i));
         //c->SaveAs("/Users/Helena/Desktop/Plots/Delta_eta_plots/test.png");
         cout << "i finished: " << i <<endl;
         //return;
