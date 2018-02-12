@@ -23,19 +23,28 @@ void Fit_Delta_eta_3part_4part() {
     //..Open the file.root:
     TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Eta_Dependent/New_Delta_eta_dependent_3Part_4Part/ErrorBar_Delta_eta_dependent_3part_4part_correlation.root","READ");
 
-    //hC42_eta_Dependent_Bin3->Draw();
-    TF1 *f = new TF1("f", "[0] + [1] * x + [2]* x * x");
-    f->SetParameters(0.35, 0.2, 0.4);
-    hC34_eta_Dependent_Bin1->GetXaxis()->SetLimits(0, 2);
-    hC34_eta_Dependent_Bin1->Fit(f);
-    hC34_eta_Dependent_Bin1->Draw("AL");
 
-    //..It works only for data points:
+    //..Plot 1/x :
+    TF1 *f1 = new TF1("f1", "[0]*1/(sin(x)*[1])", 0, 0.8);
+    f1->SetParameter(0, 0.00001);
+    f1->SetParameter(1, 7);
+    f1->Draw();
+
+
+    // TF1 *f = new TF1("f", "[0] + [1] * x + 1/sin(x)");
+    // f->SetParameters(0.35, 0.3, 0.1);
+    // hC34_eta_Dependent_Bin1->GetXaxis()->SetLimits(0, 2);
+    // hC34_eta_Dependent_Bin1->Fit(f);
+    // hC34_eta_Dependent_Bin1->Draw("AL");
+
+    // hC34_eta_Dependent_Bin1->Draw("same");
+
+    // //..It works only for data points:
     // hC34_eta_Dependent_Bin1->Fit("pol3");
     // hC34_eta_Dependent_Bin1->Draw("AL");
     // hC34_eta_Dependent_Bin1->GetXaxis()->SetLimits(0, 2);
     // hC34_eta_Dependent_Bin1->Draw("AL");
-    //**********************************************************
+    // //**********************************************************
 
 
 }
