@@ -48,10 +48,10 @@ double RhoV532_Sample;
 
 double Final_Error;
 int N = 10;
-double BinValue_Sapmle24;
+double BinValue_Sample24;
 double BinValue_Total24;
-double BinValue_Sapmle34;
-double BinValue_Sapmle42;
+double BinValue_Sample34;
+double BinValue_Sample42;
 double BinValue_Total34;
 double BinValue_Total42;
 double BinValue_Total25;
@@ -297,15 +297,17 @@ double BinValue_Sample35;
             BinValue_4Particle_Correlation = Cn42->GetBinContent(i);
 
             //..Test for Multiplicity:
-            BinValue_Total24 = Cn24->GetBinEntries(i);
-            BinValue_Total34 = Cn34->GetBinEntries(i);
-            BinValue_Total42 = Cn42->GetBinEntries(i);
+            BinValue_Total24 = Cn24->GetBinEffectiveEntries(i);
+            BinValue_Total34 = Cn34->GetBinEffectiveEntries(i);
+            BinValue_Total42 = Cn42->GetBinEffectiveEntries(i);
 
-            BinValue_Sapmle24 = prof24->GetBinEntries(i);
-            BinValue_Sapmle34 = prof34->GetBinEntries(i);
-            BinValue_Sapmle42 = prof42->GetBinEntries(i);
+            BinValue_Sample24 = prof24->GetBinEffectiveEntries(i);
+            BinValue_Sample34 = prof34->GetBinEffectiveEntries(i);
+            BinValue_Sample42 = prof42->GetBinEffectiveEntries(i);
 
-
+            if(BinValue_Total24 > 1000 && BinValue_Total34 > 1000 && BinValue_Total42 > 1000 && BinValue_Sample24 > 100 && BinValue_Sample34 > 100 && BinValue_Sample42 > 100 ) {
+                cout << "Its good for Multiplicity: " << endl;
+            
             if(Sample_BinValue_2Particle_Correlation > 0 && Sample_BinValue_4Particle_Correlation > 0 && BinValue_4Particle_Correlation > 0 && BinValue_2Particle_Correlation > 0 ) {
                 
                 Sample_Valuesqrt_2particle_correlation = sqrt(Sample_BinValue_2Particle_Correlation);
@@ -315,6 +317,8 @@ double BinValue_Sample35;
                 Valuesqrt_4Particle_Correlation = sqrt(BinValue_4Particle_Correlation);
             }
             else continue;
+            cout << "The if statement for Bincontent is passed" << endl;
+            
             if(Valuesqrt_4Particle_Correlation > 0 && Sample_Valuesqrt_4particle_correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 && BinValue_3Particle_Correlation > 0 ){
                 
                 V422 = BinValue_3Particle_Correlation / (Valuesqrt_4Particle_Correlation);
@@ -325,9 +329,14 @@ double BinValue_Sample35;
                 error += pow(RhoV422_Sample - RhoV422, 2);
             }
             else continue;
+            cout << "The Third if statement is also passed" << endl;
+            }
+            else continue;
+            cout << "The Multiplicity check is finished here" << i << endl;
+
         }
         Final_Error = sqrt(error/ (N * N) );  
-        if( BinValue_Total24 > 1000 && BinValue_Total34 > 1000 && BinValue_Total42 > 1000 && BinValue_Sapmle24 >100 && BinValue_Sapmle34 >100 && BinValue_Sapmle42 >100) {
+        if( BinValue_Total24 > 1000 && BinValue_Total34 > 1000 && BinValue_Total42 > 1000 && BinValue_Sample24 >100 && BinValue_Sample34 >100 && BinValue_Sample42 >100) {
             hRho_V422->SetBinContent(i, RhoV422); 
             hRho_V422->SetBinError(i, Final_Error);    
         }
@@ -449,15 +458,19 @@ double BinValue_Sample35;
             BinValue_23Particle_Correlation = Cn23->GetBinContent(i);
             
             //..Test for Multiplicity:
-            BinValue_Total25 = Cn25->GetBinEntries(i);
-            BinValue_Total35 = Cn35->GetBinEntries(i);
-            BinValue_Total22 = Cn22->GetBinEntries(i);
-            BinValue_Total23 = Cn23->GetBinEntries(i);
+            BinValue_Total25 = Cn25->GetBinEffectiveEntries(i);
+            BinValue_Total35 = Cn35->GetBinEffectiveEntries(i);
+            BinValue_Total22 = Cn22->GetBinEffectiveEntries(i);
+            BinValue_Total23 = Cn23->GetBinEffectiveEntries(i);
             
-            BinValue_Sample25 = prof25->GetBinEntries(i);
-            BinValue_Sample35 = prof35->GetBinEntries(i);
-            BinValue_Sample22 = prof22->GetBinEntries(i);
-            BinValue_Sample23 = prof23->GetBinEntries(i);
+            BinValue_Sample25 = prof25->GetBinEffectiveEntries(i);
+            BinValue_Sample35 = prof35->GetBinEffectiveEntries(i);
+            BinValue_Sample22 = prof22->GetBinEffectiveEntries(i);
+            BinValue_Sample23 = prof23->GetBinEffectiveEntries(i);
+
+            if(BinValue_Total25 > 1000 && BinValue_Total35 > 1000 && BinValue_Total22 > 1000 && BinValue_Total23 > 1000 && BinValue_Sample25 > 100 && BinValue_Sample35 > 100 && BinValue_Sample22 > 100 && BinValue_Sample23 > 100 ) {
+            
+                cout << "Its good for Multiplicity of Rho532: " << endl;
 
             if(Sample_BinValue_22Particle_Correlation > 0 && Sample_BinValue_23Particle_Correlation > 0 && BinValue_23Particle_Correlation > 0 && BinValue_22Particle_Correlation > 0 && BinValue_25Particle_Correlation > 0 && Sample_BinValue_25Particle_Correlation > 0 ) {
 
@@ -468,7 +481,10 @@ double BinValue_Sample35;
                 Valuesqrt_22Particle_Correlation = sqrt(BinValue_22Particle_Correlation);
                 Valuesqrt_23Particle_Correlation = sqrt(BinValue_23Particle_Correlation);
                 Valuesqrt_25Particle_Correlation = sqrt(BinValue_25Particle_Correlation);
-            }   
+            }
+            else continue; 
+                cout << "The if statement for Bincontent > 0 is passed" << endl; 
+
             if(Valuesqrt_23Particle_Correlation > 0 && Valuesqrt_22Particle_Correlation > 0 && Sample_Value_sqrt_22particle_correlation > 0 && Sample_Value_sqrt_23particle_correlation > 0  && Sample_BinValue_35Particle_Correlation > 0 && BinValue_35Particle_Correlation > 0 ){
                 
                 V532 = BinValue_35Particle_Correlation / (Valuesqrt_23Particle_Correlation * Valuesqrt_22Particle_Correlation );
@@ -479,12 +495,15 @@ double BinValue_Sample35;
                 error += pow(RhoV532_Sample - RhoV532, 2);
             }
             else continue;
+            cout << "The Third if statement for Value_sqrt > 0 is also passed" << endl;
+            }
+            cout << "The Multiplicity check is finished here: " << i << endl;
+
         }         
         Final_Error = sqrt(error/ (N * N) );  
         if( BinValue_Total25 > 1000 && BinValue_Total35 > 1000 && BinValue_Total22 > 1000 && BinValue_Total23 > 1000 && BinValue_Sample25 >100 && BinValue_Sample35 >100 && BinValue_Sample22 >100 && BinValue_Sample23 > 100) {
             hRho_V532->SetBinContent(i, RhoV532); 
             hRho_V532->SetBinError(i, Final_Error);
-  
         }
         else continue;            
     }
@@ -506,8 +525,8 @@ double BinValue_Sample35;
     // hRho_V422->SetAxisRange(0., 110);
     // hRho_V422->SetMarkerSize(1.);
     // hRho_V422->SetXTitle("# of tracks");
-    hRho_V422->Draw("same");
-    c->BuildLegend();
+    // hRho_V422->Draw("same");
+    // c->BuildLegend();
 
     // hRho_V532->SetMarkerStyle(20);
     // hRho_V532->SetMarkerColorAlpha(kRed, 4.5);
@@ -528,13 +547,13 @@ double BinValue_Sample35;
     // return;
 
     //..Gap= 0.0
-    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/AllGaps_NewConditions_Rho_v422_v532/Gap00_NewCondition_Rho_v422_Rho_v532.root","RECREATE");
-    if(!fileOutput) return;
-    fileOutput->cd();
-    hRho_V422->Write();
-    hRho_V532->Write();
-    fileOutput->Close();
-    return;
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/AllGaps_NewConditions_Rho_v422_v532/Gap00_NewCondition_Rho_v422_Rho_v532.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hRho_V422->Write();
+    // hRho_V532->Write();
+    // fileOutput->Close();
+    // return;
 
     //..Gap= 0.1
     // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/AllGaps_NewConditions_Rho_v422_v532/Gap01_NewCondition_Rho_v422_Rho_v532.root","RECREATE");

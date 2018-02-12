@@ -50,7 +50,7 @@ void All_Gaps_Linear_5th_harmonic() {
     int N = 10.;
     double Sample_Linear; 
     double BinValue_Total25;
-    double BinValue_Sapmle25;
+    double BinValue_Sample25;
     double BinValue_Total_35;
     double BinValue_Total_22; 
     double BinValue_Total_23; 
@@ -60,8 +60,8 @@ void All_Gaps_Linear_5th_harmonic() {
     double BinValue_Total_22;
     double BinValue_Total_23;
     double BinValue_Sample_25;
-    double BinValue_Sapmle_35;
-    double BinValue_Sapmle_22;
+    double BinValue_Sample_35;
+    double BinValue_Sample_22;
     double BinValue_Sample_23;
 
     //values for Linear error sampling:
@@ -255,8 +255,10 @@ void All_Gaps_Linear_5th_harmonic() {
             BinValue25_Sample = fprof25->GetBinContent(i);
 
             //..Test for Multiplicity
-            BinValue_Total25 = Cn25->GetBinEntries(i);
-            BinValue_Sapmle25 = fprof25->GetBinEntries(i);
+            BinValue_Total25 = Cn25->GetBinEffectiveEntries(i);
+            BinValue_Sample25 = fprof25->GetBinEffectiveEntries(i);
+
+            if(BinValue_Total25 > 1000 && BinValue_Sample25 > 100 ) {
 
             if(BinValue25_Sample > 0 && BinValue25 > 0 ) {
                 Valuesqrt_22Particle_Correlation = sqrt(BinValue25);
@@ -264,13 +266,17 @@ void All_Gaps_Linear_5th_harmonic() {
             }
             else continue;
             error += pow(Valuesqrt_2Particle_Sample - Valuesqrt_22Particle_Correlation, 2);
+            cout << "If statement for Bincontent passed " << endl; 
             // cout << "BinValue24_Sample: " << BinValue24_Sample << endl;
             // cout << "BinValue24: " << BinValue24 << endl;
             // cout << "error: " << error << endl;
+            }
+            else continue;
+            cout << "Multiplicity check finished " << i << endl;
         }
         final_error = sqrt(error/ (N * N) );
         //cout << "final error: " << final_error << endl;
-        if( BinValue_Total25 > 1000 && BinValue_Sapmle25  > 100) {
+        if( BinValue_Total25 > 1000 && BinValue_Sample25  > 100) {
             hC22->SetBinContent(i, Valuesqrt_22Particle_Correlation);
             hC22->SetBinError(i, final_error);
         }
@@ -376,13 +382,15 @@ void All_Gaps_Linear_5th_harmonic() {
 
 
             //..Check for Multiplicity, in the way in the sampling plot has to be at least N_ch>100 and in the total N_ch>1000 in each bins. 
-            BinValue_Total_35 = Cn35->GetBinEntries(j);
-            BinValue_Total_22 = Cn22->GetBinEntries(j);
-            BinValue_Total_23 = Cn23->GetBinEntries(j);
+            BinValue_Total_35 = Cn35->GetBinEffectiveEntries(j);
+            BinValue_Total_22 = Cn22->GetBinEffectiveEntries(j);
+            BinValue_Total_23 = Cn23->GetBinEffectiveEntries(j);
 
-            BinValue_Sapmle_35 = prof35->GetBinEntries(j);
-            BinValue_Sapmle_22 = prof22->GetBinEntries(j);
-            BinValue_Sample_23 = prof23->GetBinEntries(j);
+            BinValue_Sample_35 = prof35->GetBinEffectiveEntries(j);
+            BinValue_Sample_22 = prof22->GetBinEffectiveEntries(j);
+            BinValue_Sample_23 = prof23->GetBinEffectiveEntries(j);
+
+            if(BinValue_Total_35 > 1000 && BinValue_Total_22 > 1000 && BinValue_Total_23 > 1000 && BinValue_Sample_35 > 100 && BinValue_Sample_22 > 100 && BinValue_Sample_23 > 100 ) {
 
             if (Sample_BinValue_22Particle_Correlation > 0  && BinValue_22Particle_Correlation > 0  &&  Sample_BinValue_23Particle_Correlation > 0 && BinValue_23Particle_Correlation > 0 &&  BinValue_3Particle_Correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 ) {
             
@@ -399,6 +407,7 @@ void All_Gaps_Linear_5th_harmonic() {
 
             }
             else continue; 
+            cout << "The second If statement is passed " << endl;
             // cout << "prof34: " << bar << endl;
             // cout << "prof42: " << foo << endl;
             // cout << "Sample_BinValue_3Particle_Correlation: " << Sample_BinValue_3Particle_Correlation << endl;
@@ -410,18 +419,21 @@ void All_Gaps_Linear_5th_harmonic() {
             // cout << "V422:   "   << V422 << endl;
             // cout << "V422_Sample: " << V422_Sample << endl;
             // cout << "error: " << error << endl;
+            }
+            else continue; 
+            cout << "Multiplicity check passed" << j << endl;
         }
         sigma_z1 = sqrt(error/ (N * N) );
         //cout << "sigma: " << sigma_z1 << endl;
-        if( BinValue_Total_35 > 1000 && BinValue_Total_22 > 1000 && BinValue_Total_23 > 1000 && BinValue_Sapmle_35 >100 && BinValue_Sapmle_22 >100 && BinValue_Sample_23 > 100 ) {
+        if( BinValue_Total_35 > 1000 && BinValue_Total_22 > 1000 && BinValue_Total_23 > 1000 && BinValue_Sample_35 >100 && BinValue_Sample_22 >100 && BinValue_Sample_23 > 100 ) {
             hCV532->SetBinContent(j, V532);
             hCV532->SetBinError(j, sigma_z1);
         }
         else continue;
         cout << "BinValue_Total_35: " << BinValue_Total_35 << endl;
         cout << "BinValue_Total_22: " << BinValue_Total_22 << endl;
-        cout << "BinValue_Sapmle_35: " << BinValue_Sapmle_35 << endl;
-        cout << "BinValue_Sapmle_22: " << BinValue_Sapmle_22 << endl;
+        cout << "BinValue_Sample_35: " << BinValue_Sample_35 << endl;
+        cout << "BinValue_Sample_22: " << BinValue_Sample_22 << endl;
     }
     //     //***************************************************************************************************************
     //     //..Linear Response calculation:
@@ -550,15 +562,17 @@ void All_Gaps_Linear_5th_harmonic() {
             BinValue_23Particle_Correlation = Cn23->GetBinContent(j);
 
             //..Check the multiplicity in each bins:
-            BinValue_Total_25 = Cn25->GetBinEntries(j);
-            BinValue_Total_35 = Cn35->GetBinEntries(j);
-            BinValue_Total_22 = Cn22->GetBinEntries(j);
-            BinValue_Total_23 = Cn23->GetBinEntries(j);
+            BinValue_Total_25 = Cn25->GetBinEffectiveEntries(j);
+            BinValue_Total_35 = Cn35->GetBinEffectiveEntries(j);
+            BinValue_Total_22 = Cn22->GetBinEffectiveEntries(j);
+            BinValue_Total_23 = Cn23->GetBinEffectiveEntries(j);
 
-            BinValue_Sample_25 = prof25->GetBinEntries(j);
-            BinValue_Sapmle_35 = prof35->GetBinEntries(j);
-            BinValue_Sapmle_22 = prof22->GetBinEntries(j);
-            BinValue_Sample_23 = prof23->GetBinEntries(j);
+            BinValue_Sample_25 = prof25->GetBinEffectiveEntries(j);
+            BinValue_Sample_35 = prof35->GetBinEffectiveEntries(j);
+            BinValue_Sample_22 = prof22->GetBinEffectiveEntries(j);
+            BinValue_Sample_23 = prof23->GetBinEffectiveEntries(j);
+
+            if( BinValue_Total_25 > 1000 && BinValue_Total_35 > 1000 && BinValue_Total_22 > 1000 && BinValue_Total_23 > 1000 && BinValue_Sample_25 >100 && BinValue_Sample_35 >100 && BinValue_Sample_22 >100 && BinValue_Sample_23 > 100 ) {
             
             if(Sample_BinValue_22Particle_Correlation > 0 && Sample_BinValue_23Particle_Correlation > 0 && BinValue_23Particle_Correlation > 0 && BinValue_22Particle_Correlation > 0 && BinValue_25Particle_Correlation > 0 && Sample_BinValue_25Particle_Correlation > 0 ) {
 
@@ -569,7 +583,10 @@ void All_Gaps_Linear_5th_harmonic() {
                 Valuesqrt_22Particle_Correlation = sqrt(BinValue_22Particle_Correlation);
                 Valuesqrt_23Particle_Correlation = sqrt(BinValue_23Particle_Correlation);
                 Valuesqrt_25Particle_Correlation = sqrt(BinValue_25Particle_Correlation);
-            }   
+            }
+            else continue;
+            cout << "Second if statement for Bincontent passed" << endl; 
+
             if(Valuesqrt_23Particle_Correlation > 0 && Valuesqrt_22Particle_Correlation > 0 && Sample_Value_sqrt_22particle_correlation > 0 && Sample_Value_sqrt_23particle_correlation > 0  && Sample_BinValue_35Particle_Correlation > 0 && BinValue_35Particle_Correlation > 0 ){
                 
                 V532 = BinValue_35Particle_Correlation / (Valuesqrt_23Particle_Correlation * Valuesqrt_22Particle_Correlation );
@@ -579,16 +596,22 @@ void All_Gaps_Linear_5th_harmonic() {
                 Linear = pow(Valuesqrt_25Particle_Correlation, 2) - pow(V532, 2);   
                 Sample_Linear = pow(Sample_Value_sqrt_25particle_correlation, 2) - pow(V532_Sample, 2); 
             }
+            else continue; 
+            cout << "Third if statement passed" << endl;
+
             if(Sample_Linear > 0 && Linear > 0 ) {
                 Linear_value_sample = sqrt(Sample_Linear);
                 Linear_value = sqrt(Linear);
                 error += pow(Linear_value_sample - Linear_value, 2);
             }
             else continue; 
-        
+            cout << "Fourth if statement passed" << endl;
+            }
+            else continue;
+            cout << "Multiplicity check passed" << endl;
         }
         Linear_Error = sqrt(error/ (N * N) );
-        if( BinValue_Total_25 > 1000 && BinValue_Total_35 > 1000 && BinValue_Total_22 > 1000 && BinValue_Total_23 > 1000 && BinValue_Sample_25 >100 && BinValue_Sapmle_35 >100 && BinValue_Sapmle_22 >100 && BinValue_Sample_23 > 100 ) {
+        if( BinValue_Total_25 > 1000 && BinValue_Total_35 > 1000 && BinValue_Total_22 > 1000 && BinValue_Total_23 > 1000 && BinValue_Sample_25 >100 && BinValue_Sample_35 >100 && BinValue_Sample_22 >100 && BinValue_Sample_23 > 100 ) {
             hCLinear->SetBinContent(j, Linear_value); 
             hCLinear->SetBinError(j, Linear_Error); 
         }
@@ -683,14 +706,14 @@ void All_Gaps_Linear_5th_harmonic() {
     // hCV532->SetMarkerColorAlpha(kBlue, 0.45);
     //hCV532->SetAxisRange(0., 110);
     // hCV532->SetMarkerSize(2.);
-	hCV532->Draw("same");
+	//hCV532->Draw("same");
     
     // hCLinear->SetMarkerStyle(21);
     // hCLinear->SetMarkerColorAlpha(kBlack, 4.5);
     //hCLinear->SetAxisRange(0., 110);
     // hCLinear->SetMarkerSize(1.);
-    hCLinear->Draw("same");
-    c->BuildLegend();
+    //hCLinear->Draw("same");
+    //c->BuildLegend();
     
     // //..Create a root.file:
     //..Uden Gap

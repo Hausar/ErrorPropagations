@@ -308,11 +308,7 @@ void All_Gaps_Chi422_Chi_532() {
                 cout << "Sample: " << sample << endl;
                 cout << "BinValue_Total34: " << BinValue_Total34 << endl;
                 cout <<"BinValue_Sample34: " << BinValue_Sample34 << endl;
-            }
-            else continue; 
 
-
-            
             if (Sample_BinValue_4Particle_Correlation > 0  && BinValue_4Particle_Correlation > 0 && BinValue_3Particle_Correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 ) {
             
                 Valuesqrt_4Particle_Correlation = sqrt(BinValue_4Particle_Correlation);
@@ -329,7 +325,14 @@ void All_Gaps_Chi422_Chi_532() {
                 error += pow(Chi422_Sample - Chi422, 2);
 
             }
-            else continue; 
+            else continue;
+            cout << "The Second If statement for Positive Bin content is passed" << endl; 
+
+            }
+            else continue;
+            cout << "Multiplicity check is finished" << endl;  
+
+            
             // cout << "prof34: " << bar << endl;
             // cout << "prof42: " << foo << endl;
             // cout << "Sample_BinValue_3Particle_Correlation: " << Sample_BinValue_3Particle_Correlation << endl;
@@ -470,12 +473,8 @@ void All_Gaps_Chi422_Chi_532() {
                 cout << "******************************" << endl;
                 cout << "i: " << i << endl;
                 cout << "Sample: " << sample << endl;
-                cout << "BinValue_Total34: " << BinValue_Total35 << endl;
-                cout <<"BinValue_Sample34: " << BinValue_Sample35 << endl;
-            }
-            else continue; 
-
-
+                cout << "BinValue_Total35: " << BinValue_Total35 << endl;
+                cout <<"BinValue_Sample35: " << BinValue_Sample35 << endl;
 
             if (Sample_BinValue_22Particle_Correlation > 0  && BinValue_22Particle_Correlation > 0  &&  Sample_BinValue_23Particle_Correlation > 0 && BinValue_23Particle_Correlation > 0 &&  BinValue_3Particle_Correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 ) {
             
@@ -497,6 +496,13 @@ void All_Gaps_Chi422_Chi_532() {
 
             }
             else continue; 
+            cout << "The Second If statement is passed: " << i << endl; 
+            }
+            else continue; 
+            cout << "Multiplicity check is finished: " << i << endl; 
+            cout << "***********************************************************" << endl; 
+
+
             // cout << "prof34: " << bar << endl;
             // cout << "prof42: " << foo << endl;
             // cout << "Sample_BinValue_3Particle_Correlation: " << Sample_BinValue_3Particle_Correlation << endl;
@@ -587,11 +593,11 @@ void All_Gaps_Chi422_Chi_532() {
     // hChi422->GetYaxis()->SetRangeUser(0., 3.);
     // hChi422->GetXaxis()->SetRangeUser(0., 140);
     // hChi422->SetMarkerSize(1.);
-    //hChi422->Draw("same");
-    //c->BuildLegend();
-    
-    hChi532->Draw("same");
+    hChi422->Draw("same");
     c->BuildLegend();
+    
+    // hChi532->Draw("same");
+    // c->BuildLegend();
 
 
     //..Create a root.file:
