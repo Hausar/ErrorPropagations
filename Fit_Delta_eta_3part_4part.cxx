@@ -25,25 +25,37 @@ void Fit_Delta_eta_3part_4part() {
 
 
     //..Plot 1/x :
-    TF1 *f1 = new TF1("f1", "[0]* 1/(x-[1]) + [2]", 0, 0.8);
-    f1->SetParameter(0, 1);  // par a control the y-axis is ok now!
-    f1->SetParameter(1, 0);  // par x0 control the position to left and right
-    f1->SetParameter(1, 0);   //par b, change position up and down "lodret"
+    TF1 *f1 = new TF1("f1", "[0]* 1/(x-[1]) + [2]", 0, 3);
+    f1->SetParameter(0, 0.0005);  // par a control the y-axis is ok now!
+    f1->SetParameter(1, -0.83);  // par x0 control the position to left and right
+    f1->SetParameter(2, -0.0002);   //par b, change position up and down "lodret"
     f1->SetLineColor(kRed); 
     f1->SetLineStyle(2);
-    f1->SetMinimum(0.);
-    f1->SetMaximum(0.01);
+    //f1->SetMinimum(0.);
+    //f1->SetMaximum(0.0004);
     // f1->GetYaxis()->SetRangeUser(0, 0.04);
-    f1->Draw();
 
     // TF1 *f = new TF1("f", "[0] + [1] * x + 1/sin(x)");
     // f->SetParameters(0.35, 0.3, 0.1);
     // hC34_eta_Dependent_Bin1->GetXaxis()->SetLimits(0, 2);
-    // hC34_eta_Dependent_Bin1->Fit("f");
+    //hC34_eta_Dependent_Bin1->Fit("f1");
+    //f1->Draw();
     // hC34_eta_Dependent_Bin1->Draw("AL");
 
-    hC34_eta_Dependent_Bin1->Draw("same");
-    //hC34_eta_Dependent_Bin1->GetYaxis()->SetRangeUser(0, 0.04);
+    //hC34_eta_Dependent_Bin1->GetYaxis()->SetRangeUser(0, 0.0001);
+    //hC34_eta_Dependent_Bin1->Draw("same");
+
+
+    //..exponential fit:
+    TF1 *f2 = new TF1("f2", "[0]* exp(-x-[1]) + [2]", 0, 3);
+    f2->SetParameter(0, 0.0024);  // par a control the y-axis is ok now!
+    f2->SetParameter(1, 1.6);  // par x0 control the position to left and right
+    f2->SetParameter(2, -0.14);   //par b, change position up and down "lodret"
+    f2->SetLineColor(kRed); 
+    f2->SetLineStyle(2);
+    //f1->SetMinimum(0.);
+    //f1->SetMaximum(0.0004);
+    // f1->GetYaxis()->SetRangeUser(0, 0.04);
 
     // //..It works only for data points:
     // hC34_eta_Dependent_Bin1->Fit("pol3");
