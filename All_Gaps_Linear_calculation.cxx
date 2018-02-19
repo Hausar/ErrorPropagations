@@ -65,27 +65,27 @@ void All_Gaps_Linear_calculation() {
     c->SetFillColor(10);
     c->cd();
     
-    TH1D *hC22 = new TH1D("hC22", " V4{2},  #sqrt{< v_{4}^{2} >}, 2-Particle correlation", 200, 0, 200); //this is just define a histogram which will fill the data.
+    TH1D *hC22 = new TH1D("hC22", " V4{2},  #sqrt{< v_{4}^{2} >}, 2-Particle correlation", 100, 0, 100); //this is just define a histogram which will fill the data.
     hC22->Sumw2();
     
-    TH1D *hC42 = new TH1D("hC42", " #sqrt{< v_{2}^{4} >} 4-Particle correlation", 200, 0, 200); //this is just define a histogram 
+    TH1D *hC42 = new TH1D("hC42", " #sqrt{< v_{2}^{4} >} 4-Particle correlation", 100, 0, 100); //this is just define a histogram 
 	hC42->Sumw2();
 
-    TH1D *hCV422 = new TH1D("hCV422", "The Non-Linear Response, v_{4,22} = #frac {<<3>>} {#sqrt{< v_{2}^{4} >}}", 200, 0, 200); //this is just define a histogram which will fill the data of V422.
+    TH1D *hCV422 = new TH1D("hCV422", "The Non-Linear Response, v_{4,22} = #frac {<<3>>} {#sqrt{< v_{2}^{4} >}}", 100, 0, 100); //this is just define a histogram which will fill the data of V422.
     hCV422->Sumw2();
  
-    TH1D *hCLinear = new TH1D("hCLinear", " The Linear Response V4^{L} ", 200, 0, 200); //this is just define a histogram which will fill the data.
+    TH1D *hCLinear = new TH1D("hCLinear", " The Linear Response V4^{L} ", 100, 0, 100); //this is just define a histogram which will fill the data.
     hCLinear->Sumw2();
 
     //Open the root.file:
-    TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/LHC16q_CENT_SDD_0Gap_2_08Gap_FullGaps.root", "READ");
-    TDirectory *dir = (TDirectoryFile*)file->Get("MyTaskResults");
-    TList *list = (TList*)dir->Get("Flow_Refs_MyTaskResults");
+    // TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/LHC16q_CENT_SDD_0Gap_2_08Gap_FullGaps.root", "READ");
+    // TDirectory *dir = (TDirectoryFile*)file->Get("MyTaskResults");
+    // TList *list = (TList*)dir->Get("Flow_Refs_MyTaskResults");
     
-    TFile *file2 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Cut_Data_3_4_particle/Gap00_Cut_Tprofile_3_4_particle.root", "READ");
+    TFile *file2 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Cut_Data_2_particle/Gap00_Cut_Tprofile_2_3_4_particle.root", "READ");
 
-    TProfile *CTprof34 = (TProfile*)file2->Get("fTprofC34Gap00Ntrks1bin");
-    CTprof34->Draw();
+    // TProfile *CTprof34 = (TProfile*)file2->Get("fTprofC34Gap00Ntrks1bin");
+    // CTprof34->Draw();
 
 
     //..Uden Gap
@@ -125,7 +125,7 @@ void All_Gaps_Linear_calculation() {
 
     //..Gap= 0.6
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap06Ntrks1bin");
-    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap06Ntrks1bin");  
+    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap06Ntrks1bin");
     // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap06Ntrks1bin"); 
 
     //..Gap= 0.7
@@ -143,48 +143,54 @@ void All_Gaps_Linear_calculation() {
     TH1D *h2 = Cn42->ProjectionX("h2");
     TH1D *h3 = Cn34->ProjectionX("h3");
 
-
+    int EtaGap[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
     //****************************************************
     //// Loop to get sqrt of each bin in Tprofile of//////
     ////   Cn{4} = <<4>> = <vn^4> = <<4>> - 2 <<2>>^2 ////
     /////     v2{4} = sqrt(<<4>>_{2,2|-2,-2})        /////
     //*****************************************************
     for(int i=1; i<201; i++)
-    {
-        double error = 0.0;
-        for(int sample=1; sample<11; sample++)
+    {   
+        for(int j=0; j<9; j++) 
         {
-            TString foo(TString::Format("fTprof42_number%0dNtrks1bin", sample));	
-            TProfile *fprof42 = (TProfile*)list->FindObject(foo);
-            TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");
-    
-            BinValue42_Sample = fprof42->GetBinContent(i);
-            BinValue42 = Cn42->GetBinContent(i); 
-
-            BinValue_Total42 = Cn42->GetBinEffectiveEntries(i);
-            BinValue_Sample42 = fprof42->GetBinEffectiveEntries(i);
-    
-            if(BinValue_Total42 > 1000 && BinValue_Sample42 > 100 ) {
-
-            if(BinValue42 > 0 && BinValue42_Sample > 0 ) {
-                Valuesqrt_4Particle_Correlation = sqrt(BinValue42);
-                Valuesqrt_4Particle_Sample = sqrt(BinValue42_Sample);
-            }
-            else continue;
-            cout << "The second If statement is passed " << endl;
-            error += pow(Valuesqrt_4Particle_Sample - Valuesqrt_4Particle_Correlation, 2);
-            }
-            else continue; 
-            cout << "Multiplicity check passed" << endl;
-            // cout << "fsample: " << foo << endl;
-            // cout << "BinVlue42: " << BinValue42 << endl;
-            // cout << "BinVlue42_Sample: " << BinValue42_Sample << endl;
-            // cout << " Valuesqrt 4Particle: " << Valuesqrt_4Particle_Correlation << endl;
-            // cout << "error: " << error << endl; 
+        double error = 0.0;
+            for(int sample=1; sample<11; sample++)
+            {
+                TString foo(TString::Format("fTprof42_number%0dNtrks1bin", sample));	
+                TProfile *fprof42 = (TProfile*)list->FindObject(foo);
+                //TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");
+                //new way:
+                TString bar(TString::Format("fTprofC42Gap0%0dNtrks1bin", EtaGap[j]));
+                TProfile *CTprof42 = (TProfile*)file2->Get(bar);
         
-        }
+                BinValue42_Sample = fprof42->GetBinContent(i);
+                BinValue42 = Cn42->GetBinContent(i); 
+
+                BinValue_Total42 = Cn42->GetBinEffectiveEntries(i);
+                BinValue_Sample42 = fprof42->GetBinEffectiveEntries(i);
+        
+                if(BinValue_Total42 > 1000 && BinValue_Sample42 > 100 ) {
+
+                if(BinValue42 > 0 && BinValue42_Sample > 0 ) {
+                    Valuesqrt_4Particle_Correlation = sqrt(BinValue42);
+                    Valuesqrt_4Particle_Sample = sqrt(BinValue42_Sample);
+                }
+                else continue;
+                cout << "The second If statement is passed " << endl;
+                error += pow(Valuesqrt_4Particle_Sample - Valuesqrt_4Particle_Correlation, 2);
+                }
+                else continue; 
+                cout << "Multiplicity check passed" << endl;
+                // cout << "fsample: " << foo << endl;
+                // cout << "BinVlue42: " << BinValue42 << endl;
+                // cout << "BinVlue42_Sample: " << BinValue42_Sample << endl;
+                // cout << " Valuesqrt 4Particle: " << Valuesqrt_4Particle_Correlation << endl;
+                // cout << "error: " << error << endl; 
+            
+            }
         final_error = sqrt(error / (N * N) );
         //cout << "final_error: " << final_error << endl;
+        }
         if(BinValue_Total42 > 1000 && BinValue_Sample42 > 100 ) {
             hC42->SetBinContent(i, Valuesqrt_4Particle_Correlation);
             hC42->SetBinError(i, final_error);
