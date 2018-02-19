@@ -82,6 +82,12 @@ void All_Gaps_Linear_calculation() {
     TDirectory *dir = (TDirectoryFile*)file->Get("MyTaskResults");
     TList *list = (TList*)dir->Get("Flow_Refs_MyTaskResults");
     
+    TFile *file2 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Cut_Data_3_4_particle/Gap00_Cut_Tprofile_3_4_particle.root", "READ");
+
+    TProfile *CTprof34 = (TProfile*)file2->Get("fTprofC34Gap00Ntrks1bin");
+    CTprof34->Draw();
+
+
     //..Uden Gap
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Ntrks1bin");
     // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");  
@@ -596,7 +602,7 @@ void All_Gaps_Linear_calculation() {
 
     // // hC42->SetMarkerStyle(21);
     // // hC42->SetMarkerColorAlpha(kBlack, 10.0);
-	hC42->Draw("same");
+	//hC42->Draw("same");
     
     //..V4{2}
     // hC22->SetMarkerStyle(20);
