@@ -232,7 +232,7 @@ void Plot_Macro()
     hRho_V532_Rebin_Gap00->GetXaxis()->SetRangeUser(0., 105);
     hRho_V532_Rebin_Gap00->SetMarkerSize(1.);
     hRho_V532_Rebin_Gap00->Draw("same");
-    hRho_V532_Rebin_Gap00->SetTitle("Symmetry plane correlations #rho_{5,32} for pPb at 5.02 TeV");
+    hRho_V532_Rebin_Gap00->SetTitle("");
     hRho_V532_Rebin_Gap00->SetMarkerStyle(20); 
     hRho_V532_Rebin_Gap00->SetMarkerColor(kRed+1);
     hRho_V532_Rebin_Gap00->GetYaxis()->SetTitleOffset(1.4);
@@ -250,15 +250,19 @@ void Plot_Macro()
     TLatex latex;
     latex.SetTextSize(0.035);
     latex.SetTextAlign(13);  //align at top
-    latex.DrawLatex(10,1.5,"#sqrt{s_{NN}} = 5.02 TeV");
+    latex.DrawLatex(-10,1.,"ALICE");
+    
+    latex.SetTextAlign(13);  //align at top
+    latex.DrawLatex(-10,0.9,"pPb #sqrt{s_{NN}} = 5.02 TeV");
 
     latex.SetTextAlign(13);  //centered
-    latex.DrawLatex(10,1.3,"|#Delta #eta| < 0.0");
+    latex.DrawLatex(-10,0.8,"|#Delta #eta| < 0.0");
 
     latex.SetTextAlign(13);  //centered
-    latex.DrawLatex(10,1.1," 0.2 < p_{T} < 3.0");
+    latex.DrawLatex(-10,0.7," 0.2 < p_{T} < 3.0");
 
-    TLegend *leg = new TLegend(0.4, 0.5, 0.55, 0.55); 
+    // the coordinate is the percentile from 0 to 100% : x1, y1, x2, y2
+    TLegend *leg = new TLegend(0.78, 0.65, 0.89, 0.69); 
     leg->AddEntry(hRho_V532_Rebin_Gap00, "#rho_{5,32}", "fp");
     leg->Draw("same");
 
