@@ -70,13 +70,13 @@ double BinValue_Sample35;
     c->SetFillColor(10);
     c->cd();
 
-    TH1D *hRho_V422 = new TH1D("hRho_V422", "#rho_{4,22} = < cos (4 #Psi_{4} - 4 #Psi_{2}) > ", 100, 5, 105); //this is just define a histogram which will fill the data.
+    TH1D *hRho_V422 = new TH1D("hRho_V422", "#rho_{4,22} = < cos (4 #Psi_{4} - 4 #Psi_{2}) > ", 200, 0, 200); //this is just define a histogram which will fill the data.
     hRho_V422->Sumw2();
 
-    TH1D *hRho_V532 = new TH1D("hRho_V532", "#rho_{5,32} = < cos (5 #Psi_{5} - 3 #Psi_{3} - 2 #Psi_{2}) > ", 100, 5, 105); //this is just define a histogram which will fill the data.
+    TH1D *hRho_V532 = new TH1D("hRho_V532", "#rho_{5,32} = < cos (5 #Psi_{5} - 3 #Psi_{3} - 2 #Psi_{2}) > ", 200, 0, 200); //this is just define a histogram which will fill the data.
     hRho_V532->Sumw2();
     
-    TH1D *hC42 = new TH1D("hC42", " #sqrt{< v_{2}^{4} >}", 100, 5, 105); //this is just define a histogram 
+    TH1D *hC42 = new TH1D("hC42", " #sqrt{< v_{2}^{4} >}", 200, 0, 200); //this is just define a histogram 
 	hC42->Sumw2();
     //..hCV422 is Non-Linear response and hC22 is V4{2} = sqrt(<v4^2>)
     
@@ -87,9 +87,9 @@ double BinValue_Sample35;
     // hC22 = (TH1D*) file->Get("hC22");
 
     //Open the root.file:
-    TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/LHC16q_CENT_SDD_0Gap_2_08Gap_FullGaps.root", "READ");
-    TDirectory *dir = (TDirectoryFile*)file->Get("MyTaskResults");
-    TList *list = (TList*)dir->Get("Flow_Refs_MyTaskResults");
+    TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/pPb_LHC16q_NUA_NUE_Vertexz_new_Version.root", "READ");
+    TDirectory *dir = (TDirectoryFile*)file->Get("default");
+    TList *list = (TList*)dir->Get("Flow_Refs_default");
     
     //..Rho422 New Cut Data:
     //..Gap=0.0
@@ -144,11 +144,11 @@ double BinValue_Sample35;
     // TProfile *Cn42 = (TProfile*)file2->Get("fTprofC42Gap07Ntrks1bin");
     // TProfile *Cn34 = (TProfile*)file2->Get("fTprofC34Gap07Ntrks1bin");
 
-    //..Gap=0.8
-    TFile *file2 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Cut_Data_2_particle/Gap08_Cut_Tprofile_2_3_4_particle.root", "READ");
-    TProfile *Cn24 = (TProfile*)file2->Get("fTprofC24Gap08Ntrks1bin");
-    TProfile *Cn42 = (TProfile*)file2->Get("fTprofC42Gap08Ntrks1bin");
-    TProfile *Cn34 = (TProfile*)file2->Get("fTprofC34Gap08Ntrks1bin");
+    // //..Gap=0.8
+    // TFile *file2 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Cut_Data_2_particle/Gap08_Cut_Tprofile_2_3_4_particle.root", "READ");
+    // TProfile *Cn24 = (TProfile*)file2->Get("fTprofC24Gap08Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)file2->Get("fTprofC42Gap08Ntrks1bin");
+    // TProfile *Cn34 = (TProfile*)file2->Get("fTprofC34Gap08Ntrks1bin");
 //==============================================================================
 //..Chi532 New Cut Data
     
@@ -208,21 +208,21 @@ double BinValue_Sample35;
     // TProfile *Cn23 = (TProfile*)file2->Get("fTprofC23Gap07Ntrks1bin");
     // TProfile *Cn35 = (TProfile*)file2->Get("fTprofC35Gap07Ntrks1bin");
 
-    //..Gap=0.8
-    TFile *file2 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Cut_Data_2_particle/Gap08_Cut_Tprofile_2_3_4_particle.root", "READ");
-    TProfile *Cn25 = (TProfile*)file2->Get("fTprofC25Gap08Ntrks1bin");
-    TProfile *Cn22 = (TProfile*)file2->Get("fTprofC22Gap08Ntrks1bin");
-    TProfile *Cn23 = (TProfile*)file2->Get("fTprofC23Gap08Ntrks1bin");
-    TProfile *Cn35 = (TProfile*)file2->Get("fTprofC35Gap08Ntrks1bin");
+    // //..Gap=0.8
+    // TFile *file2 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Cut_Data_2_particle/Gap08_Cut_Tprofile_2_3_4_particle.root", "READ");
+    // TProfile *Cn25 = (TProfile*)file2->Get("fTprofC25Gap08Ntrks1bin");
+    // TProfile *Cn22 = (TProfile*)file2->Get("fTprofC22Gap08Ntrks1bin");
+    // TProfile *Cn23 = (TProfile*)file2->Get("fTprofC23Gap08Ntrks1bin");
+    // TProfile *Cn35 = (TProfile*)file2->Get("fTprofC35Gap08Ntrks1bin");
     //========================================================================= 
     //=========================================================================
     // OOOOOOOOOLLLLLLLLDDDDDDDDDDDDD
     //**************************************************************************
     //..v4,22
     //..WO Gap
-    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Ntrks1bin");
-    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Ntrks1bin"); 
+    TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Ntrks1bin");
+    TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");  
+    TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Ntrks1bin"); 
     
     //..Gap= 0.0
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap0Ntrks1bin");
@@ -271,10 +271,10 @@ double BinValue_Sample35;
     //**************************************************************************
     //..v5,32
     //..WO Gap
-    // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Ntrks1bin");  //..V5{2}
-    // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Ntrks1bin");  //..v2^{2}
-    // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Ntrks1bin");  //..v3^{2}
-    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Ntrks1bin");  //..<<3>>_{5|-3,-2}
+    TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Ntrks1bin");  //..V5{2}
+    TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Ntrks1bin");  //..v2^{2}
+    TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Ntrks1bin");  //..v3^{2}
+    TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Ntrks1bin");  //..<<3>>_{5|-3,-2}
     
     //..Gap= 0.0
     // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Gap0Ntrks1bin");  //..V5{2}
@@ -331,19 +331,20 @@ double BinValue_Sample35;
     // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap08Ntrks1bin");  //..<<3>>_{5|-3,-2}
     //=========================================================================
     // OOOOOOOOOLLLLLLLLDDDDDDDDDDDDD
+    // Rho422 
     //**************************************************************************
     //**************************************************************************
     //..Loop over bins to calculate rho:
-    for(int i=1; i<201; i++) {
+    for(int bin=1; bin<201; bin++) {
         double error = 0.0;
         for(int sample=1; sample < 11; sample++ ) {
             //..WO Gap
-            // TString foo_24(TString::Format("fTprof24_number%dNtrks1bin", sample));
-            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
-            // TString bar_34(TString::Format("fTprof34_number%dNtrks1bin", sample));	
-            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
-            // TString foo_42(TString::Format("fTprof42_number%dNtrks1bin", sample));	
-            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+            TString foo_24(TString::Format("fTprof24_number%dNtrks1bin", sample));
+            TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            TString bar_34(TString::Format("fTprof34_number%dNtrks1bin", sample));	
+            TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            TString foo_42(TString::Format("fTprof42_number%dNtrks1bin", sample));	
+            TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
             
             // //..Gap= 0.0
             // TString foo_24(TString::Format("fTprof24_number%dGap0Ntrks1bin", sample));
@@ -409,33 +410,33 @@ double BinValue_Sample35;
             // TString foo_42(TString::Format("fTprof42_number%dGap07Ntrks1bin", sample));	
             // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
-            //..Gap= 0.8
-            TString foo_24(TString::Format("fTprof24_number%dGap08Ntrks1bin", sample));
-            TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
-            TString bar_34(TString::Format("fTprof34_number%dGap08Ntrks1bin", sample));	
-            TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
-            TString foo_42(TString::Format("fTprof42_number%dGap08Ntrks1bin", sample));	
-            TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+            // //..Gap= 0.8
+            // TString foo_24(TString::Format("fTprof24_number%dGap08Ntrks1bin", sample));
+            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            // TString bar_34(TString::Format("fTprof34_number%dGap08Ntrks1bin", sample));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap08Ntrks1bin", sample));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
-            Sample_BinValue_2Particle_Correlation = prof24->GetBinContent(i);
-            Sample_BinValue_3Particle_Correlation = prof34->GetBinContent(i);
-            Sample_BinValue_4Particle_Correlation = prof42->GetBinContent(i);
+            Sample_BinValue_2Particle_Correlation = prof24->GetBinContent(bin);
+            Sample_BinValue_3Particle_Correlation = prof34->GetBinContent(bin);
+            Sample_BinValue_4Particle_Correlation = prof42->GetBinContent(bin);
 
-            BinValue_2Particle_Correlation = Cn24->GetBinContent(i);
-            BinValue_3Particle_Correlation = Cn34->GetBinContent(i);
-            BinValue_4Particle_Correlation = Cn42->GetBinContent(i);
+            BinValue_2Particle_Correlation = Cn24->GetBinContent(bin);
+            BinValue_3Particle_Correlation = Cn34->GetBinContent(bin);
+            BinValue_4Particle_Correlation = Cn42->GetBinContent(bin);
 
             //..Test for Multiplicity:
-            BinValue_Total24 = Cn24->GetBinEffectiveEntries(i);
-            BinValue_Total34 = Cn34->GetBinEffectiveEntries(i);
-            BinValue_Total42 = Cn42->GetBinEffectiveEntries(i);
+            BinValue_Total24 = Cn24->GetBinEffectiveEntries(bin);
+            BinValue_Total34 = Cn34->GetBinEffectiveEntries(bin);
+            BinValue_Total42 = Cn42->GetBinEffectiveEntries(bin);
 
-            BinValue_Sample24 = prof24->GetBinEffectiveEntries(i);
-            BinValue_Sample34 = prof34->GetBinEffectiveEntries(i);
-            BinValue_Sample42 = prof42->GetBinEffectiveEntries(i);
+            BinValue_Sample24 = prof24->GetBinEffectiveEntries(bin);
+            BinValue_Sample34 = prof34->GetBinEffectiveEntries(bin);
+            BinValue_Sample42 = prof42->GetBinEffectiveEntries(bin);
 
             if(BinValue_Total24 > 1000 && BinValue_Total34 > 1000 && BinValue_Total42 > 1000 && BinValue_Sample24 > 100 && BinValue_Sample34 > 100 && BinValue_Sample42 > 100 ) {
-                cout << "Its good for Multiplicity: " << endl;
+                cout << "Its good for Multiplicity: Start! " << endl;
             
             if(Sample_BinValue_2Particle_Correlation > 0 && Sample_BinValue_4Particle_Correlation > 0 && BinValue_4Particle_Correlation > 0 && BinValue_2Particle_Correlation > 0 ) {
                 
@@ -444,12 +445,7 @@ double BinValue_Sample35;
                 
                 Valuesqrt_2Particle_Correlation = sqrt(BinValue_2Particle_Correlation);
                 Valuesqrt_4Particle_Correlation = sqrt(BinValue_4Particle_Correlation);
-            }
-            else continue;
-            cout << "The if statement for Bincontent is passed" << endl;
-            
-            if(Valuesqrt_4Particle_Correlation > 0 && Sample_Valuesqrt_4particle_correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 && BinValue_3Particle_Correlation > 0 ){
-                
+
                 V422 = BinValue_3Particle_Correlation / (Valuesqrt_4Particle_Correlation);
                 V422_Sample = Sample_BinValue_3Particle_Correlation / (Sample_Valuesqrt_4particle_correlation); 
                 
@@ -458,33 +454,47 @@ double BinValue_Sample35;
                 error += pow(RhoV422_Sample - RhoV422, 2);
             }
             else continue;
-            cout << "The Third if statement is also passed" << endl;
+            cout << "The if statement for Bincontent (Bin > 1000 , Bin_sample > 100 and +) passed" << endl;
+            
+            // if(Valuesqrt_4Particle_Correlation > 0 && Sample_Valuesqrt_4particle_correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 && BinValue_3Particle_Correlation > 0 ){
+                
+            //     V422 = BinValue_3Particle_Correlation / (Valuesqrt_4Particle_Correlation);
+            //     V422_Sample = Sample_BinValue_3Particle_Correlation / (Sample_Valuesqrt_4particle_correlation); 
+                
+            //     RhoV422 = V422 / (Valuesqrt_2Particle_Correlation);
+            //     RhoV422_Sample = V422_Sample / (Sample_Valuesqrt_2particle_correlation);
+            //     error += pow(RhoV422_Sample - RhoV422, 2);
+            // }
+            // else continue;
+            // cout << "The second if statement is also passed" << endl;
+
             }
             else continue;
-            cout << "The Multiplicity check is finished here" << i << endl;
+            cout << "The Multiplicity check is finished here, Binnr: " << bin << endl;
 
         }
         Final_Error = sqrt(error/ (N * N) );  
         if( BinValue_Total24 > 1000 && BinValue_Total34 > 1000 && BinValue_Total42 > 1000 && BinValue_Sample24 >100 && BinValue_Sample34 >100 && BinValue_Sample42 >100) {
-            hRho_V422->SetBinContent(i, RhoV422); 
-            hRho_V422->SetBinError(i, Final_Error);    
+            hRho_V422->SetBinContent(bin, RhoV422); 
+            hRho_V422->SetBinError(bin, Final_Error);    
         }
         else continue;         
     }
-
-    //..V5,32 Calculation for Rho_532:
-    for (int i=1; i<201; i++) {
+    //**************************************|
+    //..V5,32 Calculation for Rho_532:******|
+    //**************************************|
+    for (int bin=1; bin<201; bin++) {
         double error = 0.0;
         for (int sample = 1; sample < 11; sample++) {
             //..WO Gap
-            // TString foo_25(TString::Format("fTprof25_number%dNtrks1bin", sample));
-            // TProfile *prof25 = (TProfile*)list->FindObject(foo_25);
-            // TString bar_35(TString::Format("fTprof35_number%dNtrks1bin", sample));	
-            // TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
-            // TString foo_22(TString::Format("fTprof22_number%dNtrks1bin", sample));	
-            // TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
-            // TString foo_23(TString::Format("fTprof23_number%dNtrks1bin", sample));	
-            // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
+            TString foo_25(TString::Format("fTprof25_number%dNtrks1bin", sample));
+            TProfile *prof25 = (TProfile*)list->FindObject(foo_25);
+            TString bar_35(TString::Format("fTprof35_number%dNtrks1bin", sample));	
+            TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
+            TString foo_22(TString::Format("fTprof22_number%dNtrks1bin", sample));	
+            TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
+            TString foo_23(TString::Format("fTprof23_number%dNtrks1bin", sample));	
+            TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
             // //..Gap= 0.0
             // TString foo_25(TString::Format("fTprof25_number%dGap0Ntrks1bin", sample));
@@ -566,40 +576,40 @@ double BinValue_Sample35;
             // TString foo_23(TString::Format("fTprof23_number%dGap07Ntrks1bin", sample));	
             // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
-            //..Gap= 0.8
-            TString foo_25(TString::Format("fTprof25_number%dGap08Ntrks1bin", sample));
-            TProfile *prof25 = (TProfile*)list->FindObject(foo_25);
-            TString bar_35(TString::Format("fTprof35_number%dGap08Ntrks1bin", sample));	
-            TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
-            TString foo_22(TString::Format("fTprof22_number%dGap08Ntrks1bin", sample));	
-            TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
-            TString foo_23(TString::Format("fTprof23_number%dGap08Ntrks1bin", sample));	
-            TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
+            // //..Gap= 0.8
+            // TString foo_25(TString::Format("fTprof25_number%dGap08Ntrks1bin", sample));
+            // TProfile *prof25 = (TProfile*)list->FindObject(foo_25);
+            // TString bar_35(TString::Format("fTprof35_number%dGap08Ntrks1bin", sample));	
+            // TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
+            // TString foo_22(TString::Format("fTprof22_number%dGap08Ntrks1bin", sample));	
+            // TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
+            // TString foo_23(TString::Format("fTprof23_number%dGap08Ntrks1bin", sample));	
+            // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
-            Sample_BinValue_25Particle_Correlation = prof25->GetBinContent(i);
-            Sample_BinValue_35Particle_Correlation = prof35->GetBinContent(i);
-            Sample_BinValue_22Particle_Correlation = prof22->GetBinContent(i);
-            Sample_BinValue_23Particle_Correlation = prof23->GetBinContent(i);
+            Sample_BinValue_25Particle_Correlation = prof25->GetBinContent(bin);
+            Sample_BinValue_35Particle_Correlation = prof35->GetBinContent(bin);
+            Sample_BinValue_22Particle_Correlation = prof22->GetBinContent(bin);
+            Sample_BinValue_23Particle_Correlation = prof23->GetBinContent(bin);
 
-            BinValue_25Particle_Correlation = Cn25->GetBinContent(i);
-            BinValue_35Particle_Correlation = Cn35->GetBinContent(i);
-            BinValue_22Particle_Correlation = Cn22->GetBinContent(i);
-            BinValue_23Particle_Correlation = Cn23->GetBinContent(i);
+            BinValue_25Particle_Correlation = Cn25->GetBinContent(bin);
+            BinValue_35Particle_Correlation = Cn35->GetBinContent(bin);
+            BinValue_22Particle_Correlation = Cn22->GetBinContent(bin);
+            BinValue_23Particle_Correlation = Cn23->GetBinContent(bin);
             
             //..Test for Multiplicity:
-            BinValue_Total25 = Cn25->GetBinEffectiveEntries(i);
-            BinValue_Total35 = Cn35->GetBinEffectiveEntries(i);
-            BinValue_Total22 = Cn22->GetBinEffectiveEntries(i);
-            BinValue_Total23 = Cn23->GetBinEffectiveEntries(i);
+            BinValue_Total25 = Cn25->GetBinEffectiveEntries(bin);
+            BinValue_Total35 = Cn35->GetBinEffectiveEntries(bin);
+            BinValue_Total22 = Cn22->GetBinEffectiveEntries(bin);
+            BinValue_Total23 = Cn23->GetBinEffectiveEntries(bin);
             
-            BinValue_Sample25 = prof25->GetBinEffectiveEntries(i);
-            BinValue_Sample35 = prof35->GetBinEffectiveEntries(i);
-            BinValue_Sample22 = prof22->GetBinEffectiveEntries(i);
-            BinValue_Sample23 = prof23->GetBinEffectiveEntries(i);
+            BinValue_Sample25 = prof25->GetBinEffectiveEntries(bin);
+            BinValue_Sample35 = prof35->GetBinEffectiveEntries(bin);
+            BinValue_Sample22 = prof22->GetBinEffectiveEntries(bin);
+            BinValue_Sample23 = prof23->GetBinEffectiveEntries(bin);
 
             if(BinValue_Total25 > 1000 && BinValue_Total35 > 1000 && BinValue_Total22 > 1000 && BinValue_Total23 > 1000 && BinValue_Sample25 > 100 && BinValue_Sample35 > 100 && BinValue_Sample22 > 100 && BinValue_Sample23 > 100 ) {
             
-                cout << "Its good for Multiplicity of Rho532: " << endl;
+                cout << "Its good for Multiplicity of Rho532: Start! " << endl;
 
             if(Sample_BinValue_22Particle_Correlation > 0 && Sample_BinValue_23Particle_Correlation > 0 && BinValue_23Particle_Correlation > 0 && BinValue_22Particle_Correlation > 0 && BinValue_25Particle_Correlation > 0 && Sample_BinValue_25Particle_Correlation > 0 ) {
 
@@ -610,12 +620,7 @@ double BinValue_Sample35;
                 Valuesqrt_22Particle_Correlation = sqrt(BinValue_22Particle_Correlation);
                 Valuesqrt_23Particle_Correlation = sqrt(BinValue_23Particle_Correlation);
                 Valuesqrt_25Particle_Correlation = sqrt(BinValue_25Particle_Correlation);
-            }
-            else continue; 
-                cout << "The if statement for Bincontent > 0 is passed" << endl; 
-
-            if(Valuesqrt_23Particle_Correlation > 0 && Valuesqrt_22Particle_Correlation > 0 && Sample_Value_sqrt_22particle_correlation > 0 && Sample_Value_sqrt_23particle_correlation > 0  && Sample_BinValue_35Particle_Correlation > 0 && BinValue_35Particle_Correlation > 0 ){
-                
+                    
                 V532 = BinValue_35Particle_Correlation / (Valuesqrt_23Particle_Correlation * Valuesqrt_22Particle_Correlation );
                 V532_Sample = Sample_BinValue_35Particle_Correlation / (Sample_Value_sqrt_23particle_correlation * Sample_Value_sqrt_22particle_correlation);  
 
@@ -623,16 +628,31 @@ double BinValue_Sample35;
                 RhoV532_Sample = V532_Sample / (Sample_Value_sqrt_25particle_correlation);
                 error += pow(RhoV532_Sample - RhoV532, 2);
             }
-            else continue;
-            cout << "The Third if statement for Value_sqrt > 0 is also passed" << endl;
+            else continue; 
+            cout << "Changes here.... !" << endl;
+            cout << "The if statement for (Bincontent > 1000, Bin_sample > 100 and +) is passed" << endl; 
+
+            // // if(Valuesqrt_23Particle_Correlation > 0 && Valuesqrt_22Particle_Correlation > 0 && Sample_Value_sqrt_22particle_correlation > 0 && Sample_Value_sqrt_23particle_correlation > 0  && Sample_BinValue_35Particle_Correlation > 0 && BinValue_35Particle_Correlation > 0 ){
+                
+            //     V532 = BinValue_35Particle_Correlation / (Valuesqrt_23Particle_Correlation * Valuesqrt_22Particle_Correlation );
+            //     V532_Sample = Sample_BinValue_35Particle_Correlation / (Sample_Value_sqrt_23particle_correlation * Sample_Value_sqrt_22particle_correlation);  
+
+            //     RhoV532 = V532 / (Valuesqrt_25Particle_Correlation);
+            //     RhoV532_Sample = V532_Sample / (Sample_Value_sqrt_25particle_correlation);
+            //     error += pow(RhoV532_Sample - RhoV532, 2);
+            //}
+            //else continue;
+            //cout << "The Third if statement for Value_sqrt > 0 is also passed" << endl;
+            
             }
-            cout << "The Multiplicity check is finished here: " << i << endl;
+            else continue;
+            cout << "The Multiplicity check is finished here: " << bin << endl;
 
         }         
         Final_Error = sqrt(error/ (N * N) );  
         if( BinValue_Total25 > 1000 && BinValue_Total35 > 1000 && BinValue_Total22 > 1000 && BinValue_Total23 > 1000 && BinValue_Sample25 >100 && BinValue_Sample35 >100 && BinValue_Sample22 >100 && BinValue_Sample23 > 100) {
-            hRho_V532->SetBinContent(i, RhoV532); 
-            hRho_V532->SetBinError(i, Final_Error);
+            hRho_V532->SetBinContent(bin, RhoV532); 
+            hRho_V532->SetBinError(bin, Final_Error);
         }
         else continue;            
     }
@@ -654,7 +674,7 @@ double BinValue_Sample35;
     // hRho_V422->SetAxisRange(0., 110);
     // hRho_V422->SetMarkerSize(1.);
     // hRho_V422->SetXTitle("# of tracks");
-    // hRho_V422->Draw("same");
+    hRho_V422->Draw("same");
     // c->BuildLegend();
 
     // hRho_V532->SetMarkerStyle(20);
@@ -662,8 +682,8 @@ double BinValue_Sample35;
     // hRho_V532->SetAxisRange(0., 110);
     // hRho_V532->SetMarkerSize(1.);
     // hRho_V532->SetXTitle("# of tracks");
-    hRho_V532->Draw("same");
-    c->BuildLegend();
+    //hRho_V532->Draw("same");
+    //c->BuildLegend();
 
 
     //..Gap= Without Gap
@@ -747,12 +767,12 @@ double BinValue_Sample35;
     // fileOutput->Close();
     // return;
 
-    //..Gap= 0.8
-    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/AllGaps_CutData_Rho_v422_v532/Gap08_CutData_Rho_v422_Rho_v532.root","RECREATE");
-    if(!fileOutput) return;
-    fileOutput->cd();
-    hRho_V422->Write();
-    hRho_V532->Write();
-    fileOutput->Close();
-    return;
+    // //..Gap= 0.8
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/AllGaps_CutData_Rho_v422_v532/Gap08_CutData_Rho_v422_Rho_v532.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hRho_V422->Write();
+    // hRho_V532->Write();
+    // fileOutput->Close();
+    // return;
 }
