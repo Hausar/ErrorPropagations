@@ -89,18 +89,18 @@ void All_Gaps_Chi422_Chi_532() {
     c->cd();
     
 
-    TH1D *hChi422 = new TH1D("hChi422", "The Non-Linear Coefficient, #chi_{4,22}", 100, 0, 105); //this is just define a histogram which will fill the data of Chi_422.
+    TH1D *hChi422 = new TH1D("hChi422", "The Non-Linear Coefficient, #chi_{4,22}", 200, 0, 200); //this is just define a histogram which will fill the data of Chi_422.
     hChi422->Sumw2();
 
 
-    TH1D *hChi532 = new TH1D("hChi532", "The Non-Linear Coefficient, #chi_{5,32}", 100, 0, 105); //this is just define a histogram which will fill the data of Chi_532.
+    TH1D *hChi532 = new TH1D("hChi532", "The Non-Linear Coefficient, #chi_{5,32}", 200, 0, 200); //this is just define a histogram which will fill the data of Chi_532.
     hChi532->Sumw2();
 
 
     //Open the root.file:
-    TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/LHC16q_CENT_SDD_0Gap_2_08Gap_FullGaps.root", "READ");
-    TDirectory *dir = (TDirectoryFile*)file->Get("MyTaskResults");
-    TList *list = (TList*)dir->Get("Flow_Refs_MyTaskResults");
+    TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/pPb_LHC16q_NUA_NUE_Corrected_4particle.root", "READ");
+    TDirectory *dir = (TDirectoryFile*)file->Get("default");
+    TList *list = (TList*)dir->Get("Flow_Refs_default");
 //========================================================================================================================
     
     //..Chi422 New Cut Data:
@@ -156,11 +156,11 @@ void All_Gaps_Chi422_Chi_532() {
     // TProfile *Cn42 = (TProfile*)file2->Get("fTprofC42Gap07Ntrks1bin");
     // TProfile *Cn34 = (TProfile*)file2->Get("fTprofC34Gap07Ntrks1bin");
 
-    //..Gap=0.8
-    TFile *file2 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Cut_Data_2_particle/Gap08_Cut_Tprofile_2_3_4_particle.root", "READ");
-    TProfile *Cn24 = (TProfile*)file2->Get("fTprofC24Gap08Ntrks1bin");
-    TProfile *Cn42 = (TProfile*)file2->Get("fTprofC42Gap08Ntrks1bin");
-    TProfile *Cn34 = (TProfile*)file2->Get("fTprofC34Gap08Ntrks1bin");
+    // //..Gap=0.8
+    // TFile *file2 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Cut_Data_2_particle/Gap08_Cut_Tprofile_2_3_4_particle.root", "READ");
+    // TProfile *Cn24 = (TProfile*)file2->Get("fTprofC24Gap08Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)file2->Get("fTprofC42Gap08Ntrks1bin");
+    // TProfile *Cn34 = (TProfile*)file2->Get("fTprofC34Gap08Ntrks1bin");
 //==============================================================================
 //..Chi532 New Cut Data
     
@@ -220,133 +220,133 @@ void All_Gaps_Chi422_Chi_532() {
     // TProfile *Cn23 = (TProfile*)file2->Get("fTprofC23Gap07Ntrks1bin");
     // TProfile *Cn35 = (TProfile*)file2->Get("fTprofC35Gap07Ntrks1bin");
 
-    //..Gap=0.8
-    TFile *file2 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Cut_Data_2_particle/Gap08_Cut_Tprofile_2_3_4_particle.root", "READ");
-    TProfile *Cn25 = (TProfile*)file2->Get("fTprofC25Gap08Ntrks1bin");
-    TProfile *Cn22 = (TProfile*)file2->Get("fTprofC22Gap08Ntrks1bin");
-    TProfile *Cn23 = (TProfile*)file2->Get("fTprofC23Gap08Ntrks1bin");
-    TProfile *Cn35 = (TProfile*)file2->Get("fTprofC35Gap08Ntrks1bin");
+    // //..Gap=0.8
+    // TFile *file2 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Cut_RawData_3particle_4particle/New_Cut_Data_2_particle/Gap08_Cut_Tprofile_2_3_4_particle.root", "READ");
+    // TProfile *Cn25 = (TProfile*)file2->Get("fTprofC25Gap08Ntrks1bin");
+    // TProfile *Cn22 = (TProfile*)file2->Get("fTprofC22Gap08Ntrks1bin");
+    // TProfile *Cn23 = (TProfile*)file2->Get("fTprofC23Gap08Ntrks1bin");
+    // TProfile *Cn35 = (TProfile*)file2->Get("fTprofC35Gap08Ntrks1bin");
 //==============================================================================    
     //**************************************************************************
     //######################### OOOOLLLLDDDD###########################################
     //..Chi422:
     //..WO Gap
-    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Ntrks1bin");
-    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Ntrks1bin"); 
+    TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Ntrks1bin");
+    TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");  
+    TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Ntrks1bin"); 
 
-    //..Gap= 0.0
-    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap0Ntrks1bin");
-    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap0Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap0Ntrks1bin"); 
+    // //..Gap= 0.0
+    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap00Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap00Ntrks1bin");  
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap00ANtrks1bin"); 
 
-    //..Gap= 0.1
+    // //..Gap= 0.1
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap01Ntrks1bin");
     // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap01Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap01Ntrks1bin"); 
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap01ANtrks1bin"); 
 
     // //..Gap= 0.2
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap02Ntrks1bin");
     // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap02Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap02Ntrks1bin"); 
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap02ANtrks1bin"); 
 
     // //..Gap= 0.3
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap03Ntrks1bin");
     // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap03Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap03Ntrks1bin"); 
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap03ANtrks1bin"); 
 
     // //..Gap= 0.4
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap04Ntrks1bin");
     // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap04Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap04Ntrks1bin"); 
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap04ANtrks1bin"); 
 
     // //..Gap= 0.5
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap05Ntrks1bin");
     // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap05Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap05Ntrks1bin"); 
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap05ANtrks1bin"); 
 
     // //..Gap= 0.6
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap06Ntrks1bin");
     // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap06Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap06Ntrks1bin"); 
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap06ANtrks1bin"); 
 
     // //..Gap= 0.7
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap07Ntrks1bin");
     // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap07Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap07Ntrks1bin"); 
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap07ANtrks1bin"); 
 
     // //..Gap= 0.8
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap08Ntrks1bin");
     // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap08Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap08Ntrks1bin"); 
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap08ANtrks1bin"); 
     
     //**************************************************************************
     //..Chi_532:
     //..WO Gap
-    // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Ntrks1bin");  //..V5{2}
-    // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Ntrks1bin");  //..v2^{2}
-    // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Ntrks1bin");  //..v3^{2}
-    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Ntrks1bin");  //..<<3>>_{5|-3,-2}
+    TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Ntrks1bin");  //..V5{2}
+    TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Ntrks1bin");  //..v2^{2}
+    TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Ntrks1bin");  //..v3^{2}
+    TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Ntrks1bin");  //..<<3>>_{5|-3,-2}
     
     // //..Gap= 0.0
-    // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Gap0Ntrks1bin");  //..V5{2}
-    // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Gap0Ntrks1bin");  //..v2^{2}
-    // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Gap0Ntrks1bin");  //..v3^{2}
-    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap0Ntrks1bin");  //..<<3>>_{5|-3,-2}
+    // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Gap00Ntrks1bin");  //..V5{2}
+    // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Gap00Ntrks1bin");  //..v2^{2}
+    // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Gap00Ntrks1bin");  //..v3^{2}
+    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap00ANtrks1bin");  //..<<3>>_{5|-3,-2}
     
     // //..Gap= 0.1
     // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Gap01Ntrks1bin");  //..V5{2}
     // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Gap01Ntrks1bin");  //..v2^{2}
     // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Gap01Ntrks1bin");  //..v3^{2}
-    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap01Ntrks1bin");  //..<<3>>_{5|-3,-2}
+    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap01ANtrks1bin");  //..<<3>>_{5|-3,-2}
 
-    //..Gap= 0.2
+    // //..Gap= 0.2
     // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Gap02Ntrks1bin");  //..V5{2}
     // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Gap02Ntrks1bin");  //..v2^{2}
     // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Gap02Ntrks1bin");  //..v3^{2}
-    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap02Ntrks1bin");  //..<<3>>_{5|-3,-2}
+    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap02ANtrks1bin");  //..<<3>>_{5|-3,-2}
 
-    // // //..Gap= 0.3
+    // //..Gap= 0.3
     // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Gap03Ntrks1bin");  //..V5{2}
     // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Gap03Ntrks1bin");  //..v2^{2}
     // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Gap03Ntrks1bin");  //..v3^{2}
-    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap03Ntrks1bin");  //..<<3>>_{5|-3,-2}
+    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap03ANtrks1bin");  //..<<3>>_{5|-3,-2}
 
-    //..Gap= 0.4
+    // //..Gap= 0.4
     // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Gap04Ntrks1bin");  //..V5{2}
     // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Gap04Ntrks1bin");  //..v2^{2}
     // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Gap04Ntrks1bin");  //..v3^{2}
-    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap04Ntrks1bin");  //..<<3>>_{5|-3,-2}
+    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap04ANtrks1bin");  //..<<3>>_{5|-3,-2}
 
-    //..Gap= 0.5
+    // //..Gap= 0.5
     // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Gap05Ntrks1bin");  //..V5{2}
     // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Gap05Ntrks1bin");  //..v2^{2}
     // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Gap05Ntrks1bin");  //..v3^{2}
-    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap05Ntrks1bin");  //..<<3>>_{5|-3,-2}
+    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap05ANtrks1bin");  //..<<3>>_{5|-3,-2}
 
     // //..Gap= 0.6
     // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Gap06Ntrks1bin");  //..V5{2}
     // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Gap06Ntrks1bin");  //..v2^{2}
     // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Gap06Ntrks1bin");  //..v3^{2}
-    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap06Ntrks1bin");  //..<<3>>_{5|-3,-2}
+    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap06ANtrks1bin");  //..<<3>>_{5|-3,-2}
 
     // //..Gap= 0.7
     // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Gap07Ntrks1bin");  //..V5{2}
     // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Gap07Ntrks1bin");  //..v2^{2}
     // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Gap07Ntrks1bin");  //..v3^{2}
-    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap07Ntrks1bin");  //..<<3>>_{5|-3,-2}
+    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap07ANtrks1bin");  //..<<3>>_{5|-3,-2}
 
-    //..Gap= 0.8
+    // //..Gap= 0.8
     // TProfile *Cn25 = (TProfile*)list->FindObject("fTprofC25Gap08Ntrks1bin");  //..V5{2}
     // TProfile *Cn22 = (TProfile*)list->FindObject("fTprofC22Gap08Ntrks1bin");  //..v2^{2}
     // TProfile *Cn23 = (TProfile*)list->FindObject("fTprofC23Gap08Ntrks1bin");  //..v3^{2}
-    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap08Ntrks1bin");  //..<<3>>_{5|-3,-2}
+    // TProfile *Cn35 = (TProfile*)list->FindObject("fTprofC35Gap08ANtrks1bin");  //..<<3>>_{5|-3,-2}
     
     //######################### OOOOOLLLLDDDD ############################################
     //..Projection on Xaxis:
-    TH1D *h1 = Cn24->ProjectionX("h1");
-    TH1D *h2 = Cn42->ProjectionX("h2");
-    TH1D *h3 = Cn34->ProjectionX("h3");
+    // TH1D *h1 = Cn24->ProjectionX("h1");
+    // TH1D *h2 = Cn42->ProjectionX("h2");
+    // TH1D *h3 = Cn34->ProjectionX("h3");
 
     //******************************************************************************
     //..Loop over fSample for Error propagation for Non-Linear Coefficient Chi_4,22:
@@ -355,64 +355,64 @@ void All_Gaps_Chi422_Chi_532() {
         double error = 0.0;
         for (int sample = 1; sample < 11; sample++) {
             //..WO Gap
-            // TString bar_34(TString::Format("fTprof34_number%dNtrks1bin", sample));	
-            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
-            // TString foo_42(TString::Format("fTprof42_number%dNtrks1bin", sample));	
-            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+            TString bar_34(TString::Format("fTprof34_number%dNtrks1bin", sample));	
+            TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            TString foo_42(TString::Format("fTprof42_number%dNtrks1bin", sample));	
+            TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
-            //..Gap= 0.0
-            // TString bar_34(TString::Format("fTprof34_number%dGap0Ntrks1bin", sample));	
+            // //..Gap= 0.0
+            // TString bar_34(TString::Format("fTprof34_number%dGap00ANtrks1bin", sample));	
             // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
-            // TString foo_42(TString::Format("fTprof42_number%dGap0Ntrks1bin", sample));	
+            // TString foo_42(TString::Format("fTprof42_number%dGap00Ntrks1bin", sample));	
             // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             // //..Gap= 0.1
-            // TString bar_34(TString::Format("fTprof34_number%dGap01Ntrks1bin", sample));	
+            // TString bar_34(TString::Format("fTprof34_number%dGap01ANtrks1bin", sample));	
             // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
             // TString foo_42(TString::Format("fTprof42_number%dGap01Ntrks1bin", sample));	
             // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
-            //..Gap= 0.2
-            // TString bar_34(TString::Format("fTprof34_number%dGap02Ntrks1bin", sample));	
+            // //..Gap= 0.2
+            // TString bar_34(TString::Format("fTprof34_number%dGap02ANtrks1bin", sample));	
             // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
             // TString foo_42(TString::Format("fTprof42_number%dGap02Ntrks1bin", sample));	
             // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             // //..Gap= 0.3
-            // TString bar_34(TString::Format("fTprof34_number%dGap03Ntrks1bin", sample));	
+            // TString bar_34(TString::Format("fTprof34_number%dGap03ANtrks1bin", sample));	
             // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
             // TString foo_42(TString::Format("fTprof42_number%dGap03Ntrks1bin", sample));	
             // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             // //..Gap= 0.4
-            // TString bar_34(TString::Format("fTprof34_number%dGap04Ntrks1bin", sample));	
+            // TString bar_34(TString::Format("fTprof34_number%dGap04ANtrks1bin", sample));	
             // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
             // TString foo_42(TString::Format("fTprof42_number%dGap04Ntrks1bin", sample));	
             // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             // //..Gap= 0.5
-            // TString bar_34(TString::Format("fTprof34_number%dGap05Ntrks1bin", sample));	
+            // TString bar_34(TString::Format("fTprof34_number%dGap05ANtrks1bin", sample));	
             // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
             // TString foo_42(TString::Format("fTprof42_number%dGap05Ntrks1bin", sample));	
             // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
-            // //..Gap= 0.6
-            // TString bar_34(TString::Format("fTprof34_number%dGap06Ntrks1bin", sample));	
+            //..Gap= 0.6
+            // TString bar_34(TString::Format("fTprof34_number%dGap06ANtrks1bin", sample));	
             // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
             // TString foo_42(TString::Format("fTprof42_number%dGap06Ntrks1bin", sample));	
             // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             // //..Gap= 0.7
-            // TString bar_34(TString::Format("fTprof34_number%dGap07Ntrks1bin", sample));	
+            // TString bar_34(TString::Format("fTprof34_number%dGap07ANtrks1bin", sample));	
             // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
             // TString foo_42(TString::Format("fTprof42_number%dGap07Ntrks1bin", sample));	
             // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
-            //..Gap= 0.8
-            TString bar_34(TString::Format("fTprof34_number%dGap08Ntrks1bin", sample));	
-            TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
-            TString foo_42(TString::Format("fTprof42_number%dGap08Ntrks1bin", sample));	
-            TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+            // //..Gap= 0.8
+            // TString bar_34(TString::Format("fTprof34_number%dGap08ANtrks1bin", sample));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dGap08Ntrks1bin", sample));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             
             Sample_BinValue_3Particle_Correlation = prof34->GetBinContent(i);
@@ -429,14 +429,14 @@ void All_Gaps_Chi422_Chi_532() {
             BinValue_Sample42 = prof42->GetBinEffectiveEntries(i);
 
             if( BinValue_Total34 > 1000 && BinValue_Total42 > 1000 && BinValue_Sample34 > 100 && BinValue_Sample42 > 100 ) {
-                cout << "Passed Multiplicity Test Good" << endl;
-                cout << "******************************" << endl;
-                cout << "i: " << i << endl;
-                cout << "Sample: " << sample << endl;
-                cout << "BinValue_Total34: " << BinValue_Total34 << endl;
-                cout <<"BinValue_Sample34: " << BinValue_Sample34 << endl;
+                // cout << "Passed Multiplicity Test Good" << endl;
+                // cout << "******************************" << endl;
+                // cout << "i: " << i << endl;
+                // cout << "Sample: " << sample << endl;
+                // cout << "BinValue_Total34: " << BinValue_Total34 << endl;
+                // cout <<"BinValue_Sample34: " << BinValue_Sample34 << endl;
 
-            if (Sample_BinValue_4Particle_Correlation > 0  && BinValue_4Particle_Correlation > 0 && BinValue_3Particle_Correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 ) {
+            if (Sample_BinValue_4Particle_Correlation > 0  && BinValue_4Particle_Correlation > 0 ) {
             
                 Valuesqrt_4Particle_Correlation = sqrt(BinValue_4Particle_Correlation);
                 Sample_Valuesqrt_4Particle_Correlation = sqrt(Sample_BinValue_4Particle_Correlation);
@@ -448,7 +448,6 @@ void All_Gaps_Chi422_Chi_532() {
                 Chi422 = V422 / Valuesqrt_4Particle_Correlation;
                 Chi422_Sample = V422_Sample / Sample_Valuesqrt_4Particle_Correlation;
                 
-                //error += pow(V422_Sample - V422, 2);
                 error += pow(Chi422_Sample - Chi422, 2);
 
             }
@@ -474,8 +473,8 @@ void All_Gaps_Chi422_Chi_532() {
             //fc42->Draw("EP");
             //Cn34->Draw();
             //Cn42->Draw();
-            cout << "-----------------------------" << endl;		
-            cout << "Chi422: " << Chi422 << endl;
+            //cout << "-----------------------------" << endl;		
+            //cout << "Chi422: " << Chi422 << endl;
             //cout << "Chi422_Sample: " << Chi422_Sample << endl;
         }
         sigma_z1 = sqrt(error/ (N * N) );
@@ -484,8 +483,8 @@ void All_Gaps_Chi422_Chi_532() {
             hChi422->SetBinError(i, sigma_z1);    
         }
         else continue; 
-        cout << "BinValue_Total34: " << BinValue_Total34 << endl;
-        cout <<"BinValue_Sample34: " << BinValue_Sample34 << endl;   
+        //cout << "BinValue_Total34: " << BinValue_Total34 << endl;
+        //cout <<"BinValue_Sample34: " << BinValue_Sample34 << endl;   
     }
 
 
@@ -496,23 +495,23 @@ void All_Gaps_Chi422_Chi_532() {
         double error = 0.0;
         for (int sample = 1; sample < 11; sample++) {
             //..WO Gap
-            // TString bar_35(TString::Format("fTprof35_number%dNtrks1bin", sample));	
-            // TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
-            // TString foo_22(TString::Format("fTprof22_number%dNtrks1bin", sample));	
-            // TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
-            // TString foo_23(TString::Format("fTprof23_number%dNtrks1bin", sample));	
-            // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
+            TString bar_35(TString::Format("fTprof35_number%dNtrks1bin", sample));	
+            TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
+            TString foo_22(TString::Format("fTprof22_number%dNtrks1bin", sample));	
+            TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
+            TString foo_23(TString::Format("fTprof23_number%dNtrks1bin", sample));	
+            TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
-            //..Gap= 0.0
-            // TString bar_35(TString::Format("fTprof35_number%dGap0Ntrks1bin", sample));	
+            // //..Gap= 0.0
+            // TString bar_35(TString::Format("fTprof35_number%dGap00ANtrks1bin", sample));	
             // TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
-            // TString foo_22(TString::Format("fTprof22_number%dGap0Ntrks1bin", sample));	
+            // TString foo_22(TString::Format("fTprof22_number%dGap00Ntrks1bin", sample));	
             // TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
-            // TString foo_23(TString::Format("fTprof23_number%dGap0Ntrks1bin", sample));	
+            // TString foo_23(TString::Format("fTprof23_number%dGap00Ntrks1bin", sample));	
             // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
             // //..Gap= 0.1
-            // TString bar_35(TString::Format("fTprof35_number%dGap01Ntrks1bin", sample));	
+            // TString bar_35(TString::Format("fTprof35_number%dGap01ANtrks1bin", sample));	
             // TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
             // TString foo_22(TString::Format("fTprof22_number%dGap01Ntrks1bin", sample));	
             // TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
@@ -520,7 +519,7 @@ void All_Gaps_Chi422_Chi_532() {
             // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
             // //..Gap= 0.2
-            // TString bar_35(TString::Format("fTprof35_number%dGap02Ntrks1bin", sample));	
+            // TString bar_35(TString::Format("fTprof35_number%dGap02ANtrks1bin", sample));	
             // TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
             // TString foo_22(TString::Format("fTprof22_number%dGap02Ntrks1bin", sample));	
             // TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
@@ -528,15 +527,15 @@ void All_Gaps_Chi422_Chi_532() {
             // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
             // //..Gap= 0.3
-            // TString bar_35(TString::Format("fTprof35_number%dGap03Ntrks1bin", sample));	
+            // TString bar_35(TString::Format("fTprof35_number%dGap03ANtrks1bin", sample));	
             // TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
             // TString foo_22(TString::Format("fTprof22_number%dGap03Ntrks1bin", sample));	
             // TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
             // TString foo_23(TString::Format("fTprof23_number%dGap03Ntrks1bin", sample));	
             // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
-            //..Gap= 0.4
-            // TString bar_35(TString::Format("fTprof35_number%dGap04Ntrks1bin", sample));	
+            // //..Gap= 0.4
+            // TString bar_35(TString::Format("fTprof35_number%dGap04ANtrks1bin", sample));	
             // TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
             // TString foo_22(TString::Format("fTprof22_number%dGap04Ntrks1bin", sample));	
             // TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
@@ -544,7 +543,7 @@ void All_Gaps_Chi422_Chi_532() {
             // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
             // //..Gap= 0.5
-            // TString bar_35(TString::Format("fTprof35_number%dGap05Ntrks1bin", sample));	
+            // TString bar_35(TString::Format("fTprof35_number%dGap05ANtrks1bin", sample));	
             // TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
             // TString foo_22(TString::Format("fTprof22_number%dGap05Ntrks1bin", sample));	
             // TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
@@ -552,7 +551,7 @@ void All_Gaps_Chi422_Chi_532() {
             // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
             // //..Gap= 0.6
-            // TString bar_35(TString::Format("fTprof35_number%dGap06Ntrks1bin", sample));	
+            // TString bar_35(TString::Format("fTprof35_number%dGap06ANtrks1bin", sample));	
             // TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
             // TString foo_22(TString::Format("fTprof22_number%dGap06Ntrks1bin", sample));	
             // TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
@@ -560,20 +559,20 @@ void All_Gaps_Chi422_Chi_532() {
             // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
             // //..Gap= 0.7
-            // TString bar_35(TString::Format("fTprof35_number%dGap07Ntrks1bin", sample));	
+            // TString bar_35(TString::Format("fTprof35_number%dGap07ANtrks1bin", sample));	
             // TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
             // TString foo_22(TString::Format("fTprof22_number%dGap07Ntrks1bin", sample));	
             // TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
             // TString foo_23(TString::Format("fTprof23_number%dGap07Ntrks1bin", sample));	
             // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
-            //..Gap= 0.8 
-            TString bar_35(TString::Format("fTprof35_number%dGap08Ntrks1bin", sample));	
-            TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
-            TString foo_22(TString::Format("fTprof22_number%dGap08Ntrks1bin", sample));	
-            TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
-            TString foo_23(TString::Format("fTprof23_number%dGap08Ntrks1bin", sample));	
-            TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
+            // //..Gap= 0.8 
+            // TString bar_35(TString::Format("fTprof35_number%dGap08ANtrks1bin", sample));	
+            // TProfile *prof35 = (TProfile*)list->FindObject(bar_35);
+            // TString foo_22(TString::Format("fTprof22_number%dGap08Ntrks1bin", sample));	
+            // TProfile *prof22 = (TProfile*)list->FindObject(foo_22);
+            // TString foo_23(TString::Format("fTprof23_number%dGap08Ntrks1bin", sample));	
+            // TProfile *prof23 = (TProfile*)list->FindObject(foo_23);
 
 
             Sample_BinValue_3Particle_Correlation = prof35->GetBinContent(i);
@@ -594,14 +593,14 @@ void All_Gaps_Chi422_Chi_532() {
             BinValue_Sample23 = prof23->GetBinEffectiveEntries(i);
 
             if( BinValue_Total35 > 1000 && BinValue_Total22 > 1000 && BinValue_Total23 > 1000 && BinValue_Sample35 > 100 && BinValue_Sample22 > 100 && BinValue_Sample23 > 100 ) {
-                cout << "Passed Multiplicity Test Good" << endl;
-                cout << "******************************" << endl;
-                cout << "i: " << i << endl;
-                cout << "Sample: " << sample << endl;
-                cout << "BinValue_Total35: " << BinValue_Total35 << endl;
-                cout <<"BinValue_Sample35: " << BinValue_Sample35 << endl;
+                // cout << "Passed Multiplicity Test Good" << endl;
+                // cout << "******************************" << endl;
+                // cout << "i: " << i << endl;
+                // cout << "Sample: " << sample << endl;
+                // cout << "BinValue_Total35: " << BinValue_Total35 << endl;
+                // cout <<"BinValue_Sample35: " << BinValue_Sample35 << endl;
 
-            if (Sample_BinValue_22Particle_Correlation > 0  && BinValue_22Particle_Correlation > 0  &&  Sample_BinValue_23Particle_Correlation > 0 && BinValue_23Particle_Correlation > 0 &&  BinValue_3Particle_Correlation > 0 && Sample_BinValue_3Particle_Correlation > 0 ) {
+            if (Sample_BinValue_22Particle_Correlation > 0  && BinValue_22Particle_Correlation > 0  &&  Sample_BinValue_23Particle_Correlation > 0 && BinValue_23Particle_Correlation > 0 ) {
             
                 Valuesqrt_22Particle_Correlation = sqrt(BinValue_22Particle_Correlation);
                 Valuesqrt_23Particle_Correlation = sqrt(BinValue_23Particle_Correlation);
@@ -712,28 +711,28 @@ void All_Gaps_Chi422_Chi_532() {
     // hChi422->GetYaxis()->SetRangeUser(0., 3.);
     // hChi422->GetXaxis()->SetRangeUser(0., 140);
     // hChi422->SetMarkerSize(1.);
-    hChi422->Draw("same");
-    c->BuildLegend();
+    //hChi422->Draw("same");
+    //c->BuildLegend();
     
-    // hChi532->Draw("same");
+    hChi532->Draw("same");
     // c->BuildLegend();
 
 
     //..Create a root.file:
     //..WO Gap
-    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/CutData_Chi422_Chi532_AllGaps/WOGap_CutData_Chi_422_Chi_532.root","RECREATE");
-    // if(!fileOutput) return;
-    // fileOutput->cd();
-    // hChi422->Write();
-    // hChi532->Write();
-    // return;
+    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/Chi422_Chi532_AllGaps_NUA+NUE//Corrected_WOGap_Chi_422_Chi_532_NUA+NUE.root","RECREATE");
+    if(!fileOutput) return;
+    fileOutput->cd();
+    hChi422->Write("WOGap_Chi422_NUA+NUE");
+    hChi532->Write("WOGap_Chi532_NUA+NUE");
+    return;
 
-    // //..Gap= 0.0
-    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/CutData_Chi422_Chi532_AllGaps/Gap00_CutData_Chi_422_Chi_532.root","RECREATE");
+    // //..Gap= 0.0, 0.1, 0.2, 0.3, 0.4,..., 0.8
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/Chi422_Chi532_AllGaps_NUA+NUE/Corrected_Chi_422_Chi_532_NUA+NUE.root","UPDATE");
     // if(!fileOutput) return;
     // fileOutput->cd();
-    // hChi422->Write();
-    // hChi532->Write();
+    // hChi422->Write("Gap00A_Chi422_NUA+NUE");
+    // hChi532->Write("Gap00A_Chi532_NUA+NUE");
     // return;
     
     // //..Gap= 0.1
@@ -794,10 +793,10 @@ void All_Gaps_Chi422_Chi_532() {
     // return;
 
     //..Gap= 0.8
-    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/CutData_Chi422_Chi532_AllGaps/Gap08_CutData_Chi_422_Chi_532.root","RECREATE");
-    if(!fileOutput) return;
-    fileOutput->cd();
-    hChi422->Write();
-    hChi532->Write();
-    return;
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/CutData_Chi422_Chi532_AllGaps/Gap08_CutData_Chi_422_Chi_532.root","RECREATE");
+    // if(!fileOutput) return;
+    // fileOutput->cd();
+    // hChi422->Write();
+    // hChi532->Write();
+    // return;
 }
