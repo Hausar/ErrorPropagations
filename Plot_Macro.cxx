@@ -25,11 +25,38 @@ void Plot_Macro()
 
     // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Chi_422_Chi_532/Rebin_CutData_Chi422_Chi532_AllGaps/Rebin_CutData_Chi422_Chi532_histograms.root","READ");
 
-    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/Rebin_CutData_Rho_v422_v532/Rebin_CutData_Rho_v422_v532_histograms.root","READ");
+    // TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/All_Gaps_Rho_v422_Rho_v532/Rebin_CutData_Rho_v422_v532/Rebin_CutData_Rho_v422_v532_histograms.root","READ");
 
+
+    //TFile* fileOutput = new TFile("/Users/Helena/Desktop/New_Weights_NUA_NUE/TrackingEfficiency_pPb5TeV_LHC16q_CENT_wSDD.root","READ");
+
+    //TFile* fileOutput = new TFile("/Users/Helena/Desktop/New_Weights_NUA_NUE/PhiWeight_LHC16q_CENT_wSDD.root","READ");
+    TFile* fileOutput = new TFile("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/pPb_LHC16q_NUA_NUE_Corrected_4particle.root","READ");
+    TDirectory *dir = (TDirectoryFile*)fileOutput->Get("default");
+    TList *list = (TList*)dir->Get("Flow_Refs_default");
+    TH2F *fHistEtaPhi2D = (TH2F*)list->FindObject("fHistEtaPhi2D");
+    
     // TH1D* hC22 = (TH1D*)file->Get("hC22");
     // if(!hC22) return;
-    //hC22->Draw();
+    // hC22->Draw();
+
+    //TH2F* NUE_hist = (TH2F*)fileOutput->Get("eff_265525");
+    //TH3F* NUE_hist = (TH3F*)fileOutput->Get("fPhiWeight_265525");
+    //if(!NUE_hist) return;
+    //NUE_hist->Draw();
+    //h1 = NUE_hist->ProjectionZ();
+    h1 = fHistEtaPhi2D->ProjectionX();
+    //h1->SetMarkerStyle(kFullCircle); 
+    // Float_t ymax = h1.GetMaximum();
+    // TLine *line = new TLine(0,ymax,6,ymax);
+    // line->SetLineColor(kRed);
+    // line->Draw();
+    h1->SetMarkerColor(kBlue+1);
+    h1->Draw("P");
+    //h1->GetYaxis()->SetRangeUser(0., 1);
+    //h1->GetXaxis()->SetRangeUser(0., 105);
+    //c->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/NUA_py.png");
+
 
 
 
@@ -228,46 +255,46 @@ void Plot_Macro()
     // gStyle->SetTitleFontSize(0.2);
 
     // ////..Plot Rho532: 
-    hRho_V532_Rebin_Gap00->GetYaxis()->SetRangeUser(0., 2.);
-    hRho_V532_Rebin_Gap00->GetXaxis()->SetRangeUser(0., 105);
-    hRho_V532_Rebin_Gap00->SetMarkerSize(1.);
-    hRho_V532_Rebin_Gap00->Draw("same");
-    hRho_V532_Rebin_Gap00->SetTitle("");
-    hRho_V532_Rebin_Gap00->SetMarkerStyle(20); 
-    hRho_V532_Rebin_Gap00->SetMarkerColor(kRed+1);
-    hRho_V532_Rebin_Gap00->GetYaxis()->SetTitleOffset(1.4);
-    //hRho_V532_Rebin_Gap00->GetYaxis()->CenterTitle(true);
-    hRho_V532_Rebin_Gap00->GetYaxis()->SetTitle("#rho_{5,32}");
+    // hRho_V532_Rebin_Gap00->GetYaxis()->SetRangeUser(0., 2.);
+    // hRho_V532_Rebin_Gap00->GetXaxis()->SetRangeUser(0., 105);
+    // hRho_V532_Rebin_Gap00->SetMarkerSize(1.);
+    // hRho_V532_Rebin_Gap00->Draw("same");
+    // hRho_V532_Rebin_Gap00->SetTitle("");
+    // hRho_V532_Rebin_Gap00->SetMarkerStyle(20); 
+    // hRho_V532_Rebin_Gap00->SetMarkerColor(kRed+1);
+    // hRho_V532_Rebin_Gap00->GetYaxis()->SetTitleOffset(1.4);
+    // //hRho_V532_Rebin_Gap00->GetYaxis()->CenterTitle(true);
+    // hRho_V532_Rebin_Gap00->GetYaxis()->SetTitle("#rho_{5,32}");
 
-    hRho_V532_Rebin_Gap00->GetXaxis()->SetTitleOffset(1.4);
-    //hRho_V532_Rebin_Gap00->GetXaxis()->CenterTitle(true);
-    gStyle->SetTitleFontSize(0.2);
-    hRho_V532_Rebin_Gap00->GetXaxis()->SetTitle("N_{Ch}(|#Delta#eta| < 0.8)");
-    hRho_V532_Rebin_Gap00->SetFillColor(kRed-9);
-    gStyle->SetOptStat(0);
-    c->Update();
+    // hRho_V532_Rebin_Gap00->GetXaxis()->SetTitleOffset(1.4);
+    // //hRho_V532_Rebin_Gap00->GetXaxis()->CenterTitle(true);
+    // gStyle->SetTitleFontSize(0.2);
+    // hRho_V532_Rebin_Gap00->GetXaxis()->SetTitle("N_{Ch}(|#Delta#eta| < 0.8)");
+    // hRho_V532_Rebin_Gap00->SetFillColor(kRed-9);
+    // gStyle->SetOptStat(0);
+    // c->Update();
     
-    TLatex latex;
-    latex.SetTextSize(0.035);
-    latex.SetTextAlign(13);  //align at top
-    latex.DrawLatex(-10,1.,"ALICE");
+    // TLatex latex;
+    // latex.SetTextSize(0.035);
+    // latex.SetTextAlign(13);  //align at top
+    // latex.DrawLatex(-10,1.,"ALICE");
     
-    latex.SetTextAlign(13);  //align at top
-    latex.DrawLatex(-10,0.9,"pPb #sqrt{s_{NN}} = 5.02 TeV");
+    // latex.SetTextAlign(13);  //align at top
+    // latex.DrawLatex(-10,0.9,"pPb #sqrt{s_{NN}} = 5.02 TeV");
 
-    latex.SetTextAlign(13);  //centered
-    latex.DrawLatex(-10,0.8,"|#Delta #eta| < 0.0");
+    // latex.SetTextAlign(13);  //centered
+    // latex.DrawLatex(-10,0.8,"|#Delta #eta| < 0.0");
 
-    latex.SetTextAlign(13);  //centered
-    latex.DrawLatex(-10,0.7," 0.2 < p_{T} < 3.0");
+    // latex.SetTextAlign(13);  //centered
+    // latex.DrawLatex(-10,0.7," 0.2 < p_{T} < 3.0");
 
-    // the coordinate is the percentile from 0 to 100% : x1, y1, x2, y2
-    TLegend *leg = new TLegend(0.78, 0.65, 0.89, 0.69); 
-    leg->AddEntry(hRho_V532_Rebin_Gap00, "#rho_{5,32}", "fp");
-    leg->Draw("same");
+    // // the coordinate is the percentile from 0 to 100% : x1, y1, x2, y2
+    // TLegend *leg = new TLegend(0.78, 0.65, 0.89, 0.69); 
+    // leg->AddEntry(hRho_V532_Rebin_Gap00, "#rho_{5,32}", "fp");
+    // leg->Draw("same");
 
-    leg->SetBorderSize(0);
-    gStyle->SetTitleFontSize(0.2);
+    // leg->SetBorderSize(0);
+    // gStyle->SetTitleFontSize(0.2);
     // TImage *img = TImage::Create();
     // //img->FromPad(c, 10, 10, 308, 200);
     // img->FromPad(c);
