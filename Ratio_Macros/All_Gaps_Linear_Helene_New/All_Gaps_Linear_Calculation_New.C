@@ -191,7 +191,7 @@ void All_Gaps_Linear_Calculation_New() {
                 Valuesqrt_4Particle_Correlation = sqrt(BinValue42);
                 Valuesqrt_4Particle_Sample = sqrt(BinValue42_Sample);
             
-            error_4part += pow(Valuesqrt_4Particle_Sample - Valuesqrt_4Particle_Correlation, 2);
+                error_4part += pow(Valuesqrt_4Particle_Sample - Valuesqrt_4Particle_Correlation, 2);
             }
             else continue; 
             cout << "Multiplicity check passed" << endl;
