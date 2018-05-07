@@ -19,31 +19,31 @@ void Ratio_Rebin_Chi_422_532_Helene()
     //**************************************************************************
     //..Define histograms
 
-    TH1D *Rebin_Ratio_1 = new TH1D("Rebin_Ratio_1", "|#Delta #eta| > 0.0 A", 10, 0, 200); 
+    TH1D *Rebin_Ratio_1 = new TH1D("Rebin_Ratio_1", "|#Delta #eta| > 0.0 A", 20, 0, 200); 
     Rebin_Ratio_1->Sumw2();
 
-    TH1D *Rebin_Ratio_2 = new TH1D("Rebin_Ratio_2", "|#Delta #eta| > 0.1 A", 10, 0, 200); 
+    TH1D *Rebin_Ratio_2 = new TH1D("Rebin_Ratio_2", "|#Delta #eta| > 0.1 A", 20, 0, 200); 
     Rebin_Ratio_2->Sumw2();
 
-    TH1D *Rebin_Ratio_3 = new TH1D("Rebin_Ratio_3", "|#Delta #eta| > 0.2 A", 10, 0, 200);
+    TH1D *Rebin_Ratio_3 = new TH1D("Rebin_Ratio_3", "|#Delta #eta| > 0.2 A", 20, 0, 200);
     Rebin_Ratio_3->Sumw2();
 
-    TH1D *Rebin_Ratio_4 = new TH1D("Rebin_Ratio_4", "|#Delta #eta| > 0.3 A", 10, 0, 200); 
+    TH1D *Rebin_Ratio_4 = new TH1D("Rebin_Ratio_4", "|#Delta #eta| > 0.3 A", 20, 0, 200); 
     Rebin_Ratio_4->Sumw2();
 
-    TH1D *Rebin_Ratio_5 = new TH1D("Rebin_Ratio_5", "|#Delta #eta| > 0.4 A", 10, 0, 200); 
+    TH1D *Rebin_Ratio_5 = new TH1D("Rebin_Ratio_5", "|#Delta #eta| > 0.4 A", 20, 0, 200); 
     Rebin_Ratio_5->Sumw2();
 
-    TH1D *Rebin_Ratio_6 = new TH1D("Rebin_Ratio_6", "|#Delta #eta| > 0.5 A", 10, 0, 200);
+    TH1D *Rebin_Ratio_6 = new TH1D("Rebin_Ratio_6", "|#Delta #eta| > 0.5 A", 20, 0, 200);
     Rebin_Ratio_6->Sumw2();
 
-    TH1D *Rebin_Ratio_7 = new TH1D("Rebin_Ratio_7", "|#Delta #eta| > 0.6 A", 10, 0, 200); 
+    TH1D *Rebin_Ratio_7 = new TH1D("Rebin_Ratio_7", "|#Delta #eta| > 0.6 A", 20, 0, 200); 
     Rebin_Ratio_7->Sumw2();
 
-    TH1D *Rebin_Ratio_8 = new TH1D("Rebin_Ratio_8", "|#Delta #eta| > 0.7 A", 10, 0, 200);
+    TH1D *Rebin_Ratio_8 = new TH1D("Rebin_Ratio_8", "|#Delta #eta| > 0.7 A", 20, 0, 200);
     Rebin_Ratio_8->Sumw2();
 
-    TH1D *Rebin_Ratio_9 = new TH1D("Rebin_Ratio_9", "|#Delta #eta| > 0.8 A", 10, 0, 200);
+    TH1D *Rebin_Ratio_9 = new TH1D("Rebin_Ratio_9", "|#Delta #eta| > 0.8 A", 20, 0, 200);
     Rebin_Ratio_9->Sumw2();
     //==========================================================================
     //Open Helenes root.file for Chi_422 and Chi_532:
@@ -59,82 +59,82 @@ void Ratio_Rebin_Chi_422_532_Helene()
     Chi_422_Gap07 = (TH1D*)file->Get("Gap07A_Chi422_NUA+NUE");
     Chi_422_Gap08 = (TH1D*)file->Get("Gap08A_Chi422_NUA+NUE");
     
-    Chi_V532_Gap00 = (TH1D*)file->Get("Gap00A_Chi532_NUA+NUE");
-    Chi_V532_Gap01 = (TH1D*)file->Get("Gap01A_Chi532_NUA+NUE");
-    Chi_V532_Gap02 = (TH1D*)file->Get("Gap02A_Chi532_NUA+NUE"); 
-    Chi_V532_Gap03 = (TH1D*)file->Get("Gap03A_Chi532_NUA+NUE");
-    Chi_V532_Gap04 = (TH1D*)file->Get("Gap04A_Chi532_NUA+NUE");
-    Chi_V532_Gap05 = (TH1D*)file->Get("Gap05A_Chi532_NUA+NUE");
-    Chi_V532_Gap06 = (TH1D*)file->Get("Gap06A_Chi532_NUA+NUE");
-    Chi_V532_Gap07 = (TH1D*)file->Get("Gap07A_Chi532_NUA+NUE");
-    Chi_V532_Gap08 = (TH1D*)file->Get("Gap08A_Chi532_NUA+NUE");
+    Chi_532_Gap00 = (TH1D*)file->Get("Gap00A_Chi532_NUA+NUE");
+    Chi_532_Gap01 = (TH1D*)file->Get("Gap01A_Chi532_NUA+NUE");
+    Chi_532_Gap02 = (TH1D*)file->Get("Gap02A_Chi532_NUA+NUE"); 
+    Chi_532_Gap03 = (TH1D*)file->Get("Gap03A_Chi532_NUA+NUE");
+    Chi_532_Gap04 = (TH1D*)file->Get("Gap04A_Chi532_NUA+NUE");
+    Chi_532_Gap05 = (TH1D*)file->Get("Gap05A_Chi532_NUA+NUE");
+    Chi_532_Gap06 = (TH1D*)file->Get("Gap06A_Chi532_NUA+NUE");
+    Chi_532_Gap07 = (TH1D*)file->Get("Gap07A_Chi532_NUA+NUE");
+    Chi_532_Gap08 = (TH1D*)file->Get("Gap08A_Chi532_NUA+NUE");
 
     //==========================================================================
-    int binning = 20;
+    int binning = 10;
     double errorNum;
     double sumNum = 0;
     double sumDenom = 1;
     double content = 0;
 
-    if(binning == 20)RebinAll(Chi_422_Gap00, Rebin_Ratio_1, 20);
-    if(!Chi_422_Gap00) fPrint("Warning there is no histogram");
-    Rebin_Ratio_1->GetXaxis()->SetRangeUser(10, 100);
-    //Rebin_Ratio_1->Draw("same");
+    if(binning == 10)RebinAll(Chi_532_Gap00, Rebin_Ratio_1, 10);
+    if(!Chi_532_Gap00) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_1->GetXaxis()->SetRangeUser(10, 100);
+    Rebin_Ratio_1->Draw("same");
 
-    if(binning == 20)RebinAll(Chi_422_Gap01, Rebin_Ratio_2, 20);
-    if(!Chi_422_Gap01) fPrint("Warning there is no histogram");
-    Rebin_Ratio_2->GetXaxis()->SetRangeUser(10, 100);
+    if(binning == 10)RebinAll(Chi_532_Gap01, Rebin_Ratio_2, 10);
+    if(!Chi_532_Gap01) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_2->GetXaxis()->SetRangeUser(10, 100);
     Rebin_Ratio_2->Draw("same");
 
-    if(binning == 20)RebinAll(Chi_422_Gap02, Rebin_Ratio_3, 20);
-    if(!Chi_422_Gap02) fPrint("Warning there is no histogram");
-    Rebin_Ratio_3->GetXaxis()->SetRangeUser(10, 100);
+    if(binning == 10)RebinAll(Chi_532_Gap02, Rebin_Ratio_3, 10);
+    if(!Chi_532_Gap02) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_3->GetXaxis()->SetRangeUser(10, 100);
     //Rebin_Ratio_3->Draw("same");
 
-    if(binning == 20)RebinAll(Chi_422_Gap03, Rebin_Ratio_4, 20);
-    if(!Chi_422_Gap03) fPrint("Warning there is no histogram");
-    Rebin_Ratio_4->GetXaxis()->SetRangeUser(10, 100);
+    if(binning == 10)RebinAll(Chi_532_Gap03, Rebin_Ratio_4, 10);
+    if(!Chi_532_Gap03) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_4->GetXaxis()->SetRangeUser(10, 100);
     //Rebin_Ratio_4->Draw("same");
 
-    if(binning == 20)RebinAll(Chi_422_Gap04, Rebin_Ratio_5, 20);
-    if(!Chi_422_Gap04) fPrint("Warning there is no histogram");
-    Rebin_Ratio_5->GetXaxis()->SetRangeUser(10, 100);
+    if(binning == 10)RebinAll(Chi_532_Gap04, Rebin_Ratio_5, 10);
+    if(!Chi_532_Gap04) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_5->GetXaxis()->SetRangeUser(10, 100);
     //Rebin_Ratio_5->Draw("same");
 
-    if(binning == 20)RebinAll(Chi_422_Gap05, Rebin_Ratio_6, 20);
-    if(!Chi_422_Gap05) fPrint("Warning there is no histogram");
-    Rebin_Ratio_6->GetXaxis()->SetRangeUser(10, 100);
+    if(binning == 10)RebinAll(Chi_532_Gap05, Rebin_Ratio_6, 10);
+    if(!Chi_532_Gap05) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_6->GetXaxis()->SetRangeUser(10, 100);
     //Rebin_Ratio_6->Draw("same");
 
-    if(binning == 20)RebinAll(Chi_422_Gap06, Rebin_Ratio_7, 20);
-    if(!Chi_422_Gap06) fPrint("Warning there is no histogram");
-    Rebin_Ratio_7->GetXaxis()->SetRangeUser(10, 100);
+    if(binning == 10)RebinAll(Chi_532_Gap06, Rebin_Ratio_7, 10);
+    if(!Chi_532_Gap06) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_7->GetXaxis()->SetRangeUser(10, 100);
     //Rebin_Ratio_7->Draw("same");
 
-    if(binning == 20)RebinAll(Chi_422_Gap07, Rebin_Ratio_8, 20);
-    if(!Chi_422_Gap07) fPrint("Warning there is no histogram");
-    Rebin_Ratio_8->GetXaxis()->SetRangeUser(10, 100);
+    if(binning == 10)RebinAll(Chi_532_Gap07, Rebin_Ratio_8, 10);
+    if(!Chi_532_Gap07) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_8->GetXaxis()->SetRangeUser(10, 100);
     //Rebin_Ratio_8->Draw("same");
 
-    if(binning == 20)RebinAll(Chi_422_Gap08, Rebin_Ratio_9, 20);
-    if(!Chi_422_Gap08) fPrint("Warning there is no histogram");
-    Rebin_Ratio_9->GetXaxis()->SetRangeUser(10, 100);
+    if(binning == 10)RebinAll(Chi_532_Gap08, Rebin_Ratio_9, 10);
+    if(!Chi_532_Gap08) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_9->GetXaxis()->SetRangeUser(10, 100);
     //Rebin_Ratio_9->Draw("same");
 
     //..Writting to the Root.file:
     //..V4,22
-    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Comparison_Katka_Helene_NUA+NUE/Rebin_Plots_Helene_You_Chi_422_532/Rebin_Chi_422_532_Helene.root","UPDATE");
+    TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Comparison_Katka_Helene_NUA+NUE/Rebin_Plots_Helene_You_Chi_422_532/Rebin_Chi_422_532_Helene_10Length.root","UPDATE");
     if(!fileOutput) return;
     fileOutput->cd();
-    Rebin_Ratio_1->Write("Rebin_Chi_V422_Gap00A");
-    Rebin_Ratio_2->Write("Rebin_Chi_V422_Gap01A");
-    Rebin_Ratio_3->Write("Rebin_Chi_V422_Gap02A");  // You don't have <<4>>_{44}
-    Rebin_Ratio_4->Write("Rebin_Chi_V422_Gap03A");
-    Rebin_Ratio_5->Write("Rebin_Chi_V422_Gap04A");
-    Rebin_Ratio_6->Write("Rebin_Chi_V422_Gap05A");
-    Rebin_Ratio_7->Write("Rebin_Chi_V422_Gap06A");
-    Rebin_Ratio_8->Write("Rebin_Chi_V422_Gap07A");
-    Rebin_Ratio_9->Write("Rebin_Chi_V422_Gap08A");
+    Rebin_Ratio_1->Write("Rebin_Chi_V532_Gap00A");
+    Rebin_Ratio_2->Write("Rebin_Chi_V532_Gap01A");
+    Rebin_Ratio_3->Write("Rebin_Chi_V532_Gap02A");  
+    Rebin_Ratio_4->Write("Rebin_Chi_V532_Gap03A");
+    Rebin_Ratio_5->Write("Rebin_Chi_V532_Gap04A");
+    Rebin_Ratio_6->Write("Rebin_Chi_V532_Gap05A");
+    Rebin_Ratio_7->Write("Rebin_Chi_V532_Gap06A");
+    Rebin_Ratio_8->Write("Rebin_Chi_V532_Gap07A");
+    Rebin_Ratio_9->Write("Rebin_Chi_V532_Gap08A");
     
 } // End of the Macro
 
