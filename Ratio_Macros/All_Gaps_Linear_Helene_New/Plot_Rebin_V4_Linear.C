@@ -19,7 +19,7 @@ void Plot_Rebin_V4_Linear()
 
     //..Open the Root.file:
 
-     TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Comparison_Katka_Helene_NUA+NUE/Rebin_Plots_Helene_You_V4L_V5L_NL/Rebin_V4L_Helene.root","READ");
+     TFile* fileOutput = new TFile("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Comparison_Katka_Helene_NUA+NUE/Rebin_Plots_Helene_You_V4L_V5L_NL/Rebin_V5L_Helene.root","READ");
 
 
     TH1D* Rebin_hCLinear_Gap00A = (TH1D*)fileOutput->Get("Rebin_hCLinear_Gap00A");
@@ -37,15 +37,15 @@ void Plot_Rebin_V4_Linear()
     Rebin_hCLinear_Gap00A->SetMarkerStyle(kFullCircle); 
     Rebin_hCLinear_Gap00A->SetMarkerColor(kBlue+1);
     Rebin_hCLinear_Gap00A->SetStats(0);
-    Rebin_hCLinear_Gap00A->GetXaxis()->SetRangeUser(10, 90);
+    Rebin_hCLinear_Gap00A->GetXaxis()->SetRangeUser(10, 100);
     Rebin_hCLinear_Gap00A->Draw("P");
-    Rebin_hCLinear_Gap00A->GetYaxis()->SetRangeUser(0.006, 0.035);
+    Rebin_hCLinear_Gap00A->GetYaxis()->SetRangeUser(0.0, 0.024);
     Rebin_hCLinear_Gap00A->GetYaxis()->SetTitleOffset(1.5);
     //Rebin_hCLinear_Gap00A->GetYaxis()->SetTitleSize(0.1);
     //Rebin_hCLinear_Gap00A->GetYaxis()->CenterTitle(true);
-    Rebin_hCLinear_Gap00A->GetYaxis()->SetTitle("V_{4}^{L}");
+    Rebin_hCLinear_Gap00A->GetYaxis()->SetTitle("V_{5}^{L}");
     Rebin_hCLinear_Gap00A->GetXaxis()->SetTitle("N_{trks}");
-    Rebin_hCLinear_Gap00A->GetXaxis()->SetTitleOffset(1.4);
+    Rebin_hCLinear_Gap00A->GetXaxis()->SetTitleOffset(1.3);
     //Rebin_hCLinear_Gap00A->GetXaxis()->CenterTitle(true);
     //gStyle->SetTitleFontSize(0.2);
     Rebin_hCLinear_Gap00A->GetXaxis()->SetTitle("N_{Ch}(|#Delta#eta| < 0.8)");
@@ -116,19 +116,19 @@ void Plot_Rebin_V4_Linear()
     TLatex latex;
     latex.SetTextSize(0.035);
     latex.SetTextAlign(13);  //align at top
-    latex.DrawLatex(25,0.034,"ALICE");
+    latex.DrawLatex(25,0.023,"ALICE");
     
     latex.SetTextSize(0.035);
     latex.SetTextAlign(13);  //align at top
-    latex.DrawLatex(25,0.032,"#sqrt{s_{NN}} = 5.02 TeV");
+    latex.DrawLatex(25,0.021,"#sqrt{s_{NN}} = 5.02 TeV");
 
     latex.SetTextAlign(13);  //centered
-    latex.DrawLatex(25,0.03,"|#Delta #eta| < 0.8");
+    latex.DrawLatex(25,0.019,"|#Delta #eta| < 0.8");
 
     latex.SetTextAlign(13);  //centered
-    latex.DrawLatex(25,0.028," 0.2 < p_{T} < 3.0");
+    latex.DrawLatex(25,0.017," 0.2 < p_{T} < 3.0");
 
-    c->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/Plots_NonLinear_V422/Linear_same_10Bin_Lenght.png");
+    c->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/Plots_NonLinear_V532/Linear_V5_same_10Bin_Lenght_100Bins.png");
 
 
     // TLegend *leg01 = new TLegend(0.4, 0.5, 0.55, 0.55); 
