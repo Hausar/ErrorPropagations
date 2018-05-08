@@ -49,7 +49,7 @@ void All_Gaps_Linear_Calculation_New() {
     double V422_Sample = 0.0;
     double sigma_z1 = 0.0;
     int N = 10;
-
+    int M =0;
 
     
     TCanvas *c = new TCanvas("c","The Test HISTOGRAM ", 100, 8, 700, 600);
@@ -186,6 +186,7 @@ void All_Gaps_Linear_Calculation_New() {
             BinValue_Total_Sample42 = fprof42->GetBinEffectiveEntries(i);
     
             if(BinValue_Total42 > 1000 && BinValue_Total_Sample42 > 100 ) {
+                M += 1;
 
             if(BinValue42 > 0 && BinValue42_Sample > 0 ) {
                 Valuesqrt_4Particle_Correlation = sqrt(BinValue42);
@@ -200,7 +201,8 @@ void All_Gaps_Linear_Calculation_New() {
             cout << "The second If statement is passed " << endl;
         
         }
-        final_error_4part = sqrt(error_4part / (N * N) );
+        cout << "M: " << M << endl;
+        final_error_4part = sqrt(error_4part / (M * M) );
         
         if(BinValue_Total42 > 1000 && BinValue_Total_Sample42 > 100 ) {
             hC42->SetBinContent(i, Valuesqrt_4Particle_Correlation);
@@ -566,7 +568,7 @@ void All_Gaps_Linear_Calculation_New() {
     // hC42->SetMarkerSize(1.);
     // hC42->SetXTitle("# of tracks");
     // gStyle->SetOptStat(0);
-    // hC42->Draw("same");
+    hC42->Draw("same");
 
     // //..V4{2}: << 2 >>_{4,-4}
     // hC22->SetLineColor(kBlue);
@@ -592,7 +594,7 @@ void All_Gaps_Linear_Calculation_New() {
     // //hV422->GetYaxis()->SetRangeUser(0., 3.);
     // //hV422->GetXaxis()->SetRangeUser(0., 140);
     // hV422->SetMarkerSize(2.);
-	hV422->Draw("same");
+	//hV422->Draw("same");
     c->BuildLegend();
     
     
