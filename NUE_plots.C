@@ -43,16 +43,16 @@ void NUE_plots() {
     //hTruth->Draw();
 
     //..Projection on pT:
-    // h1 = hReco->ProjectionX("MC-Reco");
-    // h2 = hTruth->ProjectionX("MC-Truth");
+    h1 = hReco->ProjectionX("MC-Reco");
+    h2 = hTruth->ProjectionX("MC-Truth");
 
     //..Projection on eta:
     // h1 = hReco->ProjectionY("MC-Reco");
     // h2 = hTruth->ProjectionY("MC-Truth");
 
     //..Projection on Vz:
-    h1 = hReco->ProjectionZ("MC-Reconstructed");
-    h2 = hTruth->ProjectionZ("MC-Truth");
+    // h1 = hReco->ProjectionZ("MC-Reconstructed");
+    // h2 = hTruth->ProjectionZ("MC-Truth");
 
 //***************************************************************************
     // Define the Canvas
@@ -67,7 +67,7 @@ void NUE_plots() {
     h1->SetStats(0);
     h1->GetYaxis()->SetTitleOffset(1.6);
     //h1->GetXaxis()->SetRangeUser(-0.8, 0.8); // Only for Eta 
-    h1->Draw("e1");               // Draw h1
+    //h1->Draw("e1");               // Draw h1
     
 
     //********** h2 **************
@@ -76,7 +76,7 @@ void NUE_plots() {
     h2->SetLineColor(kRed);
     h2->SetLineWidth(2);
     h2->SetStats(0);
-    h2->Draw("same");         // Draw h2 on top of h1
+    //h2->Draw("same");         // Draw h2 on top of h1
 
 
     // // Define the ratio plot
@@ -85,13 +85,13 @@ void NUE_plots() {
     h3->SetMinimum(0.0);  // Define Y ..
     h3->SetMaximum(2.); // .. range
     h3->Sumw2();
-    //h3->SetStats(0);      // No statistics on lower plot
+    h3->SetStats(0);      // No statistics on lower plot
     h3->Divide(h2);
     h3->SetMarkerStyle(kOpenDiamond);
     h3->SetMarkerSize(2);
     h3->SetMarkerColor(kMagenta+1);
     h3->SetLineColor(kMagenta+1);
-    //h3->Draw("ep");       // Draw the ratio plot
+    h3->Draw("ep");       // Draw the ratio plot
 
     // // h1 settings:==============:
     h1->SetLineColor(kBlue+1);
@@ -101,9 +101,9 @@ void NUE_plots() {
     h1->GetYaxis()->SetTitleSize(20);
     h1->GetYaxis()->SetTitleFont(43);
     //h1->GetXaxis()->SetTitle("p_{T}(GeV/c)");
-    //h1->GetXaxis()->SetTitle("#eta");
-    h1->GetXaxis()->SetTitle("V_{z}(cm)");
-    h1->GetYaxis()->SetTitle("Counts");
+    h1->GetXaxis()->SetTitle("#eta");
+    //h1->GetXaxis()->SetTitle("V_{z}(cm)");
+    //h1->GetYaxis()->SetTitle("Counts");
     
     // h2 settings:==============:
     h2->SetLineColor(kRed);
@@ -124,9 +124,9 @@ void NUE_plots() {
     h3->GetYaxis()->SetLabelSize(15);
 
     // X axis ratio plot settings:==============:
-    //h3->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+    h3->GetXaxis()->SetTitle("p_{T} (GeV/c)");
     //h3->GetXaxis()->SetTitle("#eta");
-    h3->GetXaxis()->SetTitle("V_{z}(cm)");
+    //h3->GetXaxis()->SetTitle("V_{z}(cm)");
     h3->GetXaxis()->SetTitleSize(20);
     h3->GetXaxis()->SetTitleFont(43);
     h3->GetXaxis()->SetTitleOffset(1.3);
@@ -136,23 +136,23 @@ void NUE_plots() {
     //h3->GetXaxis()->SetRangeUser(-0.8, 0.8);
 
     //..Draw a Constant line at y=1:============:
-    // gPad->Modified(); 
-    // gPad->Update(); // make sure gPad is updated 
-    // TLine *line = new TLine(gPad->GetUxmin(), 1, gPad->GetUxmax(), 1);
-    // line->SetLineStyle(9);
-    // line->SetLineWidth(2); 
-    // line->SetLineColor(kBlack);
-    // line->Draw(); 
+    gPad->Modified(); 
+    gPad->Update(); // make sure gPad is updated 
+    TLine *line = new TLine(gPad->GetUxmin(), 1, gPad->GetUxmax(), 1);
+    line->SetLineStyle(9);
+    line->SetLineWidth(2); 
+    line->SetLineColor(kBlack);
+    line->Draw(); 
     
     //x1, y1, x2, y2
     //TLegend *leg = new TLegend(0.56,0.75,0.89,0.9);
-    TLegend *leg = new TLegend(0.36,0.35,0.71,0.5);  //Make a good position
-    leg->AddEntry(h1,"MC-Reco", "ep");
-    leg->AddEntry(h2,"MC-Truth", "ep");
-    //leg->AddEntry(h3, "Ratio of MC-Reco to MC-Truth", "ep");
-    
+    TLegend *leg = new TLegend(0.36,0.6,0.75,0.8);  //Make a good position
+    //leg->AddEntry(h1,"MC-Reco", "ep");
+    //leg->AddEntry(h2,"MC-Truth", "ep");
+    leg->AddEntry(h3, "#frac{MC-Reco}{MC-Truth}", "ep");
+    //of MC-Reco to MC-Truth
     leg->Draw();
     //h3->Draw("ep");       // Draw the ratio plot
     // Save in Pic Folder:======================:
-    //c->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/Plots_NUE/MCReco_MCTruth_VzZ_Projection.png");
+    c->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/Plots_NUE/Ratio_MCReco_MCTruth_pTX_Projection.png");
     }
