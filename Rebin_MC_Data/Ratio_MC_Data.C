@@ -3,40 +3,18 @@
 void Ratio_MC_Data() {
 
 //******************************************************************************
-//..Monte Carlo NUE Weights:
+//..Monte Carlo && Data Ratio:
 //******************************************************************************
     //=============================================================================================
     //Open the Rebin Data:
     TFile *file1 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Rebin_MC_Data/Results_Rebin_Data.root","READ");
-    TH1D* h1 = (TH1D*)file1->Get("Rebin_Cn34_Gap08");
-    TH1D* h2 = (TH1D*)file1->Get("Rebin_Cn34_Gap00");
+    TH1D* h1 = (TH1D*)file1->Get("Rebin_Cn35_Gap08");
+    TH1D* h2 = (TH1D*)file1->Get("Rebin_Cn35_Gap00");
 
     //Open MC data:
     TFile *file2 = TFile::Open("/Users/Helena/Desktop/Helen_simpletask/ErrorPropagations/Rebin_MC_Data/Rebin_MC.root","READ");
-    TH1D* h1 = (TH1D*)file2->Get("MC_Rebin_Cn34_Gap08");//Open root.file:
-    TH1D* h2 = (TH1D*)file2 ->Get("MC_Rebin_Cn34_Gap00");
-    TFile *file = TFile::Open("/Users/Helena/Desktop/Katarina_all/Katarina_NUE_Monte_Carlo/pPb5TeV_LHC16q_CENT_wSDD.root", "READ");
-    TDirectory *dir = (TDirectoryFile*)file->Get("default");
-    TList *list = (TList*)dir->Get("outputMC_default");
-
-    TH3F *hReco = (TH3F*)list->FindObject("hReco");
-    TH3F *hTruth = (TH3F*)list->FindObject("hTruth");
-
-
-    //hReco->Draw();
-    //hTruth->Draw();
-
-    //..Projection on pT:
-    h1 = hReco->ProjectionX("MC-Reco");
-    h2 = hTruth->ProjectionX("MC-Truth");
-
-    //..Projection on eta:
-    // h1 = hReco->ProjectionY("MC-Reco");
-    // h2 = hTruth->ProjectionY("MC-Truth");
-
-    //..Projection on Vz:
-    // h1 = hReco->ProjectionZ("MC-Reconstructed");
-    // h2 = hTruth->ProjectionZ("MC-Truth");
+    TH1D* h1 = (TH1D*)file2->Get("MC_Rebin_Cn35_Gap08");//Open root.file:
+    TH1D* h2 = (TH1D*)file2 ->Get("MC_Rebin_Cn35_Gap00");
 
 //***************************************************************************
     // Define the Canvas
