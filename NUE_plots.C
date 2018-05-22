@@ -124,7 +124,7 @@ void NUE_plots() {
     h3->GetYaxis()->SetLabelSize(15);
 
     // X axis ratio plot settings:==============:
-    h3->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+    //h3->GetXaxis()->SetTitle("p_{T} (GeV/c)");
     //h3->GetXaxis()->SetTitle("#eta");
     //h3->GetXaxis()->SetTitle("V_{z}(cm)");
     h3->GetXaxis()->SetTitleSize(20);
