@@ -76,9 +76,9 @@ void All_Gaps_Linear_Calculation_New() {
 
     //**************************************************************************
     //..Uden Gap
-    TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Ntrks1bin");
-    TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");  
-    TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Ntrks1bin"); 
+    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Ntrks1bin");
+    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Ntrks1bin");  
+    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Ntrks1bin"); 
 
     //..Gap= 0.0
     // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap00Ntrks1bin");
@@ -121,9 +121,9 @@ void All_Gaps_Linear_Calculation_New() {
     // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap07ANtrks1bin");
 
     //..Gap= 0.8
-    // TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap08Ntrks1bin");
-    // TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap08Ntrks1bin");  
-    // TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap08ANtrks1bin");  
+    TProfile *Cn24 = (TProfile*)list->FindObject("fTprofC24Gap08Ntrks1bin");
+    TProfile *Cn42 = (TProfile*)list->FindObject("fTprofC42Gap08Ntrks1bin");  
+    TProfile *Cn34 = (TProfile*)list->FindObject("fTprofC34Gap08ANtrks1bin");  
     //**************************************************************************
 
 
@@ -201,8 +201,8 @@ void All_Gaps_Linear_Calculation_New() {
             cout << "The second If statement is passed " << endl;
         
         }
-        cout << "M: " << M << endl;
-        final_error_4part = sqrt(error_4part / (M * M) );
+        //cout << "M: " << M << endl;
+        final_error_4part = sqrt(error_4part / (N * N) );
         
         if(BinValue_Total42 > 1000 && BinValue_Total_Sample42 > 100 ) {
             hC42->SetBinContent(i, Valuesqrt_4Particle_Correlation);
@@ -416,15 +416,16 @@ void All_Gaps_Linear_Calculation_New() {
         //***************************************************************************************************
 
     for (int j=1; j<201; j++) {
+        double Counter = 0.0;
         double error_L = 0.0;
         for (int i = 1; i < 11; i++) {
             //..Uden Gap 
-            TString foo_24(TString::Format("fTprof24_number%dNtrks1bin", i));
-            TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
-            TString bar_34(TString::Format("fTprof34_number%dNtrks1bin", i));	
-            TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
-            TString foo_42(TString::Format("fTprof42_number%dNtrks1bin", i));	
-            TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+            // TString foo_24(TString::Format("fTprof24_number%dNtrks1bin", i));
+            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            // TString bar_34(TString::Format("fTprof34_number%dNtrks1bin", i));	
+            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            // TString foo_42(TString::Format("fTprof42_number%dNtrks1bin", i));	
+            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             //..Gap= 0.0
             // TString foo_24(TString::Format("fTprof24_number%dGap00Ntrks1bin", i));
@@ -491,12 +492,12 @@ void All_Gaps_Linear_Calculation_New() {
             // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             //..Gap= 0.8
-            // TString foo_24(TString::Format("fTprof24_number%dGap08Ntrks1bin", i));
-            // TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
-            // TString bar_34(TString::Format("fTprof34_number%dGap08ANtrks1bin", i));	
-            // TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
-            // TString foo_42(TString::Format("fTprof42_number%dGap08Ntrks1bin", i));	
-            // TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
+            TString foo_24(TString::Format("fTprof24_number%dGap08Ntrks1bin", i));
+            TProfile *prof24 = (TProfile*)list->FindObject(foo_24);
+            TString bar_34(TString::Format("fTprof34_number%dGap08ANtrks1bin", i));	
+            TProfile *prof34 = (TProfile*)list->FindObject(bar_34);
+            TString foo_42(TString::Format("fTprof42_number%dGap08Ntrks1bin", i));	
+            TProfile *prof42 = (TProfile*)list->FindObject(foo_42);
 
             Sample_BinValue_2Particle_Correlation = prof24->GetBinContent(j);
             Sample_BinValue_3Particle_Correlation = prof34->GetBinContent(j);
@@ -516,38 +517,42 @@ void All_Gaps_Linear_Calculation_New() {
             BinValue_Total_Sample_42 = prof42->GetBinEffectiveEntries(j);
             
             if( BinValue_Total_24 > 1000 && BinValue_Total_34 > 1000 && BinValue_Total_42 > 1000 && BinValue_Total_Sample_24 >100 && BinValue_Total_Sample_34 >100 && BinValue_Total_Sample_42 >100) {
+                if(Sample_BinValue_2Particle_Correlation > 0 && Sample_BinValue_4Particle_Correlation > 0 && BinValue_4Particle_Correlation > 0 && BinValue_2Particle_Correlation > 0 ) {
+
+                    Sample_Valuesqrt_2particle_correlation = sqrt(Sample_BinValue_2Particle_Correlation);
+                    Sample_Valuesqrt_4particle_correlation = sqrt(Sample_BinValue_4Particle_Correlation);
+                    
+                    Valuesqrt_2Particle_Correlation = sqrt(BinValue_2Particle_Correlation);
+                    Valuesqrt_4Particle_Correlation = sqrt(BinValue_4Particle_Correlation);
+                    
+                    //..Calculate v422 Non-Linear:
+                    V422 = BinValue_3Particle_Correlation / (Valuesqrt_4Particle_Correlation);
+                    V422_Sample = Sample_BinValue_3Particle_Correlation / (Sample_Valuesqrt_4particle_correlation);               
+                    
+                    Linear = pow(Valuesqrt_2Particle_Correlation, 2) - pow(V422, 2);   
+                    Sample_Linear = pow(Sample_Valuesqrt_2particle_correlation, 2) - pow(V422_Sample, 2); 
             
-            if(Sample_BinValue_2Particle_Correlation > 0 && Sample_BinValue_4Particle_Correlation > 0 && BinValue_4Particle_Correlation > 0 && BinValue_2Particle_Correlation > 0 ) {
-
-                Sample_Valuesqrt_2particle_correlation = sqrt(Sample_BinValue_2Particle_Correlation);
-                Sample_Valuesqrt_4particle_correlation = sqrt(Sample_BinValue_4Particle_Correlation);
+                if(Sample_Linear > 0 && Linear > 0 ) {
+                    Linear_value_sample = sqrt(Sample_Linear);
+                    Linear_value = sqrt(Linear);
+                    error_L += pow(Linear_value_sample - Linear_value, 2);
+                }
+                else continue;
                 
-                Valuesqrt_2Particle_Correlation = sqrt(BinValue_2Particle_Correlation);
-                Valuesqrt_4Particle_Correlation = sqrt(BinValue_4Particle_Correlation);
+                }
+                else continue; 
                 
-                //..Calculate v422 Non-Linear:
-                V422 = BinValue_3Particle_Correlation / (Valuesqrt_4Particle_Correlation);
-                V422_Sample = Sample_BinValue_3Particle_Correlation / (Sample_Valuesqrt_4particle_correlation);               
-                
-                Linear = pow(Valuesqrt_2Particle_Correlation, 2) - pow(V422, 2);   
-                Sample_Linear = pow(Sample_Valuesqrt_2particle_correlation, 2) - pow(V422_Sample, 2); 
-            //}
-            if(Sample_Linear > 0 && Linear > 0 ) {
-                Linear_value_sample = sqrt(Sample_Linear);
-                Linear_value = sqrt(Linear);
-                error_L += pow(Linear_value_sample - Linear_value, 2);
-            }
-            else continue;
-            cout << "Error are made now" << endl;
+            Counter += 1;
             }
             else continue; 
-            cout << "The If statement for BinContent is passed: " << endl; 
-
-            }
-            else continue; 
-            cout << "Multiplicity check finished: " << j << endl; 
+            cout << "*******************************" << endl;
+            cout << "Sampleing: " << i << endl;
+            cout << "Multiplicity check finished Bin: " << j << endl; 
+            cout << "Counter : " << Counter << endl;
+            cout << "*********************************" << endl;
         }
-        Linear_Error = sqrt(error_L/ (N * N) );
+        cout << "TEST TeST !!! Counter : " << Counter << endl;
+        Linear_Error = sqrt(error_L/ (Counter * Counter) );
         if( BinValue_Total_24 > 1000 && BinValue_Total_34 > 1000 && BinValue_Total_42 > 1000 && BinValue_Total_Sample_24 >100 && BinValue_Total_Sample_34 >100 && BinValue_Total_Sample_42 >100) {
             hCLinear->SetBinContent(j, Linear_value); 
             hCLinear->SetBinError(j, Linear_Error); 
@@ -568,7 +573,7 @@ void All_Gaps_Linear_Calculation_New() {
     // hC42->SetMarkerSize(1.);
     // hC42->SetXTitle("# of tracks");
     // gStyle->SetOptStat(0);
-    hC42->Draw("same");
+    //hC42->Draw("same");
 
     // //..V4{2}: << 2 >>_{4,-4}
     // hC22->SetLineColor(kBlue);
@@ -586,7 +591,7 @@ void All_Gaps_Linear_Calculation_New() {
     // hCLinear->SetMarkerColorAlpha(kBlack, 4.5);
     // //hCLinear->SetAxisRange(0., 110);
     // hCLinear->SetMarkerSize(1.);
-    //hCLinear->Draw("same");
+    hCLinear->Draw("same");
 
     //..V422_NL
     // hV422->SetMarkerStyle(34);
@@ -595,7 +600,7 @@ void All_Gaps_Linear_Calculation_New() {
     // //hV422->GetXaxis()->SetRangeUser(0., 140);
     // hV422->SetMarkerSize(2.);
 	//hV422->Draw("same");
-    c->BuildLegend();
+    //c->BuildLegend();
     
     
     //..Create a root.file:
