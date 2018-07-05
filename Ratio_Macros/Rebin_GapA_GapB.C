@@ -10,8 +10,7 @@
 #include <iostream>
 using namespace std;  
 
-void Rebin_V4_V5_NL_Helene() 
-{    
+void Rebin_GapA_GapB() {    
     TCanvas *c = new TCanvas("c","The Test HISTOGRAM ", 100, 8, 700, 600);
     c->SetFillColor(10);
     c->cd();
@@ -46,9 +45,9 @@ void Rebin_V4_V5_NL_Helene()
     TH1D *Rebin_Ratio_9 = new TH1D("Rebin_Ratio_9", "|#Delta #eta| > 0.8 ", 20, 0, 200);
     Rebin_Ratio_9->Sumw2();
     //==========================================================================
-    //Open Helenes root.file for V4_L && V5_L && v422 && v422 && 2-particle_sqrt
-    //In thesis: Debug_Average_V422_A+B_NUA+NUE.root
-    TFile *file = TFile::Open("/Users/Helena/Dropbox/0-Speciale/code/panda/Thesis_Macros/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_V422_NL_Linear_NUA+NUE/Average_V422_NUA+NUE/4particle_Debug_Average_V422_V532_A+B.root", "READ");
+    //Open Helenes root.file for V4_L && V5_L && v422 && v532 && 2-particle_sqrt
+    // 4-particle-sqrt:
+    TFile *file = TFile::Open("/Users/Helena/Dropbox/0-Speciale/code/panda/Thesis_Macros/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_V422_NL_Linear_NUA+NUE/Average_V422_NUA+NUE/Debug_Average_V422_A+B_NUA+NUE.root", "READ");
     if(!file) return; 
     v422_Gap00 = (TH1D*)file->Get("v422_Gap00_A+B");
     v422_Gap01 = (TH1D*)file->Get("v422_Gap01_A+B");
@@ -59,6 +58,7 @@ void Rebin_V4_V5_NL_Helene()
     v422_Gap06 = (TH1D*)file->Get("v422_Gap06_A+B");
     v422_Gap07 = (TH1D*)file->Get("v422_Gap07_A+B");
     v422_Gap08 = (TH1D*)file->Get("v422_Gap08_A+B");
+
     //==========================================================================
     int binning = 10;
     double errorNum;
@@ -68,34 +68,52 @@ void Rebin_V4_V5_NL_Helene()
 
     if(binning == 10)RebinAll(v422_Gap00, Rebin_Ratio_1, 10);
     if(!v422_Gap00) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_1->GetXaxis()->SetRangeUser(10, 100);
     Rebin_Ratio_1->Draw("same");
 
     if(binning == 10)RebinAll(v422_Gap01, Rebin_Ratio_2, 10);
     if(!v422_Gap01) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_2->GetXaxis()->SetRangeUser(10, 90);  //There is an outlier for bins > 90 cut at 10 < bin < 90
+    //Rebin_Ratio_2->Draw("same");
 
     if(binning == 10)RebinAll(v422_Gap02, Rebin_Ratio_3, 10);
     if(!v422_Gap02) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_3->GetXaxis()->SetRangeUser(10, 100);
+    //Rebin_Ratio_3->Draw("same");  //There is an outlier for cut 10 < bins < 100 
 
     if(binning == 10)RebinAll(v422_Gap03, Rebin_Ratio_4, 10);
     if(!v422_Gap03) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_4->GetXaxis()->SetRangeUser(10, 100);
+    //Rebin_Ratio_4->Draw("same");
 
     if(binning == 10)RebinAll(v422_Gap04, Rebin_Ratio_5, 10);
     if(!v422_Gap04) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_5->GetXaxis()->SetRangeUser(10, 100);
+    //Rebin_Ratio_5->Draw("same");
 
     if(binning == 10)RebinAll(v422_Gap05, Rebin_Ratio_6, 10);
     if(!v422_Gap05) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_6->GetXaxis()->SetRangeUser(10, 100);
+    //Rebin_Ratio_6->Draw("same");
 
     if(binning == 10)RebinAll(v422_Gap06, Rebin_Ratio_7, 10);
     if(!v422_Gap06) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_7->GetXaxis()->SetRangeUser(10, 100);
+    //Rebin_Ratio_7->Draw("same");
 
     if(binning == 10)RebinAll(v422_Gap07, Rebin_Ratio_8, 10);
     if(!v422_Gap07) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_8->GetXaxis()->SetRangeUser(10, 100);
+    Rebin_Ratio_8->Draw("same");
 
     if(binning == 10)RebinAll(v422_Gap08, Rebin_Ratio_9, 10);
     if(!v422_Gap08) fPrint("Warning there is no histogram");
+    //Rebin_Ratio_9->GetXaxis()->SetRangeUser(10, 100);
+    //Rebin_Ratio_9->Draw("same");
 
     //..Writting to the Root.file:
-    TFile* fileOutput = new TFile("/Users/Helena/Dropbox/0-Speciale/code/panda/Thesis_Macros/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_V422_NL_Linear_NUA+NUE/Average_V422_NUA+NUE/4particle_Rebin_Debug_Average_v422_v532_A+B.root", "UPDATE");
+    //..V4,22
+    TFile* fileOutput = new TFile("/Users/Helena/Dropbox/0-Speciale/code/panda/Thesis_Macros/Helen_simpletask/ErrorPropagations/AllGaps_Linear_NL_V4_V5/AllGaps_V422_NL_Linear_NUA+NUE/Average_V422_NUA+NUE/Debug_Rebin_Average_v422_A+B_NUA+NUE.root","UPDATE");
     if(!fileOutput) return;
     fileOutput->cd();
     Rebin_Ratio_1->Write("Rebin_v422_Gap00_A+B");
@@ -106,12 +124,14 @@ void Rebin_V4_V5_NL_Helene()
     Rebin_Ratio_6->Write("Rebin_v422_Gap05_A+B");
     Rebin_Ratio_7->Write("Rebin_v422_Gap06_A+B");
     Rebin_Ratio_8->Write("Rebin_v422_Gap07_A+B");
-    Rebin_Ratio_9->Write("Rebin_v422_Gap08_A+B");
+    Rebin_Ratio_9->Write("Rebin_v422_Gap08_A+B");    
 } // End of the Macro
+
 //..Define Rebin Function
 //_____________________________________________________________________________
 void RebinAll(TH1D *h1, TH1D *h2, int binning)
 {
+	
 	double sumNum[200] = {0};
 	double sumDenom[200] = {0};
 	double errorNum[200] = {0};

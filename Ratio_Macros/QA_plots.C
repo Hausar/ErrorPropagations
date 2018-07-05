@@ -1,4 +1,3 @@
-
 //Macro To Calculate the Error Propagation:
 //Root file:
 #include <TFile.h>
@@ -20,10 +19,9 @@ void QA_plots() {
     
     //Open the root.file:
     //TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/fEventCut_QA_Plots.root", "READ");
-    TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/DCA_distribution_cut.root", "READ");
+    TFile *file = TFile::Open("/Users/Helena/Dropbox/0-Speciale/code/panda/Thesis_Macros/bar_GF/Helene_WNUA/merging/DCA_distribution_cut.root", "READ");
     TDirectory *dir = (TDirectoryFile*)file->Get("default");
-    TList *list = (TList*)dir->Get("Flow_Refs_default");
-    
+    TList *list = (TList*)dir->Get("Flow_Refs_default");   
     TProfile *Vtz_raw = (TProfile*)list->FindObject("Vtz_raw");  
     TProfile *Vtz_selected = (TProfile*)list->FindObject("Vtz_selected");
     TProfile *fHistCentralityDis = (TProfile*)list->FindObject("fHistCentralityDis");
@@ -41,12 +39,15 @@ void QA_plots() {
     Vtz_raw->SetStats(0);
     Vtz_raw->GetYaxis()->SetTitleOffset(1.4);
     Vtz_raw->SetTitle(0);
+    //Vtz_raw->GetYaxis()->SetRangeUser(-10, 4000 );
+    //Vtz_raw->GetXaxis()->SetRangeUser(0.2., 3.0 );
     //Vtz_raw->Draw();
     
     Vtz_selected->SetStats(0);
     Vtz_selected->GetYaxis()->SetTitleOffset(1.4);
     Vtz_selected->SetLineColor(kRed+1);
     Vtz_selected->SetTitle(0);
+    //Vtz_selected->GetYaxis()->SetRangeUser(-10, 4000 );
     //Vtz_selected->Draw("same");
 
     fHistCentralityDis->SetStats(0);
@@ -64,19 +65,20 @@ void QA_plots() {
     fHistPt->GetYaxis()->SetTitle("Counts");
     fHistPt->GetXaxis()->SetTitle("p_{T}[GeV/c]");
     fHistPt->GetYaxis()->SetTitleOffset(1.4);
-    fHistPt->GetYaxis()->SetRangeUser(-10e7, 9e8 );
+    fHistPt->GetYaxis()->SetRangeUser(10e-1, 10e11 );
+    fHistPt->GetXaxis()->SetRangeUser(-3, 10.0 );
     fHistPt->SetTitle(0);
-    // fHistPt->Draw("l hist");
+    //fHistPt->Draw("hist");
 
     fHistPtAfter->SetStats(0);
     fHistPtAfter->GetYaxis()->SetTitle("Counts");
     fHistPtAfter->GetXaxis()->SetTitle("p_{T}[GeV/c]");
     fHistPtAfter->GetYaxis()->SetTitleOffset(1.4);
-    fHistPtAfter->GetYaxis()->SetRangeUser(-10e7., 9e8 );
-    fHistPtAfter->GetXaxis()->SetRangeUser(0.2., 3.0 );
+    fHistPtAfter->GetYaxis()->SetRangeUser(10e-1., 10e11 );
+    fHistPtAfter->GetXaxis()->SetRangeUser(-3, 10.0 );
     fHistPtAfter->SetTitle(0);
     fHistPtAfter->SetLineColor(kRed);
-    // fHistPtAfter->Draw("l hist same");
+    //fHistPtAfter->Draw("same hist");
     
     fHistEta->SetStats(0);
     fHistEta->GetYaxis()->SetTitle("Counts");
@@ -97,40 +99,44 @@ void QA_plots() {
     hDCAxyBefore->GetYaxis()->SetTitle("Counts");
     hDCAxyBefore->GetXaxis()->SetTitle("DCA_{xy}");
     hDCAxyBefore->GetYaxis()->SetTitleOffset(1.3);
-    hDCAxyBefore->GetXaxis()->SetRangeUser(-0.1., 4.0 );
+    hDCAxyBefore->GetYaxis()->SetRangeUser(10, 10e12 );
+    hDCAxyBefore->GetXaxis()->SetRangeUser(-0.1., 5.0 );
     hDCAxyBefore->SetTitle(0);
-    //hDCAxyBefore->Draw();
+    //hDCAxyBefore->Draw("hist");
 
     hDCAzBefore->SetStats(0);
     hDCAzBefore->GetYaxis()->SetTitle("Counts");
     hDCAzBefore->GetXaxis()->SetTitle("DCA_{z}");
     hDCAzBefore->GetYaxis()->SetTitleOffset(1.3);
+    hDCAzBefore->GetXaxis()->SetRangeUser(-3., 3.0 );
+    hDCAzBefore->GetYaxis()->SetRangeUser(1, 10e10 );
     hDCAzBefore->SetTitle(0);
-    //hDCAzBefore->Draw();
+    //hDCAzBefore->Draw("hist");
 
     hDCAxyAfter->SetStats(0);
     hDCAxyAfter->GetYaxis()->SetTitle("Counts");
     hDCAxyAfter->GetXaxis()->SetTitle("DCA_{xy}");
     hDCAxyAfter->GetYaxis()->SetTitleOffset(1.4);
-    hDCAxyAfter->GetXaxis()->SetRangeUser(-0.5, 2 );
+    hDCAxyAfter->GetYaxis()->SetRangeUser(10, 10e12 );
+    hDCAxyAfter->GetXaxis()->SetRangeUser(-0.5, 5 );
     hDCAxyAfter->SetLineColor(kRed+1);
     hDCAxyAfter->SetTitle(0);
-    hDCAxyAfter->Draw();
+    //hDCAxyAfter->Draw("same hist");
     
     hDCAzAfter->SetStats(0);
     hDCAzAfter->GetYaxis()->SetTitle("Counts");
     hDCAzAfter->GetXaxis()->SetTitle("DCA_{z}");
     hDCAzAfter->GetYaxis()->SetTitleOffset(1.4);
     hDCAzAfter->SetLineColor(kRed+1);
-    hDCAzAfter->GetXaxis()->SetRangeUser(-3., 3.0 );
+    //hDCAzAfter->GetXaxis()->SetRangeUser(-3., 3.0 );
+    hDCAzAfter->GetYaxis()->SetRangeUser(1, 10e10 );
     hDCAzAfter->SetTitle(0);
-    //hDCAzAfter->Draw();
+    //hDCAzAfter->Draw("same hist");
 
     //..Add Legend to plot:
     TLegend *legend = new TLegend(0.6,0.7,0.9,0.9);
-    //legend->AddEntry(hDCAxyBefore,"Before cut", "l");
-    legend->AddEntry(hDCAxyAfter,"After cut","l");
+    legend->AddEntry(fHistPt,"Before cut", "l");
+    legend->AddEntry(fHistPtAfter,"After cut","l");
     legend->Draw();
-    c->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/Plots_QA/DCAxyAfter_point.png");
-
+    c->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/Plots_QA/new_Plots_QA/DCA_xy_pT_2D.png");
 }   
