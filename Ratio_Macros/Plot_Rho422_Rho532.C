@@ -185,6 +185,6 @@ void Plot_Rho422_Rho532()
     leg->AddEntry(Rebin_Rho_422_Gap08A, "|#Delta#eta| > 0.8 ", "lep");
     leg->Draw("same");
 
-    c->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/Plots_SymmetryPlanes_Rho422_Rho532/Thesis_Rho422_allgap.png");
+    c->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/Plots_SymmetryPlanes_Rho422_Rho532/Final_Rho_n,mk/Final_Rho_422.pdf");
 
 }
