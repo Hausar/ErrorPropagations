@@ -13,9 +13,17 @@ using namespace std;
 
 void Plot_MonteCarlo_Data() 
 {    
-    TCanvas *c = new TCanvas("c","The Test HISTOGRAM ", 100, 8, 700, 600);
-    c->SetFillColor(10);
-    c->cd();
+    // TCanvas *c = new TCanvas("c","The Test HISTOGRAM ", 100, 8, 700, 600);
+    // c->SetFillColor(10);
+    // c->cd();
+
+    // create canvas
+    TCanvas *canRatio = new TCanvas("canRatio", "", 600, 450);
+    // only after creating canvas, you call gPad
+    
+    gPad->SetBottomMargin(0.12); // increase bottom margin to have space for x-axis title                                                                  
+    gPad->SetLeftMargin(0.17); // increase left margin to have space for y-axis title
+    gPad->SetRightMargin(0.03); // decrease right margin because there you don't have any text (except for 2D plots)
 
     //============================================================================================
     //..Unit bins:
@@ -24,13 +32,13 @@ void Plot_MonteCarlo_Data()
     // TDirectory *dir = (TDirectoryFile*)file->Get("default");
     // TList *list = (TList*)dir->Get("Flow_Refs_default");
 
-    // TProfile *Cn43_Data0= (TProfile*)list->FindObject("fTprofC25Gap00Ntrks1bin");   //..V5{2}
+    // TProfile *Cn24_Data0= (TProfile*)list->FindObject("fTprofC25Gap00Ntrks1bin");   //..V5{2}
     // TProfile *Cn22_Data = (TProfile*)list->FindObject("fTprofC22Gap00Ntrks1bin");   //..v2^{2}
     // TProfile *Cn23_Data = (TProfile*)list->FindObject("fTprofC23Gap00Ntrks1bin");   //..v3^{2}
-    // TProfile *Cn43_Data = (TProfile*)list->FindObject("fTprofC35Gap00ANtrks1bin");  //..<<3>>_{5|-3,-2}
-    // TProfile *Cn43_Data = (TProfile*)list->FindObject("fTprofC34Gap00ANtrks1bin");  //..<<3>>_{4|-2,-2}
-    // TProfile *Cn43_Data = (TProfile*)list->FindObject("fTprofC42Gap00Ntrks1bin");
-    // TProfile *Cn43_Data = (TProfile*)list->FindObject("fTprofC43Gap00Ntrks1bin");
+    // TProfile *Cn24_Data = (TProfile*)list->FindObject("fTprofC35Gap00ANtrks1bin");  //..<<3>>_{5|-3,-2}
+    // TProfile *Cn24_Data = (TProfile*)list->FindObject("fTprofC34Gap00ANtrks1bin");  //..<<3>>_{4|-2,-2}
+    // TProfile *Cn24_Data = (TProfile*)list->FindObject("fTprofC42Gap00Ntrks1bin");
+    // TProfile *Cn24_Data = (TProfile*)list->FindObject("fTprofC43Gap00Ntrks1bin");
 
     //..Open the MC root.file: 
     // TFile *fileMC = TFile::Open
@@ -38,39 +46,39 @@ void Plot_MonteCarlo_Data()
     // TDirectory *dirMC = (TDirectoryFile*)fileMC->Get("default");
     // TList *listMC = (TList*)dirMC->Get("Flow_Refs_default");
 
-    // TProfile *Cn43_MC = (TProfile*)listMC->FindObject("fTprofC25Gap00Ntrks1bin");   //..V5{2}
+    // TProfile *Cn24_MC = (TProfile*)listMC->FindObject("fTprofC25Gap00Ntrks1bin");   //..V5{2}
     // TProfile *Cn22_MC = (TProfile*)listMC->FindObject("fTprofC22Gap00Ntrks1bin");   //..v2^{2}
     // TProfile *Cn23_MC = (TProfile*)listMC->FindObject("fTprofC23Gap00Ntrks1bin");   //..v3^{2}
-    // TProfile *Cn43_MC = (TProfile*)listMC->FindObject("fTprofC35Gap00ANtrks1bin");  //..<<3>>_{5|-3,-2}
-    // TProfile *Cn43_MC = (TProfile*)listMC->FindObject("fTprofC34Gap00ANtrks1bin");  //..<<3>>_{4|-2,-2}
-    // TProfile *Cn43_MC = (TProfile*)listMC->FindObject("fTprofC42Gap00Ntrks1bin");  //..<<4>>_{3,2|-3,-2}
-    // TProfile *Cn43_MC = (TProfile*)listMC->FindObject("fTprofC43Gap00Ntrks1bin");  //..<<4>>_{2,2|-2,-2}
+    // TProfile *Cn24_MC = (TProfile*)listMC->FindObject("fTprofC35Gap00ANtrks1bin");  //..<<3>>_{5|-3,-2}
+    // TProfile *Cn24_MC = (TProfile*)listMC->FindObject("fTprofC34Gap00ANtrks1bin");  //..<<3>>_{4|-2,-2}
+    // TProfile *Cn24_MC = (TProfile*)listMC->FindObject("fTprofC42Gap00Ntrks1bin");  //..<<4>>_{3,2|-3,-2}
+    // TProfile *Cn24_MC = (TProfile*)listMC->FindObject("fTprofC43Gap00Ntrks1bin");  //..<<4>>_{2,2|-2,-2}
 
     //=============================================================================================
     //..Rebin Data:
     //Open the Rebin Data root.file:
     TFile *file1 = TFile::Open("/Users/Helena/Dropbox/0-Speciale/code/panda/Thesis_Macros/Helen_simpletask/ErrorPropagations/Rebin_MC_Data/Results_Rebin_Data.root","READ");
-    TH1D* Data_Rebin_Cn43_Gap00 = (TH1D*)file1->Get("Rebin_Cn43_Gap00");
-    TH1D* Data_Rebin_Cn43_Gap01 = (TH1D*)file1->Get("Rebin_Cn43_Gap01");
-    TH1D* Data_Rebin_Cn43_Gap02 = (TH1D*)file1->Get("Rebin_Cn43_Gap02");
-    TH1D* Data_Rebin_Cn43_Gap03 = (TH1D*)file1->Get("Rebin_Cn43_Gap03");
-    TH1D* Data_Rebin_Cn43_Gap04 = (TH1D*)file1->Get("Rebin_Cn43_Gap04");
-    TH1D* Data_Rebin_Cn43_Gap05 = (TH1D*)file1->Get("Rebin_Cn43_Gap05");
-    TH1D* Data_Rebin_Cn43_Gap06 = (TH1D*)file1->Get("Rebin_Cn43_Gap06");
-    TH1D* Data_Rebin_Cn43_Gap07 = (TH1D*)file1->Get("Rebin_Cn43_Gap07");
-    TH1D* Data_Rebin_Cn43_Gap08 = (TH1D*)file1->Get("Rebin_Cn43_Gap08");
+    TH1D* Data_Rebin_Cn24_Gap00 = (TH1D*)file1->Get("Rebin_Cn24_Gap00");
+    TH1D* Data_Rebin_Cn24_Gap01 = (TH1D*)file1->Get("Rebin_Cn24_Gap01");
+    TH1D* Data_Rebin_Cn24_Gap02 = (TH1D*)file1->Get("Rebin_Cn24_Gap02");
+    TH1D* Data_Rebin_Cn24_Gap03 = (TH1D*)file1->Get("Rebin_Cn24_Gap03");
+    TH1D* Data_Rebin_Cn24_Gap04 = (TH1D*)file1->Get("Rebin_Cn24_Gap04");
+    TH1D* Data_Rebin_Cn24_Gap05 = (TH1D*)file1->Get("Rebin_Cn24_Gap05");
+    TH1D* Data_Rebin_Cn24_Gap06 = (TH1D*)file1->Get("Rebin_Cn24_Gap06");
+    TH1D* Data_Rebin_Cn24_Gap07 = (TH1D*)file1->Get("Rebin_Cn24_Gap07");
+    TH1D* Data_Rebin_Cn24_Gap08 = (TH1D*)file1->Get("Rebin_Cn24_Gap08");
 
     TFile *file2 = TFile::Open("/Users/Helena/Dropbox/0-Speciale/code/panda/Thesis_Macros/Helen_simpletask/ErrorPropagations/Rebin_MC_Data/Rebin_MC.root","READ");
     
-    TH1D* MC_Rebin_Cn43_Gap00 = (TH1D*)file2 ->Get("MC_Rebin_Cn43_Gap00");
-    TH1D* MC_Rebin_Cn43_Gap01 = (TH1D*)file2->Get("MC_Rebin_Cn43_Gap01");
-    TH1D* MC_Rebin_Cn43_Gap02 = (TH1D*)file2->Get("MC_Rebin_Cn43_Gap02");
-    TH1D* MC_Rebin_Cn43_Gap03 = (TH1D*)file2->Get("MC_Rebin_Cn43_Gap03");
-    TH1D* MC_Rebin_Cn43_Gap04 = (TH1D*)file2->Get("MC_Rebin_Cn43_Gap04");
-    TH1D* MC_Rebin_Cn43_Gap05 = (TH1D*)file2->Get("MC_Rebin_Cn43_Gap05");
-    TH1D* MC_Rebin_Cn43_Gap06 = (TH1D*)file2->Get("MC_Rebin_Cn43_Gap06");
-    TH1D* MC_Rebin_Cn43_Gap07 = (TH1D*)file2->Get("MC_Rebin_Cn43_Gap07");
-    TH1D* MC_Rebin_Cn43_Gap08 = (TH1D*)file2->Get("MC_Rebin_Cn43_Gap08");
+    TH1D* MC_Rebin_Cn24_Gap00 = (TH1D*)file2 ->Get("MC_Rebin_Cn24_Gap00");
+    TH1D* MC_Rebin_Cn24_Gap01 = (TH1D*)file2->Get("MC_Rebin_Cn24_Gap01");
+    TH1D* MC_Rebin_Cn24_Gap02 = (TH1D*)file2->Get("MC_Rebin_Cn24_Gap02");
+    TH1D* MC_Rebin_Cn24_Gap03 = (TH1D*)file2->Get("MC_Rebin_Cn24_Gap03");
+    TH1D* MC_Rebin_Cn24_Gap04 = (TH1D*)file2->Get("MC_Rebin_Cn24_Gap04");
+    TH1D* MC_Rebin_Cn24_Gap05 = (TH1D*)file2->Get("MC_Rebin_Cn24_Gap05");
+    TH1D* MC_Rebin_Cn24_Gap06 = (TH1D*)file2->Get("MC_Rebin_Cn24_Gap06");
+    TH1D* MC_Rebin_Cn24_Gap07 = (TH1D*)file2->Get("MC_Rebin_Cn24_Gap07");
+    TH1D* MC_Rebin_Cn24_Gap08 = (TH1D*)file2->Get("MC_Rebin_Cn24_Gap08");
 
     double y[100] = {0};
     double x[100] = {0};
@@ -111,41 +119,41 @@ void Plot_MonteCarlo_Data()
 
     int n = 10;
     for(int i=1; i<12; i++) {
-        y[i] = MC_Rebin_Cn43_Gap00->GetBinContent(i);
-        ey[i] = MC_Rebin_Cn43_Gap00->GetBinError(i);
-        x[i] = MC_Rebin_Cn43_Gap00->GetBinCenter(i);  //This one will give you the x-axis
+        y[i] = MC_Rebin_Cn24_Gap00->GetBinContent(i);
+        ey[i] = MC_Rebin_Cn24_Gap00->GetBinError(i);
+        x[i] = MC_Rebin_Cn24_Gap00->GetBinCenter(i);  //This one will give you the x-axis
         
-        y1[i] = MC_Rebin_Cn43_Gap01->GetBinContent(i);
-        ey1[i] = MC_Rebin_Cn43_Gap01->GetBinError(i);
-        x1[i] = MC_Rebin_Cn43_Gap01->GetBinCenter(i);
+        y1[i] = MC_Rebin_Cn24_Gap01->GetBinContent(i);
+        ey1[i] = MC_Rebin_Cn24_Gap01->GetBinError(i);
+        x1[i] = MC_Rebin_Cn24_Gap01->GetBinCenter(i);
 
-        y2[i] = MC_Rebin_Cn43_Gap02->GetBinContent(i);
-        ey2[i] = MC_Rebin_Cn43_Gap02->GetBinError(i);
-        x2[i] = MC_Rebin_Cn43_Gap02->GetBinCenter(i);
+        y2[i] = MC_Rebin_Cn24_Gap02->GetBinContent(i);
+        ey2[i] = MC_Rebin_Cn24_Gap02->GetBinError(i);
+        x2[i] = MC_Rebin_Cn24_Gap02->GetBinCenter(i);
         
-        y3[i] = MC_Rebin_Cn43_Gap03->GetBinContent(i);
-        ey3[i] = MC_Rebin_Cn43_Gap03->GetBinError(i);
-        x3[i] = MC_Rebin_Cn43_Gap03->GetBinCenter(i);
+        y3[i] = MC_Rebin_Cn24_Gap03->GetBinContent(i);
+        ey3[i] = MC_Rebin_Cn24_Gap03->GetBinError(i);
+        x3[i] = MC_Rebin_Cn24_Gap03->GetBinCenter(i);
 
-        y4[i] = MC_Rebin_Cn43_Gap04->GetBinContent(i);
-        ey4[i] = MC_Rebin_Cn43_Gap04->GetBinError(i);
-        x4[i] = MC_Rebin_Cn43_Gap04->GetBinCenter(i);
+        y4[i] = MC_Rebin_Cn24_Gap04->GetBinContent(i);
+        ey4[i] = MC_Rebin_Cn24_Gap04->GetBinError(i);
+        x4[i] = MC_Rebin_Cn24_Gap04->GetBinCenter(i);
 
-        y5[i] = MC_Rebin_Cn43_Gap05->GetBinContent(i);
-        ey5[i] = MC_Rebin_Cn43_Gap05->GetBinError(i);
-        x5[i] = MC_Rebin_Cn43_Gap05->GetBinCenter(i);
+        y5[i] = MC_Rebin_Cn24_Gap05->GetBinContent(i);
+        ey5[i] = MC_Rebin_Cn24_Gap05->GetBinError(i);
+        x5[i] = MC_Rebin_Cn24_Gap05->GetBinCenter(i);
 
-        y6[i] = MC_Rebin_Cn43_Gap06->GetBinContent(i);
-        ey6[i] = MC_Rebin_Cn43_Gap06->GetBinError(i);
-        x6[i] = MC_Rebin_Cn43_Gap06->GetBinCenter(i);
+        y6[i] = MC_Rebin_Cn24_Gap06->GetBinContent(i);
+        ey6[i] = MC_Rebin_Cn24_Gap06->GetBinError(i);
+        x6[i] = MC_Rebin_Cn24_Gap06->GetBinCenter(i);
 
-        y7[i] = MC_Rebin_Cn43_Gap07->GetBinContent(i);
-        ey7[i] = MC_Rebin_Cn43_Gap07->GetBinError(i);
-        x7[i] = MC_Rebin_Cn43_Gap07->GetBinCenter(i);
+        y7[i] = MC_Rebin_Cn24_Gap07->GetBinContent(i);
+        ey7[i] = MC_Rebin_Cn24_Gap07->GetBinError(i);
+        x7[i] = MC_Rebin_Cn24_Gap07->GetBinCenter(i);
 
-        y8[i] = MC_Rebin_Cn43_Gap08->GetBinContent(i);
-        ey8[i] = MC_Rebin_Cn43_Gap08->GetBinError(i);
-        x8[i] = MC_Rebin_Cn43_Gap08->GetBinCenter(i);
+        y8[i] = MC_Rebin_Cn24_Gap08->GetBinContent(i);
+        ey8[i] = MC_Rebin_Cn24_Gap08->GetBinError(i);
+        x8[i] = MC_Rebin_Cn24_Gap08->GetBinCenter(i);
 
     }
     TMultiGraph *mg = new TMultiGraph();
@@ -153,15 +161,24 @@ void Plot_MonteCarlo_Data()
 
     TGraphErrors* ge = new TGraphErrors(n, x, y, ex, ey);
     ge->SetFillColor(0);
-    ge->SetFillColorAlpha(kBlue+1, .3);
+    ge->SetFillColorAlpha(kBlue+3, .3);
     ge->SetFillStyle(3006);
     ge->SetTitle(0);
     ge->GetXaxis()->SetTitle("N_{ch}(|#eta| < 0.8)");
     //ge->GetYaxis()->CenterTitle(true);
-    ge->GetYaxis()->SetTitle("<<4>>_{2,3|-2,-3}");
-    ge->GetYaxis()->SetTitleOffset(1.3);
+    ge->GetYaxis()->SetTitle("<<2>>_{4|-4}");
+    ge->GetYaxis()->SetTitleOffset(1.5);
     ge->GetXaxis()->SetRangeUser(20, 90);
-    ge->GetYaxis()->SetRangeUser(-0.0001, 0.0001);
+    ge->GetYaxis()->SetRangeUser(-0.0004, 0.002);
+    //ge->GetYaxis()->SetTitleOffset(1.6); // pushes the title of the x-axis more down
+    ge->GetYaxis()->SetTitleSize(0.055); // this size I usually use (or also 0.06)
+    ge->GetYaxis()->SetNdivisions(505); // sometimes this makes the axes look prettier, it decreases number of ticks
+    ge->GetYaxis()->SetLabelSize(0.055); // label size should be the same as title size for consistency
+    ge->GetXaxis()->SetTitleOffset(1.0); // pushes the title of the x-axis more down
+    ge->GetXaxis()->SetTitleSize(0.055); // this size I usually use (or also 0.06)
+    ge->GetXaxis()->SetNdivisions(505); // sometimes this makes the axes look prettier, it decreases number of ticks
+    ge->GetXaxis()->SetLabelSize(0.055); // label size should be the same as title size for consistency
+    ge->GetXaxis()->SetRangeUser(20, 90);
     //ge->Draw("L");
     ge->Draw("a3");
        
@@ -245,78 +262,81 @@ void Plot_MonteCarlo_Data()
 //:=====================================================================://
 ////////////////////// Plot of Data: ////////////////////////////////////
 
-    Data_Rebin_Cn43_Gap00->SetMarkerStyle(kFullCircle); 
-    Data_Rebin_Cn43_Gap00->SetMarkerColor(kBlue+1);
-    Data_Rebin_Cn43_Gap00->SetStats(0);
-    Data_Rebin_Cn43_Gap00->Draw("Psame");
+    Data_Rebin_Cn24_Gap00->SetMarkerStyle(kFullCircle); 
+    Data_Rebin_Cn24_Gap00->SetMarkerColor(kBlue+1);
+    Data_Rebin_Cn24_Gap00->SetStats(0);
+    Data_Rebin_Cn24_Gap00->Draw("Psame");
     
-    // Data_Rebin_Cn43_Gap01->SetMarkerStyle(kFullCircle); 
-    // Data_Rebin_Cn43_Gap01->SetMarkerColor(kRed+1);
-    // Data_Rebin_Cn43_Gap01->SetLineColor(kRed+1);
-    // Data_Rebin_Cn43_Gap01->Draw("Psame");
+    // Data_Rebin_Cn24_Gap01->SetMarkerStyle(kFullCircle); 
+    // Data_Rebin_Cn24_Gap01->SetMarkerColor(kRed+1);
+    // Data_Rebin_Cn24_Gap01->SetLineColor(kRed+1);
+    // Data_Rebin_Cn24_Gap01->Draw("Psame");
     
-    // Data_Rebin_Cn43_Gap02->SetMarkerStyle(kFullCircle); 
-    // Data_Rebin_Cn43_Gap02->SetMarkerColor(3);
-    // Data_Rebin_Cn43_Gap02->SetLineColor(3);
-    // Data_Rebin_Cn43_Gap02->Draw("Psame");
+    // Data_Rebin_Cn24_Gap02->SetMarkerStyle(kFullCircle); 
+    // Data_Rebin_Cn24_Gap02->SetMarkerColor(3);
+    // Data_Rebin_Cn24_Gap02->SetLineColor(3);
+    // Data_Rebin_Cn24_Gap02->Draw("Psame");
     
-    // Data_Rebin_Cn43_Gap03->SetMarkerStyle(kFullSquare); 
-    // Data_Rebin_Cn43_Gap03->SetMarkerColor(kPink+9);
-    // Data_Rebin_Cn43_Gap03->SetLineColor(kPink+9);
-    // Data_Rebin_Cn43_Gap03->Draw("Psame");
+    // Data_Rebin_Cn24_Gap03->SetMarkerStyle(kFullSquare); 
+    // Data_Rebin_Cn24_Gap03->SetMarkerColor(kPink+9);
+    // Data_Rebin_Cn24_Gap03->SetLineColor(kPink+9);
+    // Data_Rebin_Cn24_Gap03->Draw("Psame");
     
-    // Data_Rebin_Cn43_Gap04->SetMarkerStyle(kFullDiamond); 
-    // Data_Rebin_Cn43_Gap04->SetMarkerColor(kCyan+1);
-    // Data_Rebin_Cn43_Gap04->SetLineColor(kCyan+1);
-    // Data_Rebin_Cn43_Gap04->SetMarkerSize(2);
-    // Data_Rebin_Cn43_Gap04->Draw("Psame");
+    // Data_Rebin_Cn24_Gap04->SetMarkerStyle(kFullDiamond); 
+    // Data_Rebin_Cn24_Gap04->SetMarkerColor(kCyan+1);
+    // Data_Rebin_Cn24_Gap04->SetLineColor(kCyan+1);
+    // Data_Rebin_Cn24_Gap04->SetMarkerSize(2);
+    // Data_Rebin_Cn24_Gap04->Draw("Psame");
 
-    // Data_Rebin_Cn43_Gap05->SetMarkerStyle(kFullStar); 
-    // Data_Rebin_Cn43_Gap05->SetMarkerColor(kOrange+3);
-    // Data_Rebin_Cn43_Gap05->SetLineColor(kOrange+3);
-    // Data_Rebin_Cn43_Gap05->SetMarkerSize(2);
-    // Data_Rebin_Cn43_Gap05->Draw("Psame");
+    // Data_Rebin_Cn24_Gap05->SetMarkerStyle(kFullStar); 
+    // Data_Rebin_Cn24_Gap05->SetMarkerColor(kOrange+3);
+    // Data_Rebin_Cn24_Gap05->SetLineColor(kOrange+3);
+    // Data_Rebin_Cn24_Gap05->SetMarkerSize(2);
+    // Data_Rebin_Cn24_Gap05->Draw("Psame");
 
-    // Data_Rebin_Cn43_Gap06->SetMarkerStyle(kFullCross); 
-    // Data_Rebin_Cn43_Gap06->SetMarkerColor(kMagenta+2);
-    // Data_Rebin_Cn43_Gap06->SetLineColor(kMagenta+2);
-    // Data_Rebin_Cn43_Gap06->SetMarkerSize(2);
-    // Data_Rebin_Cn43_Gap06->Draw("Psame");
+    // Data_Rebin_Cn24_Gap06->SetMarkerStyle(kFullCross); 
+    // Data_Rebin_Cn24_Gap06->SetMarkerColor(kMagenta+2);
+    // Data_Rebin_Cn24_Gap06->SetLineColor(kMagenta+2);
+    // Data_Rebin_Cn24_Gap06->SetMarkerSize(2);
+    // Data_Rebin_Cn24_Gap06->Draw("Psame");
 
-    // Data_Rebin_Cn43_Gap07->SetMarkerStyle(kFullDiamond); 
-    // Data_Rebin_Cn43_Gap07->SetMarkerColor(kGreen+3);
-    // Data_Rebin_Cn43_Gap07->SetLineColor(kGreen+2);
-    // Data_Rebin_Cn43_Gap07->SetMarkerSize(2);
-    // Data_Rebin_Cn43_Gap07->Draw("Psame");
+    // Data_Rebin_Cn24_Gap07->SetMarkerStyle(kFullDiamond); 
+    // Data_Rebin_Cn24_Gap07->SetMarkerColor(kGreen+3);
+    // Data_Rebin_Cn24_Gap07->SetLineColor(kGreen+2);
+    // Data_Rebin_Cn24_Gap07->SetMarkerSize(2);
+    // Data_Rebin_Cn24_Gap07->Draw("Psame");
     
-    Data_Rebin_Cn43_Gap08->SetMarkerStyle(kFullCircle); 
-    Data_Rebin_Cn43_Gap08->SetMarkerColor(kYellow+3);
-    Data_Rebin_Cn43_Gap08->SetLineColor(kYellow+3);
-    Data_Rebin_Cn43_Gap08->Draw("Psame");
+    Data_Rebin_Cn24_Gap08->SetMarkerStyle(kFullCircle); 
+    Data_Rebin_Cn24_Gap08->SetMarkerColor(kYellow+3);
+    Data_Rebin_Cn24_Gap08->SetLineColor(kYellow+3);
+    Data_Rebin_Cn24_Gap08->Draw("Psame");
 
     //c->BuildLegend();
     
     TLatex latex;
+    latex.SetTextSize(0.05);
+    latex.SetTextAlign(13);  //align at top
+    latex.DrawLatex(25,0.0019,"ALICE");
+
     latex.SetTextSize(0.045);
     latex.SetTextAlign(13);  //align at top
-    latex.DrawLatex(25,0.00009,"ALICE");
-
-    latex.SetTextSize(0.035);
-    latex.SetTextAlign(13);  //align at top
-    latex.DrawLatex(25,0.00007,"p-Pb collisions");
+    latex.DrawLatex(25,0.0016,"p-Pb collisions");
     
-    latex.SetTextSize(0.035);
+    latex.SetTextSize(0.045);
     latex.SetTextAlign(13);  //align at top
-    latex.DrawLatex(25,-0.00002,"#sqrt{s_{NN}} = 5.02 TeV");
+    latex.DrawLatex(25,0.0014,"#sqrt{s_{NN}} = 5.02 TeV");
 
+    latex.SetTextSize(0.045);
     latex.SetTextAlign(13);  //centered
-    latex.DrawLatex(25,-0.00004,"|#eta| < 0.8");
+    latex.DrawLatex(25,0.0012,"|#eta| < 0.8");
 
+    latex.SetTextSize(0.045);
     latex.SetTextAlign(13);  //centered
-    latex.DrawLatex(25,-0.00006," 0.2 < p_{T} < 3.0 GeV/c");
+    latex.DrawLatex(25,-0.0001," 0.2 < p_{T} < 3.0 GeV/c");
 
+    latex.SetTextSize(0.045);    
     latex.SetTextAlign(13);  //centered
-    latex.DrawLatex(42,0.00009,"(This thesis)");
+    latex.DrawLatex(40,0.0019,"(This thesis)");
    
    //TLegend *legend = new TLegend(0.1,0.7,0.48,0.9);
    TLegend *legend = new TLegend(0.6,0.6,0.89,0.88);
@@ -331,16 +351,16 @@ void Plot_MonteCarlo_Data()
     //legend->AddEntry(ge6,"DPMJET |#Delta #eta| > 0.6","f");
     //legend->AddEntry(ge7,"DPMJET |#Delta #eta| > 0.7","f");
     legend->AddEntry(ge8,"DPMJET |#Delta #eta| > 0.8","f");
-    legend->AddEntry(Data_Rebin_Cn43_Gap00,"|#Delta #eta| > 0.0","lep");
-    // legend->AddEntry(Data_Rebin_Cn43_Gap01,"|#Delta #eta| > 0.1","lep");
-    // legend->AddEntry(Data_Rebin_Cn43_Gap02,"|#Delta #eta| > 0.2","lep");
-    // legend->AddEntry(Data_Rebin_Cn43_Gap03,"|#Delta #eta| > 0.3","lep");
-    // legend->AddEntry(Data_Rebin_Cn43_Gap04,"|#Delta #eta| > 0.4","lep");
-    // legend->AddEntry(Data_Rebin_Cn43_Gap05,"|#Delta #eta| > 0.5","lep");
-    //legend->AddEntry(Data_Rebin_Cn43_Gap06,"|#Delta #eta| > 0.6","lep");
-    //legend->AddEntry(Data_Rebin_Cn43_Gap07,"|#Delta #eta| > 0.7","lep");
-    legend->AddEntry(Data_Rebin_Cn43_Gap08,"|#Delta #eta| > 0.8","lep");
+    legend->AddEntry(Data_Rebin_Cn24_Gap00,"|#Delta #eta| > 0.0","lep");
+    // legend->AddEntry(Data_Rebin_Cn24_Gap01,"|#Delta #eta| > 0.1","lep");
+    // legend->AddEntry(Data_Rebin_Cn24_Gap02,"|#Delta #eta| > 0.2","lep");
+    // legend->AddEntry(Data_Rebin_Cn24_Gap03,"|#Delta #eta| > 0.3","lep");
+    // legend->AddEntry(Data_Rebin_Cn24_Gap04,"|#Delta #eta| > 0.4","lep");
+    // legend->AddEntry(Data_Rebin_Cn24_Gap05,"|#Delta #eta| > 0.5","lep");
+    //legend->AddEntry(Data_Rebin_Cn24_Gap06,"|#Delta #eta| > 0.6","lep");
+    //legend->AddEntry(Data_Rebin_Cn24_Gap07,"|#Delta #eta| > 0.7","lep");
+    legend->AddEntry(Data_Rebin_Cn24_Gap08,"|#Delta #eta| > 0.8","lep");
     legend->Draw();
 
-    c->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/Plots_MC/Plots_MC_Data_Thesis/Yellow_MC_Data_Cn43_Gap00_Gap08.png");
+    canRatio->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/Plots_MC/Plots_MC_Data_Thesis/MC_Data_Thesis/MC_Data_Cn24_Gap00_Gap08.pdf");
 }
