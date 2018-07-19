@@ -15,11 +15,11 @@ void QA_plots() {
     TCanvas *c = new TCanvas("c","The Test HISTOGRAM ", 100, 8, 700, 600);
     c->SetFillColor(10);
     c->cd();
-    gPad->SetLogy();
+    gPad->SetLogz();
     
     //Open the root.file:
     //TFile *file = TFile::Open("/Users/Helena/Desktop/bar_GF/Helene_WNUA/merging/fEventCut_QA_Plots.root", "READ");
-    TFile *file = TFile::Open("/Users/Helena/Dropbox/0-Speciale/code/panda/Thesis_Macros/bar_GF/Helene_WNUA/merging/DCA_distribution_cut.root", "READ");
+    TFile *file = TFile::Open("/Users/Helena/Dropbox/0-Speciale/code/panda/Thesis_Macros/bar_GF/Helene_WNUA/merging/DCAxy_smallbinwidth.root", "READ");
     TDirectory *dir = (TDirectoryFile*)file->Get("default");
     TList *list = (TList*)dir->Get("Flow_Refs_default");   
     TProfile *Vtz_raw = (TProfile*)list->FindObject("Vtz_raw");  
@@ -34,6 +34,8 @@ void QA_plots() {
     TProfile *hDCAzBefore = (TProfile*)list->FindObject("hDCAzBefore");
     TProfile *hDCAxyAfter = (TProfile*)list->FindObject("hDCAxyAfter");
     TProfile *hDCAzAfter = (TProfile*)list->FindObject("hDCAzAfter");
+    TProfile *hDCAxypTbefore2D = (TProfile*)list->FindObject("hDCAxypTbefore2D");
+    TProfile *hDCAxypTafter2D = (TProfile*)list->FindObject("hDCAxypTafter2D");
     //**************************************************************************    
     //..Plot the Histograms
     Vtz_raw->SetStats(0);
@@ -102,7 +104,7 @@ void QA_plots() {
     hDCAxyBefore->GetYaxis()->SetRangeUser(10, 10e12 );
     hDCAxyBefore->GetXaxis()->SetRangeUser(-0.1., 5.0 );
     hDCAxyBefore->SetTitle(0);
-    //hDCAxyBefore->Draw("hist");
+    //hDCAxyBefore->Draw("l");
 
     hDCAzBefore->SetStats(0);
     hDCAzBefore->GetYaxis()->SetTitle("Counts");
@@ -121,7 +123,7 @@ void QA_plots() {
     hDCAxyAfter->GetXaxis()->SetRangeUser(-0.5, 5 );
     hDCAxyAfter->SetLineColor(kRed+1);
     hDCAxyAfter->SetTitle(0);
-    //hDCAxyAfter->Draw("same hist");
+    //hDCAxyAfter->Draw("same l");
     
     hDCAzAfter->SetStats(0);
     hDCAzAfter->GetYaxis()->SetTitle("Counts");
@@ -133,10 +135,32 @@ void QA_plots() {
     hDCAzAfter->SetTitle(0);
     //hDCAzAfter->Draw("same hist");
 
+    hDCAxypTbefore2D->SetStats(0);
+    hDCAxypTbefore2D->GetYaxis()->SetTitle("DCA_{xy}");
+    hDCAxypTbefore2D->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+    hDCAxypTbefore2D->GetYaxis()->SetTitleOffset(1.4);
+    hDCAxypTbefore2D->GetYaxis()->SetRangeUser(0, 0.25 );
+    hDCAxypTbefore2D->GetXaxis()->SetRangeUser(0, 3);
+    hDCAxypTbefore2D->SetLineColor(kRed+1);
+    hDCAxypTbefore2D->SetTitle(0);
+    hDCAxypTbefore2D->Draw("colz");
+
+    hDCAxypTafter2D->SetStats(0);
+    hDCAxypTafter2D->GetYaxis()->SetTitle("DCA_{xy}");
+    hDCAxypTafter2D->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+    hDCAxypTafter2D->GetYaxis()->SetTitleOffset(1.2);
+    hDCAxypTafter2D->GetXaxis()->SetTitleOffset(1.2);
+    hDCAxypTafter2D->GetYaxis()->SetRangeUser(0, 0.25 );
+    hDCAxypTafter2D->GetXaxis()->SetRangeUser(0, 3);
+    //hDCAxypTafter2D->SetLineColor(kRed+1);
+    hDCAxypTafter2D->SetTitle(0);
+    //hDCAxypTafter2D->Draw("colz");
+
     //..Add Legend to plot:
-    TLegend *legend = new TLegend(0.6,0.7,0.9,0.9);
-    legend->AddEntry(fHistPt,"Before cut", "l");
-    legend->AddEntry(fHistPtAfter,"After cut","l");
+    TLegend *legend = new TLegend(0.5,0.7,0.8,0.88);
+    legend->SetBorderSize(-1);
+    legend->AddEntry(hDCAxypTbefore2D,"Before cut", " ");
+    //legend->AddEntry(hDCAxypTafter2D,"After cut"," ");
     legend->Draw();
-    c->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/Plots_QA/new_Plots_QA/DCA_xy_pT_2D.png");
+    c->SaveAs("/Users/Helena/Dropbox/0-Speciale/code/panda/Sand_boks/Old/pic/Plots_QA/new_Plots_QA/DCA_xy_before2D_logz2.png");
 }   
